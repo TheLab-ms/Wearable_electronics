@@ -5,3 +5,5 @@ Don has volunteered to lead us in designing and manufacturing a wearable electro
 • The electronic design and software will be open source.  
 
 • Designed to be modded / hacked with your own code. 
+
+• All proceeds will go to TheLab.ms
