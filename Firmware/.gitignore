@@ -1,0 +1,8 @@
+# Ignore files and directories containing binaries or auto generated files
+# Using this web site as a guide on what to ignore for css projects
+# http://processors.wiki.ti.com/index.php/Source_control_with_CCS
+Debug/
+Release/
+.launches/
+.config/
+.xdchelp
