@@ -1,7 +1,7 @@
-#include <msp430.h> 
+#include <msp430.h>
 
 extern const unsigned char font1[95][64];
-
+extern const unsigned char font_basic[ ][8];
 
 
 #define  BINARY 10
@@ -77,6 +77,7 @@ int main(void)
 {
 	unsigned int x;
 	volatile unsigned char charsel, skip;
+	unsigned char charstart, charend;
 
 
     WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
@@ -99,13 +100,15 @@ my_id = 1;//for debug purposes
 
 
 	//these color levels will be set by every ASCII character request sent from the central processor
-	current_red_level   = 0;   //red
-	current_blue_level  = 0;   //blue
-	current_green_level = 200; //green
+	current_red_level   = 150;   //red
+	current_blue_level  = 150;   //blue
+	current_green_level = 150;   //green
 
 
 	skip=0;
-	charsel=0;
+	charstart=33;  //Sets the first char in the font array to display
+	charend=58;   //Sets the last char in the font array to display (should be greater than charstart)
+	charsel=charstart;
 	first_serial_byte=0;
 	init_LED_data(charsel);
 	while(1)//this loop displays all desired data
@@ -128,7 +131,7 @@ my_id = 1;//for debug purposes
 			{
 				skip=0;
 				init_LED_data(charsel++);//load next character in font set
-				if(charsel>4) charsel=0;
+				if(charsel>charend) charsel=charstart;
 			}
 		}
 		//******************************************
@@ -224,9 +227,30 @@ void us_delay(unsigned char dly)
 void init_LED_data(unsigned char data)
 {
 	unsigned int x;
-	unsigned char index;
+//	unsigned char index = 0;
+	unsigned int i;
+	unsigned int j;
+	const unsigned char mask = 1;
 
+	x = 0;
+	for( j = 0; j < 8; j++)
+	{
+		if((x & 0x18) == 0x18) { x+=8; }
+		for ( i = 0; i < 8; i++ )
+		{
+			LED_data[x]   = ( ( font_basic[data][j] & ( mask << i ) ) != 0 ) * current_red_level;
+			x++;
+			LED_data[x] = ( ( font_basic[data][j] & ( mask << i ) ) != 0 ) * current_blue_level;
+			x++;
+			LED_data[x] = ( ( font_basic[data][j] & ( mask << i ) ) != 0 ) * current_green_level;
+			x++;
+		}
+
+	}
+
+/*
 	index=0;
+
 	for(x=0; x<255; x+=3)
 	{
 		if((x & 0x18) == 0x18)//skip over P3 and P4 equal "11" state
@@ -236,6 +260,7 @@ void init_LED_data(unsigned char data)
 		LED_data[x+1] = font1[data][index] * current_blue_level;//blue
 		LED_data[x+2] = font1[data][index++] * current_green_level;//green
 	}
+*/
 }
 
 
@@ -352,10 +377,9 @@ void display_red_green_blue()
 {
 	unsigned int x, y;
 
-
-  redlevel=255;
-  bluelevel=0;
-  grnlevel=0;
+	redlevel=255;
+	bluelevel=0;
+	grnlevel=0;
 	for(y=0; y<200; y++)
 	{
 		for(x=0; x<0xFF; x+=3)
@@ -372,47 +396,43 @@ void display_red_green_blue()
 		}
 	}
 
-
-	  redlevel=0;
-	  bluelevel=0;
-	  grnlevel=255;
-		for(y=0; y<200; y++)
+	redlevel=0;
+	bluelevel=0;
+	grnlevel=255;
+	for(y=0; y<200; y++)
+	{
+		for(x=0; x<0xFF; x+=3)
 		{
-			for(x=0; x<0xFF; x+=3)
-			{
-				if((x & 0x18) == 0x18)//skip over P3 and P4 equal "11" state
-					x+=8;
+			if((x & 0x18) == 0x18)//skip over P3 and P4 equal "11" state
+				x+=8;
 
-				P3OUT = x;
-				us_delay(redlevel);
-				P3OUT = x+1;
-				us_delay(bluelevel);
-				P3OUT = x+2;
-				us_delay(grnlevel);
-			}
+			P3OUT = x;
+			us_delay(redlevel);
+			P3OUT = x+1;
+			us_delay(bluelevel);
+			P3OUT = x+2;
+			us_delay(grnlevel);
 		}
+	}
 
+	redlevel=0;
+	bluelevel=255;
+	grnlevel=0;
+	for(y=0; y<200; y++)
+	{
+		for(x=0; x<0xFF; x+=3)
+		{
+			if((x & 0x18) == 0x18)//skip over P3 and P4 equal "11" state
+				x+=8;
 
-
-
-		  redlevel=0;
-		  bluelevel=255;
-		  grnlevel=0;
-			for(y=0; y<200; y++)
-			{
-				for(x=0; x<0xFF; x+=3)
-				{
-					if((x & 0x18) == 0x18)//skip over P3 and P4 equal "11" state
-						x+=8;
-
-					P3OUT = x;
-					us_delay(redlevel);
-					P3OUT = x+1;
-					us_delay(bluelevel);
-					P3OUT = x+2;
-					us_delay(grnlevel);
-				}
-			}
+			P3OUT = x;
+			us_delay(redlevel);
+			P3OUT = x+1;
+			us_delay(bluelevel);
+			P3OUT = x+2;
+			us_delay(grnlevel);
+		}
+	}
 }
 
 
