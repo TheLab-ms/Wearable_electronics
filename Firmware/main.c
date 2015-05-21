@@ -90,7 +90,7 @@ int main(void)
 
 
 	//while(1)
-	//display_red_green_blue();
+	display_red_green_blue();
 
 	my_id = P2IN;//read this MSP430's segment ID as defined by the termination of P2.0, P2.1 and P2.2
 	my_id &= 0x07;
