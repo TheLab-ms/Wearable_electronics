@@ -77,7 +77,6 @@ int main(void)
 {
 	unsigned int x;
 	volatile unsigned char charsel, skip;
-	unsigned char charstart, charend;
 
 
     WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
@@ -91,26 +90,28 @@ int main(void)
 
 
 	//while(1)
-	display_red_green_blue();
+	//display_red_green_blue();
 
 	my_id = P2IN;//read this MSP430's segment ID as defined by the termination of P2.0, P2.1 and P2.2
 	my_id &= 0x07;
-my_id = 1;//for debug purposes
+	my_id = 1;//for debug purposes
 
 
 
 	//these color levels will be set by every ASCII character request sent from the central processor
-	current_red_level   = 150;   //red
-	current_blue_level  = 150;   //blue
-	current_green_level = 150;   //green
+	current_red_level   = 180;   //red
+	current_blue_level  = 180;   //blue
+	current_green_level = 180;   //green
 
 
 	skip=0;
-	charstart=33;  //Sets the first char in the font array to display
-	charend=58;   //Sets the last char in the font array to display (should be greater than charstart)
-	charsel=charstart;
+	// Replaced the simple loop through characters with an array of characters
+	// Using unicode hex values to choose characters in the array
+	// Currently set to TheLAB.ms
+	unsigned char charstodisplay[9] = {0x54, 0x68, 0x65, 0x4C, 0x41, 0x42, 0x2E, 0x6D, 0x73};
+	charsel=0;
 	first_serial_byte=0;
-	init_LED_data(charsel);
+	init_LED_data(charstodisplay[charsel]);
 	while(1)//this loop displays all desired data
 	{
 		if(receiving_data==1)//wait here while receiving a packet
@@ -121,8 +122,6 @@ my_id = 1;//for debug purposes
 			process_data_packet();
 		}
 
-
-
 		//******  ASCII character display DEMO ONLY - to be removed later  ***********
 		if(first_serial_byte==0)
 		{
@@ -130,8 +129,9 @@ my_id = 1;//for debug purposes
 			if(skip>250)
 			{
 				skip=0;
-				init_LED_data(charsel++);//load next character in font set
-				if(charsel>charend) charsel=charstart;
+				charsel++;
+				if(charsel>(sizeof(charstodisplay)-1)) charsel=0;
+				init_LED_data(charstodisplay[charsel]);
 			}
 		}
 		//******************************************
@@ -160,7 +160,6 @@ my_id = 1;//for debug purposes
 		}
 	}
 
-	return 0;
 }
 
 
@@ -226,41 +225,27 @@ void us_delay(unsigned char dly)
 //****************************************************************************************************
 void init_LED_data(unsigned char data)
 {
-	unsigned int x;
-//	unsigned char index = 0;
-	unsigned int i;
-	unsigned int j;
+	unsigned int x, i, j;
 	const unsigned char mask = 1;
+	unsigned char tempbit;
 
-	x = 0;
+	x =0;
+
 	for( j = 0; j < 8; j++)
 	{
-		if((x & 0x18) == 0x18) { x+=8; }
+
 		for ( i = 0; i < 8; i++ )
 		{
-			LED_data[x]   = ( ( font_basic[data][j] & ( mask << i ) ) != 0 ) * current_red_level;
-			x++;
-			LED_data[x] = ( ( font_basic[data][j] & ( mask << i ) ) != 0 ) * current_blue_level;
-			x++;
-			LED_data[x] = ( ( font_basic[data][j] & ( mask << i ) ) != 0 ) * current_green_level;
-			x++;
+			if((x & 0x18) == 0x18) { x+=8; } //skip over P3 and P4 equal "11" state
+			tempbit   = (font_basic[data][j] & ( mask << i ) ) != 0;
+			LED_data[x] = tempbit * current_red_level;
+			LED_data[x+1] = tempbit * current_blue_level;
+			LED_data[x+2] = tempbit * current_green_level;
+			x+=3;
 		}
 
 	}
 
-/*
-	index=0;
-
-	for(x=0; x<255; x+=3)
-	{
-		if((x & 0x18) == 0x18)//skip over P3 and P4 equal "11" state
-			x+=8;
-
-		LED_data[x]   = font1[data][index] * current_red_level;//red
-		LED_data[x+1] = font1[data][index] * current_blue_level;//blue
-		LED_data[x+2] = font1[data][index++] * current_green_level;//green
-	}
-*/
 }
 
 
@@ -433,6 +418,7 @@ void display_red_green_blue()
 			us_delay(grnlevel);
 		}
 	}
+
 }
 
 
