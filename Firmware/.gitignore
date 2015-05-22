@@ -2,8 +2,6 @@
 # Using this web site as a guide on what to ignore for css projects
 # http://processors.wiki.ti.com/index.php/Source_control_with_CCS
 Debug/
-Debug__GNU/
-Debug__TI/
 Release/
 .launches/
 .config/

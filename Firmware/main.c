@@ -75,7 +75,7 @@ __interrupt void USCI0RX_ISR(void)
 //****************************************************************************************************
 int main(void)
 {
-	unsigned int x;
+	volatile unsigned int x;
 	volatile unsigned char charsel, skip;
 
 
@@ -105,10 +105,31 @@ int main(void)
 
 
 	skip=0;
+
+	// ***
 	// Replaced the simple loop through characters with an array of characters
 	// Using unicode hex values to choose characters in the array
-	// Currently set to TheLAB.ms
-	unsigned char charstodisplay[9] = {0x54, 0x68, 0x65, 0x4C, 0x41, 0x42, 0x2E, 0x6D, 0x73};
+	// DONT FORGET to adjust the array element to the number of chars
+	// ***
+
+	// ***
+	// Below spells out TheLAB.ms
+	// ***
+//	unsigned char charstodisplay[9] = {0x54, 0x68, 0x65, 0x4C, 0x41, 0x42, 0x2E, 0x6D, 0x73};
+
+	// ***
+	// Below scrolls through 0-9 then A-Z then a-z
+	// ***
+	unsigned char charstodisplay[62] = {
+			0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39,
+			0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A,
+			0x4B, 0x4C, 0x4D, 0x4E, 0x4F, 0x50, 0x51, 0x52, 0x53, 0x54,
+			0x55, 0x56, 0x57, 0x58, 0x59, 0x5A,
+			0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6A,
+			0x6B, 0x6C, 0x6D, 0x6E, 0x6F, 0x70, 0x71, 0x72, 0x73, 0x74,
+			0x75, 0x76, 0x77, 0x78, 0x79, 0x7A
+	};
+
 	charsel=0;
 	first_serial_byte=0;
 	init_LED_data(charstodisplay[charsel]);
@@ -140,23 +161,39 @@ int main(void)
 		//strobe LEDs based on the data in the LED_data[] array
 		for(x=0; x<255; x+=3)
 		{
+			if (x > 247) {
+				x=x;
+			}
 			if(receiving_data==1)
 				x=300;//terminate update
 
 			if((x & 0x18) == 0x18)//skip over P3 and P4 equal "11" state
 				x+=8;
+			int delay1, delay2, delay3;
+			if ((LED_data[x] == 0) && (LED_data[x+1] == 0) && (LED_data[x+2] == 0)) {
+				delay1 = 1;
+			    delay2 = 1;
+			    delay3 = 1;
+			} else {
+				delay1 = LED_data[x];
+				delay2 = LED_data[x+1];
+				delay3 = LED_data[x+2];
+			}
 
 			if(LED_data[x])//if data > zero
 				P3OUT = x;
-			us_delay(LED_data[x]);
+			//us_delay(LED_data[x]);
+			us_delay(delay1);
 
 			if(LED_data[x+1])
 				P3OUT = x+1;
-			us_delay(LED_data[x+1]);
+			//us_delay(LED_data[x+1]);
+			us_delay(delay2);
 
 			if(LED_data[x+2])
 				P3OUT = x+2;
-			us_delay(LED_data[x+2]);
+			//us_delay(LED_data[x+2]);
+			us_delay(delay3);
 		}
 	}
 
@@ -225,23 +262,23 @@ void us_delay(unsigned char dly)
 //****************************************************************************************************
 void init_LED_data(unsigned char data)
 {
-	unsigned int x, i, j;
+	unsigned int h, i, j;
 	const unsigned char mask = 1;
 	unsigned char tempbit;
 
-	x =0;
+	h =0;
 
 	for( j = 0; j < 8; j++)
 	{
 
 		for ( i = 0; i < 8; i++ )
 		{
-			if((x & 0x18) == 0x18) { x+=8; } //skip over P3 and P4 equal "11" state
+			if((h & 0x18) == 0x18) { h+=8; } //skip over P3 and P4 equal "11" state
 			tempbit   = (font_basic[data][j] & ( mask << i ) ) != 0;
-			LED_data[x] = tempbit * current_red_level;
-			LED_data[x+1] = tempbit * current_blue_level;
-			LED_data[x+2] = tempbit * current_green_level;
-			x+=3;
+			LED_data[h] = tempbit * current_red_level;
+			LED_data[h+1] = tempbit * current_blue_level;
+			LED_data[h+2] = tempbit * current_green_level;
+			h+=3;
 		}
 
 	}
