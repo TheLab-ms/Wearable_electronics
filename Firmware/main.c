@@ -1,6 +1,6 @@
 #include <msp430.h>
 
-extern const unsigned char font1[95][64];
+//extern const unsigned char font1[95][64];
 extern const unsigned char font_basic[ ][8];
 
 
@@ -99,9 +99,9 @@ int main(void)
 
 
 	//these color levels will be set by every ASCII character request sent from the central processor
-	current_red_level   = 180;   //red
-	current_blue_level  = 180;   //blue
-	current_green_level = 180;   //green
+	current_red_level   = 200;   //red
+	current_blue_level  = 200;   //blue
+	current_green_level = 0;   //green
 
 
 	skip=0;
@@ -109,18 +109,17 @@ int main(void)
 	// ***
 	// Replaced the simple loop through characters with an array of characters
 	// Using unicode hex values to choose characters in the array
-	// DONT FORGET to adjust the array element to the number of chars
 	// ***
 
 	// ***
 	// Below spells out TheLAB.ms
 	// ***
-//	unsigned char charstodisplay[9] = {0x54, 0x68, 0x65, 0x4C, 0x41, 0x42, 0x2E, 0x6D, 0x73};
+	const unsigned char charstodisplay[ ] = {0x54, 0x68, 0x65, 0x4C, 0x41, 0x42, 0x2E, 0x6D, 0x73};
 
 	// ***
 	// Below scrolls through 0-9 then A-Z then a-z
 	// ***
-	unsigned char charstodisplay[62] = {
+/*	const unsigned char charstodisplay[ ] = {
 			0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39,
 			0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A,
 			0x4B, 0x4C, 0x4D, 0x4E, 0x4F, 0x50, 0x51, 0x52, 0x53, 0x54,
@@ -128,7 +127,7 @@ int main(void)
 			0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6A,
 			0x6B, 0x6C, 0x6D, 0x6E, 0x6F, 0x70, 0x71, 0x72, 0x73, 0x74,
 			0x75, 0x76, 0x77, 0x78, 0x79, 0x7A
-	};
+	}; */
 
 	charsel=0;
 	first_serial_byte=0;
@@ -161,19 +160,18 @@ int main(void)
 		//strobe LEDs based on the data in the LED_data[] array
 		for(x=0; x<255; x+=3)
 		{
-			if (x > 247) {
-				x=x;
-			}
+
 			if(receiving_data==1)
 				x=300;//terminate update
 
 			if((x & 0x18) == 0x18)//skip over P3 and P4 equal "11" state
 				x+=8;
 			int delay1, delay2, delay3;
+			//*** If LED is completley off we still need a minimum delay for consistency
 			if ((LED_data[x] == 0) && (LED_data[x+1] == 0) && (LED_data[x+2] == 0)) {
-				delay1 = 1;
-			    delay2 = 1;
-			    delay3 = 1;
+				delay1 = 50;
+			    delay2 = 50;
+			    delay3 = 50;
 			} else {
 				delay1 = LED_data[x];
 				delay2 = LED_data[x+1];
@@ -182,18 +180,18 @@ int main(void)
 
 			if(LED_data[x])//if data > zero
 				P3OUT = x;
-			//us_delay(LED_data[x]);
 			us_delay(delay1);
 
 			if(LED_data[x+1])
 				P3OUT = x+1;
-			//us_delay(LED_data[x+1]);
 			us_delay(delay2);
 
 			if(LED_data[x+2])
 				P3OUT = x+2;
-			//us_delay(LED_data[x+2]);
 			us_delay(delay3);
+
+			P3OUT = 216; // Using this to clear LED's fixing the last LED brighter bug
+			us_delay(0); // Dont need a delay for this clear but # must be 216 or above (192 + 24skip = 216)
 		}
 	}
 
@@ -469,7 +467,6 @@ void display_red_green_blue()
 
 /*  CODE GRAVEYARD
 
-//****************************************************************************************************
 void init_LED_data()
 {
 	unsigned int x;
@@ -528,7 +525,6 @@ init_timer();//used by color show to slowly change colors
 
 
 
-//****************************************************************************************************
 void init_timer()
 {
 	intcount=0;
@@ -540,7 +536,6 @@ void init_timer()
 
 //This timer is started after power up for the light show start_color_show(); but terminated upon receipt of the first byte from the host.
 //From that point forward, incoming packets from the host determine what is displayed.
-//****************************************************************************************************
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void Timer_A (void)
 {
