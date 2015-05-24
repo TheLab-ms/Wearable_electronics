@@ -32,7 +32,8 @@ unsigned char first_serial_byte;
 //*******  PROTOTYPES  *******************************************************************************
 void us_delay(unsigned char dly);
 void init_ports(void);
-void init_LED_data(unsigned char data);
+void init_LED_data(unsigned char data, unsigned char datanext, unsigned int offset);
+void display_LED_data(void);
 void init_uart(void);
 void init_timer(void);
 void init_system_clock(void);
@@ -76,7 +77,8 @@ __interrupt void USCI0RX_ISR(void)
 int main(void)
 {
 	volatile unsigned int x;
-	volatile unsigned char charsel, skip;
+	volatile unsigned int charsel, charprev, skip, skip2, skipdelay;
+	unsigned int scroll, offset;
 
 
     WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
@@ -99,12 +101,10 @@ int main(void)
 
 
 	//these color levels will be set by every ASCII character request sent from the central processor
-	current_red_level   = 200;   //red
-	current_blue_level  = 200;   //blue
-	current_green_level = 0;   //green
+	current_red_level   = 250;   //red
+	current_blue_level  = 15;   //blue
+	current_green_level = 250;   //green
 
-
-	skip=0;
 
 	// ***
 	// Replaced the simple loop through characters with an array of characters
@@ -112,12 +112,12 @@ int main(void)
 	// ***
 
 	// ***
-	// Below spells out TheLAB.ms
+	// Below spells out T h e L A B . m s (space)
 	// ***
-	const unsigned char charstodisplay[ ] = {0x54, 0x68, 0x65, 0x4C, 0x41, 0x42, 0x2E, 0x6D, 0x73};
+	const unsigned char charstodisplay[ ] = {0x54, 0x68, 0x65, 0x4C, 0x41, 0x42, 0x2E, 0x6D, 0x73, 0x00};
 
 	// ***
-	// Below scrolls through 0-9 then A-Z then a-z
+	// Below goes through 0-9 then A-Z then a-z
 	// ***
 /*	const unsigned char charstodisplay[ ] = {
 			0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39,
@@ -127,12 +127,19 @@ int main(void)
 			0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6A,
 			0x6B, 0x6C, 0x6D, 0x6E, 0x6F, 0x70, 0x71, 0x72, 0x73, 0x74,
 			0x75, 0x76, 0x77, 0x78, 0x79, 0x7A
-	}; */
+	};
+*/
+
+	// ***
+	// Determine if you want scrolling text or not set scroll=1 to scroll
+	// ***
+	scroll = 1;
 
 	charsel=0;
+	charprev=0;
 	first_serial_byte=0;
-	init_LED_data(charstodisplay[charsel]);
-	while(1)//this loop displays all desired data
+	init_LED_data(charstodisplay[charsel], 0, 0);  // Set up the first set of LED_data
+	while(1)  //this loop displays all desired data
 	{
 		if(receiving_data==1)//wait here while receiving a packet
 		{
@@ -142,57 +149,38 @@ int main(void)
 			process_data_packet();
 		}
 
-		//******  ASCII character display DEMO ONLY - to be removed later  ***********
 		if(first_serial_byte==0)
 		{
-			skip++;
-			if(skip>250)
+
+			if (scroll == 1) { skipdelay=10; } else { skipdelay=250; }
+			for(skip=0; skip<skipdelay; skip++)
 			{
-				skip=0;
-				charsel++;
-				if(charsel>(sizeof(charstodisplay)-1)) charsel=0;
-				init_LED_data(charstodisplay[charsel]);
+				display_LED_data();  // Strobe the LEDs based on LED_data
 			}
-		}
-		//******************************************
 
+			charprev = charsel;
+			charsel++;
+			if(charsel>(sizeof(charstodisplay)-1)) charsel=0;
 
-		//strobe LEDs based on the data in the LED_data[] array
-		for(x=0; x<255; x+=3)
-		{
+			if (scroll == 1)
+			{  // If scrolling we must do 8 more displays per char combining current and next char
+				for (offset=1; offset<9; offset++)
+				{
+					init_LED_data(charstodisplay[charprev], charstodisplay[charsel], offset);
+					skipdelay=50;
+					for(skip2=0; skip2<skipdelay; skip2++)
+					{
+						display_LED_data();  // Strobe the LEDs based on LED_data
+					}
 
-			if(receiving_data==1)
-				x=300;//terminate update
-
-			if((x & 0x18) == 0x18)//skip over P3 and P4 equal "11" state
-				x+=8;
-			int delay1, delay2, delay3;
-			//*** If LED is completley off we still need a minimum delay for consistency
-			if ((LED_data[x] == 0) && (LED_data[x+1] == 0) && (LED_data[x+2] == 0)) {
-				delay1 = 50;
-			    delay2 = 50;
-			    delay3 = 50;
+				}
+				init_LED_data(charstodisplay[charsel], 0, 0);
 			} else {
-				delay1 = LED_data[x];
-				delay2 = LED_data[x+1];
-				delay3 = LED_data[x+2];
+				init_LED_data(charstodisplay[charsel], 0, 0);
 			}
 
-			if(LED_data[x])//if data > zero
-				P3OUT = x;
-			us_delay(delay1);
-
-			if(LED_data[x+1])
-				P3OUT = x+1;
-			us_delay(delay2);
-
-			if(LED_data[x+2])
-				P3OUT = x+2;
-			us_delay(delay3);
-
-			P3OUT = 216; // Using this to clear LED's fixing the last LED brighter bug
-			us_delay(0); // Dont need a delay for this clear but # must be 216 or above (192 + 24skip = 216)
 		}
+
 	}
 
 }
@@ -239,7 +227,7 @@ void process_data_packet()
 	}
 
 	if(segment_mode == ASCIIFONT1)
-		init_LED_data(LED_data[5]-31);//load selected character in font set
+		init_LED_data(LED_data[5]-31, 0, 0);//load selected character in font set
 }
 
 
@@ -258,26 +246,45 @@ void us_delay(unsigned char dly)
 
 
 //****************************************************************************************************
-void init_LED_data(unsigned char data)
+void init_LED_data(unsigned char data, unsigned char datanext, unsigned int offset)
 {
 	unsigned int h, i, j;
 	const unsigned char mask = 1;
-	unsigned char tempbit;
+	volatile unsigned int tempbit = 0;
 
 	h =0;
 
+	// Loops Through Each Byte in both the data and datanext arrays
 	for( j = 0; j < 8; j++)
 	{
-
+		// Loops Through Each Bit in each Byte in data array
 		for ( i = 0; i < 8; i++ )
 		{
-			if((h & 0x18) == 0x18) { h+=8; } //skip over P3 and P4 equal "11" state
-			tempbit   = (font_basic[data][j] & ( mask << i ) ) != 0;
-			LED_data[h] = tempbit * current_red_level;
-			LED_data[h+1] = tempbit * current_blue_level;
-			LED_data[h+2] = tempbit * current_green_level;
-			h+=3;
+			if ( i >= offset ) {  // Skips bits of offset value to be filled in with next data array for scrolling text
+				if((h & 0x18) == 0x18) { h+=8; } //skip over P3 and P4 equal "11" state
+				tempbit   = (font_basic[data][j] & ( mask << i ) ) != 0;
+				LED_data[h] = tempbit * current_red_level;
+				LED_data[h+1] = tempbit * current_blue_level;
+				LED_data[h+2] = tempbit * current_green_level;
+				h+=3;
+			}
 		}
+
+		if (offset >= 1) {  // Only do this second loop if needed
+			// Loops Through Each Bit in each Byte in datanext array
+			for ( i = 0; i < 8; i++ )
+			{
+				if ( offset > i ) {  // Fills in the bits skipped in the first byte with bits from the next byte
+					if((h & 0x18) == 0x18) { h+=8; } //skip over P3 and P4 equal "11" state
+					tempbit   = (font_basic[datanext][j] & ( mask << i ) ) != 0;
+					LED_data[h] = tempbit * current_red_level;
+					LED_data[h+1] = tempbit * current_blue_level;
+					LED_data[h+2] = tempbit * current_green_level;
+					h+=3;
+				}
+			}
+		}
+
 
 	}
 
@@ -456,7 +463,47 @@ void display_red_green_blue()
 
 }
 
+void display_LED_data()
+{
+	unsigned int x;
 
+	//strobe LEDs based on the data in the LED_data[] array
+	for(x=0; x<255; x+=3)
+	{
+
+		if(receiving_data==1)
+			x=300;//terminate update
+
+		if((x & 0x18) == 0x18)//skip over P3 and P4 equal "11" state
+			x+=8;
+		int delay1, delay2, delay3;
+		//*** If LED is completley off we still need a minimum delay for consistency
+		if ((LED_data[x] == 0) && (LED_data[x+1] == 0) && (LED_data[x+2] == 0)) {
+			delay1 = 50;
+		    delay2 = 50;
+		    delay3 = 50;
+		} else {
+			delay1 = LED_data[x];
+			delay2 = LED_data[x+1];
+			delay3 = LED_data[x+2];
+		}
+
+		if(LED_data[x])//if data > zero
+			P3OUT = x;
+		us_delay(delay1);
+
+		if(LED_data[x+1])
+			P3OUT = x+1;
+		us_delay(delay2);
+
+		if(LED_data[x+2])
+			P3OUT = x+2;
+		us_delay(delay3);
+
+		P3OUT = 248; // Using this to clear LED's fixing the last LED brighter bug
+		us_delay(0); // Dont need a delay for this clear but # must be 248 or above (192 + 56skip = 248)
+	}
+}
 
 
 
