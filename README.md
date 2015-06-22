@@ -7,3 +7,7 @@ Don has volunteered to lead us in designing and manufacturing a wearable electro
 • Designed to be modded / hacked with your own code. 
 
 • All proceeds will go to TheLab.ms
+
+• Use branch 'develop' for code related to small 64 LED prototype
+
+• Use this master repo for code related to the full sized prototype
