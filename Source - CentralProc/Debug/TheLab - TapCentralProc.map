@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v4.3.5                      
 ******************************************************************************
->> Linked Mon Jun 22 16:16:16 2015
+>> Linked Thu Jun 25 14:24:32 2015
 
 OUTPUT FILE NAME:   <TheLab - TapCentralProc.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 00005c00
@@ -18,8 +18,8 @@ MEMORY CONFIGURATION
   INFOC                 00001880   00000080  00000000  00000080  RWIX
   INFOB                 00001900   00000080  00000000  00000080  RWIX
   INFOA                 00001980   00000080  00000000  00000080  RWIX
-  RAM                   00001c00   00004000  000000a3  00003f5d  RWIX
-  FLASH                 00005c00   0000a380  00000032  0000a34e  RWIX
+  RAM                   00001c00   00004000  0000134d  00002cb3  RWIX
+  FLASH                 00005c00   0000a380  0000013c  0000a244  RWIX
   INT00                 0000ff80   00000002  00000000  00000002  RWIX
   INT01                 0000ff82   00000002  00000000  00000002  RWIX
   INT02                 0000ff84   00000002  00000000  00000002  RWIX
@@ -84,7 +84,7 @@ MEMORY CONFIGURATION
   INT61                 0000fffa   00000002  00000002  00000000  RWIX
   INT62                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-  FLASH2                00010000   00015c00  000003e6  0001581a  RWIX
+  FLASH2                00010000   00015c00  00003656  000125aa  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -95,10 +95,26 @@ section   page    origin      length       input sections
 .init_array 
 *          0    00005c00    00000000     UNINITIALIZED
 
-.bss       0    00001c00    00000003     UNINITIALIZED
-                  00001c00    00000001     (.common:gBlue)
-                  00001c01    00000001     (.common:gGreen)
-                  00001c02    00000001     (.common:gRed)
+.bss       0    00001c00    00001103     UNINITIALIZED
+                  00001c00    00000400     (.common:A2Dvolts)
+                  00002000    00000400     (.common:m_dFFTOutData)
+                  00002400    00000400     (.common:m_dImaginary)
+                  00002800    00000400     (.common:m_dReal)
+                  00002c00    00000100     (.common:A2Dcounts)
+                  00002d00    00000001     (.common:gBlue)
+                  00002d01    00000001     (.common:gGreen)
+                  00002d02    00000001     (.common:gRed)
+
+.data      0    00002d04    000001aa     UNINITIALIZED
+                  00002d04    000000b0     rts430x_lc_rd_eabi.lib : signal.obj (.data:sigtable)
+                  00002db4    00000080                            : xvalues.obj (.data)
+                  00002e34    00000068                            : xfvalues.obj (.data)
+                  00002e9c    00000008                            : _lock.obj (.data)
+                  00002ea4    00000008                            : feraiseexcept.obj (.data)
+                  00002eac    00000002                            : errno.obj (.data)
+
+.TI.persistent 
+*          0    00002d04    00000000     UNINITIALIZED
 
 .stack     0    00005b60    000000a0     UNINITIALIZED
                   00005b60    00000004     rts430x_lc_rd_eabi.lib : boot.obj (.stack)
@@ -109,10 +125,16 @@ section   page    origin      length       input sections
                   00005c00    0000001a     rts430x_lc_rd_eabi.lib : boot.obj (.text:_isr:_c_int00_noexit)
                   00005c1a    00000006                            : isr_trap.obj (.text:_isr:__TI_ISR_TRAP)
 
-.cinit     0    00005c20    00000012     
-                  00005c20    00000006     (.cinit..bss.load) [load image, compression = zero_init]
-                  00005c26    00000004     (__TI_handler_table)
-                  00005c2a    00000008     (__TI_cinit_table)
+.const     0    00005c20    00000098     
+                  00005c20    00000038     rts430x_lc_rd_eabi.lib : xlog.obj (.const:p)
+                  00005c58    00000030                            : xsin.obj (.const:c)
+                  00005c88    00000030                            : xsin.obj (.const:s)
+
+.cinit     0    00005cb8    00000084     
+                  00005cb8    00000062     (.cinit..data.load) [load image, compression = rle]
+                  00005d1a    0000000c     (__TI_handler_table)
+                  00005d26    00000006     (.cinit..bss.load) [load image, compression = zero_init]
+                  00005d2c    00000010     (__TI_cinit_table)
 
 RTC        0    0000ffd2    00000002     
                   0000ffd2    00000002     rts430x_lc_rd_eabi.lib : int41.obj (.int41)
@@ -189,39 +211,93 @@ SYSNMI     0    0000fffc    00000002
 .reset     0    0000fffe    00000002     
                   0000fffe    00000002     rts430x_lc_rd_eabi.lib : boot.obj (.reset)
 
-.text      0    00010000    000003e6     
-                  00010000    000000e2     main.obj (.text:main)
-                  000100e2    000000c4     main.obj (.text:update_segment_LINE)
-                  000101a6    00000070     main.obj (.text:I2Cwrite_chip_address)
-                  00010216    0000006e     rts430x_lc_rd_eabi.lib : autoinit.obj (.text:_auto_init_hold_wdt)
-                  00010284    00000068     main.obj (.text:I2Cwrite_chip_data)
-                  000102ec    00000058     main.obj (.text:init_clock)
-                  00010344    0000002c     main.obj (.text:select_global_colors)
-                  00010370    00000024     rts430x_lc_rd_eabi.lib : copy_zero_init.obj (.text:decompress:ZI:__TI_zero_init)
-                  00010394    0000001e     main.obj (.text:getI2Cdata)
-                  000103b2    00000012     main.obj (.text:I2Cstart)
-                  000103c4    00000012     main.obj (.text:I2Cstop)
-                  000103d6    00000008     main.obj (.text:i2c_data_low)
-                  000103de    00000004     rts430x_lc_rd_eabi.lib : pre_init.obj (.text:_system_pre_init)
-                  000103e2    00000004                            : exit.obj (.text:abort)
+.text      0    00010000    00003656     
+                  00010000    000007c6     main.obj (.text:myFFT)
+                  000107c6    000004ec     main.obj (.text:main)
+                  00010cb2    00000452     rts430x_lc_rd_eabi.lib : frcdivd.obj (.text:__TI_frcdivd)
+                  00011104    00000420                            : xlog.obj (.text:_Log)
+                  00011524    000003c2                            : xsin.obj (.text:_Sin)
+                  000118e6    0000031a                            : fmod.obj (.text:fmod)
+                  00011c00    000002e4                            : frcmpyd.obj (.text:__TI_frcmpyd)
+                  00011ee4    000002d8                            : addd.obj (.text:__mspabi_addd)
+                  000121bc    00000282                            : mpyd.obj (.text:__mspabi_mpyd)
+                  0001243e    00000252                            : frcaddd.obj (.text:__TI_frcaddd)
+                  00012690    00000222                            : divd.obj (.text:__mspabi_divd)
+                  000128b2    0000019e                            : xdscale.obj (.text:_Dscale)
+                  00012a50    00000100                            : xdnorm.obj (.text:_Dnorm)
+                  00012b50    000000ea     main.obj (.text:update_segment_LINE)
+                  00012c3a    000000d8     rts430x_lc_rd_eabi.lib : cmpd.obj (.text:__mspabi_cmpd)
+                  00012d12    000000b2                            : renormd.obj (.text:__TI_renormd)
+                  00012dc4    0000009a     main.obj (.text:I2Cwrite_chip_address)
+                  00012e5e    00000094     rts430x_lc_rd_eabi.lib : fltlid.obj (.text:__mspabi_fltlid)
+                  00012ef2    00000080     main.obj (.text:I2Cwrite_chip_data)
+                  00012f72    00000076     rts430x_lc_rd_eabi.lib : fltuld.obj (.text:__mspabi_fltuld)
+                  00012fe8    00000072                            : xdunscal.obj (.text:_Dunscale)
+                  0001305a    0000006e                            : autoinit.obj (.text:_auto_init_hold_wdt)
+                  000130c8    00000066                            : fixdli.obj (.text:__mspabi_fixdli)
+                  0001312e    00000064                            : cvtfd.obj (.text:__mspabi_cvtfd)
+                  00013192    00000062                            : copy_decompress_rle.obj (.text:__TI_decompress_rle_core)
+                  000131f4    00000058     main.obj (.text:init_clock)
+                  0001324c    0000003e     rts430x_lc_rd_eabi.lib : asr32.obj (.text:l_asr_const)
+                  0001328a    0000003e                            : lsl32.obj (.text:l_lsl_const)
+                  000132c8    0000003e                            : lsr32.obj (.text:l_lsr_const)
+                  00013306    0000003a                            : llmath.obj (.text:__mspabi_srlll)
+                  00013340    00000038                            : signal.obj (.text:signal)
+                  00013378    00000036                            : xferaise.obj (.text:_Feraise)
+                  000133ae    00000034                            : feraiseexcept.obj (.text:feraiseexcept)
+                  000133e2    00000032                            : subd.obj (.text:__mspabi_subd)
+                  00013414    00000032                            : raise.obj (.text:raise)
+                  00013446    0000002e                            : negd.obj (.text:__mspabi_negd)
+                  00013474    0000002c     main.obj (.text:select_global_colors)
+                  000134a0    00000028     rts430x_lc_rd_eabi.lib : fixdi.obj (.text:__mspabi_fixdi)
+                  000134c8    00000024                            : copy_zero_init.obj (.text:decompress:ZI:__TI_zero_init)
+                  000134ec    00000022                            : mult32_f5hw.obj (.text)
+                  0001350e    0000001e     main.obj (.text:I2Cstart)
+                  0001352c    0000001e     main.obj (.text:I2Cstop)
+                  0001354a    0000001e     main.obj (.text:getI2Cdata)
+                  00013568    00000016     rts430x_lc_rd_eabi.lib : mult16_f5hw.obj (.text)
+                  0001357e    00000014                            : memcpy.obj (.text:memcpy)
+                  00013592    00000012                            : copy_decompress_none.obj (.text:decompress:none:__TI_decompress_none)
+                  000135a4    00000010     main.obj (.text:delay_100KHz)
+                  000135b4    00000010     rts430x_lc_rd_eabi.lib : asr32.obj (.text:l_asr)
+                  000135c4    00000010                            : lsl32.obj (.text:l_lsl)
+                  000135d4    00000010                            : lsr32.obj (.text:l_lsr)
+                  000135e4    0000000e                            : cos.obj (.text:cos)
+                  000135f2    0000000e                            : log10.obj (.text:log10)
+                  00013600    0000000e                            : sin.obj (.text:sin)
+                  0001360e    0000000c                            : fltid.obj (.text:__mspabi_fltid)
+                  0001361a    0000000a                            : fs_neg.obj (.text)
+                  00013624    0000000a                            : lsl16.obj (.text)
+                  0001362e    0000000a                            : lsr16.obj (.text)
+                  00013638    00000008     main.obj (.text:i2c_data_low)
+                  00013640    00000006     rts430x_lc_rd_eabi.lib : fltud.obj (.text:__mspabi_fltud)
+                  00013646    00000006                            : copy_decompress_rle.obj (.text:decompress:rle24:__TI_decompress_rle24)
+                  0001364c    00000004                            : pre_init.obj (.text:_system_pre_init)
+                  00013650    00000004                            : exit.obj (.text:abort)
+                  00013654    00000002                            : _lock.obj (.text:_nop)
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 00005c2a records: 1, size/record: 8, table size: 8
-	.bss: load addr=00005c20, load size=00000006 bytes, run addr=00001c00, run size=00000003 bytes, compression=zero_init
+__TI_cinit_table @ 00005d2c records: 2, size/record: 8, table size: 16
+	.data: load addr=00005cb8, load size=00000062 bytes, run addr=00002d04, run size=000001aa bytes, compression=rle
+	.bss: load addr=00005d26, load size=00000006 bytes, run addr=00001c00, run size=00001103 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 00005c26 records: 1, size/record: 4, table size: 4
+__TI_handler_table @ 00005d1a records: 3, size/record: 4, table size: 12
 	index: 0, handler: __TI_zero_init
+	index: 1, handler: __TI_decompress_rle24
+	index: 2, handler: __TI_decompress_none
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
 
 address    name
 --------   ----
+00002c00   A2Dcounts
+00001c00   A2Dvolts
 00000700   ADC12CTL0
 00000701   ADC12CTL0_H
 00000700   ADC12CTL0_L
@@ -304,7 +380,7 @@ address    name
 00000732   ADC12MEM9
 00000733   ADC12MEM9_H
 00000732   ADC12MEM9_L
-000103e2   C$$EXIT
+00013650   C$$EXIT
 00000150   CRCDI
 00000152   CRCDIRB
 00000153   CRCDIRB_H
@@ -368,10 +444,10 @@ address    name
 00000146   FCTL4
 00000147   FCTL4_H
 00000146   FCTL4_L
-000103b2   I2Cstart
-000103c4   I2Cstop
-000101a6   I2Cwrite_chip_address
-00010284   I2Cwrite_chip_data
+0001350e   I2Cstart
+0001352c   I2Cstop
+00012dc4   I2Cwrite_chip_address
+00012ef2   I2Cwrite_chip_data
 000004c4   MAC
 000004da   MAC32H
 000004db   MAC32H_H
@@ -901,17 +977,48 @@ address    name
 0000015c   WDTCTL
 0000015d   WDTCTL_H
 0000015c   WDTCTL_L
+00002db4   _Denorm
+00012a50   _Dnorm
+000128b2   _Dscale
+00012fe8   _Dunscale
+00002dc4   _Eps
+00002eac   _Errno
+00002e34   _FDenorm
+00002e44   _FEps
+00002e54   _FInf
+00002e64   _FNan
+00002e84   _FRteps
+00002e74   _FSnan
+00002e94   _FXbig
+00002e98   _FZero
+00002ea4   _Fenv
+00013378   _Feraise
+00002dd4   _Hugeval
+00002de4   _Inf
+00011104   _Log
+00002df4   _Nan
+00002e14   _Rteps
+00011524   _Sin
+00002e04   _Snan
+00002ea8   _Tls_setup__Fenv
+00002e24   _Xbig
+00002e2c   _Zero
 00005c00   __STACK_END
 000000a0   __STACK_SIZE
-00005c2a   __TI_CINIT_Base
-00005c32   __TI_CINIT_Limit
-00005c26   __TI_Handler_Table_Base
-00005c2a   __TI_Handler_Table_Limit
+00005d2c   __TI_CINIT_Base
+00005d3c   __TI_CINIT_Limit
+00005d1a   __TI_Handler_Table_Base
+00005d26   __TI_Handler_Table_Limit
 UNDEFED    __TI_INITARRAY_Base
 UNDEFED    __TI_INITARRAY_Limit
 00005c1a   __TI_ISR_TRAP
 00000001   __TI_args_main
+00013592   __TI_decompress_none
+00013646   __TI_decompress_rle24
 00000001   __TI_exit
+0001243e   __TI_frcaddd
+00010cb2   __TI_frcdivd
+00011c00   __TI_frcmpyd
 0000ffd2   __TI_int41
 0000ffd4   __TI_int42
 0000ffd6   __TI_int43
@@ -934,26 +1041,110 @@ UNDEFED    __TI_INITARRAY_Limit
 0000fff8   __TI_int60
 0000fffa   __TI_int61
 0000fffc   __TI_int62
-00010370   __TI_zero_init
+00012d12   __TI_renormd
+000134c8   __TI_zero_init
 ffffffff   __binit__
 ffffffff   __c_args__
-00010216   _auto_init_hold_wdt
+00011ee4   __mspabi_addd
+00012c3a   __mspabi_cmpd
+0001312e   __mspabi_cvtfd
+00012690   __mspabi_divd
+000134a0   __mspabi_fixdi
+000130c8   __mspabi_fixdli
+0001360e   __mspabi_fltid
+00012e5e   __mspabi_fltlid
+00013640   __mspabi_fltud
+00012f72   __mspabi_fltuld
+000121bc   __mspabi_mpyd
+00013568   __mspabi_mpyi_f5hw
+000134ec   __mspabi_mpyl_f5hw
+00013446   __mspabi_negd
+0001361a   __mspabi_negf
+00013624   __mspabi_slli
+000135c4   __mspabi_slll
+000132c2   __mspabi_slll_1
+0001329e   __mspabi_slll_10
+0001329a   __mspabi_slll_11
+00013296   __mspabi_slll_12
+00013292   __mspabi_slll_13
+0001328e   __mspabi_slll_14
+0001328a   __mspabi_slll_15
+000132be   __mspabi_slll_2
+000132ba   __mspabi_slll_3
+000132b6   __mspabi_slll_4
+000132b2   __mspabi_slll_5
+000132ae   __mspabi_slll_6
+000132aa   __mspabi_slll_7
+000132a6   __mspabi_slll_8
+000132a2   __mspabi_slll_9
+000135b4   __mspabi_sral
+00013284   __mspabi_sral_1
+00013260   __mspabi_sral_10
+0001325c   __mspabi_sral_11
+00013258   __mspabi_sral_12
+00013254   __mspabi_sral_13
+00013250   __mspabi_sral_14
+0001324c   __mspabi_sral_15
+00013280   __mspabi_sral_2
+0001327c   __mspabi_sral_3
+00013278   __mspabi_sral_4
+00013274   __mspabi_sral_5
+00013270   __mspabi_sral_6
+0001326c   __mspabi_sral_7
+00013268   __mspabi_sral_8
+00013264   __mspabi_sral_9
+0001362e   __mspabi_srli
+000135d4   __mspabi_srll
+00013300   __mspabi_srll_1
+000132dc   __mspabi_srll_10
+000132d8   __mspabi_srll_11
+000132d4   __mspabi_srll_12
+000132d0   __mspabi_srll_13
+000132cc   __mspabi_srll_14
+000132c8   __mspabi_srll_15
+000132fc   __mspabi_srll_2
+000132f8   __mspabi_srll_3
+000132f4   __mspabi_srll_4
+000132f0   __mspabi_srll_5
+000132ec   __mspabi_srll_6
+000132e8   __mspabi_srll_7
+000132e4   __mspabi_srll_8
+000132e0   __mspabi_srll_9
+00013306   __mspabi_srlll
+000133e2   __mspabi_subd
+0001305a   _auto_init_hold_wdt
 00005c00   _c_int00
 00005c00   _c_int00_noexit
+00002e9c   _lock
+00013654   _nop
 0000fffe   _reset_vector
 00005b60   _stack
-000103de   _system_pre_init
-000103e2   abort
+0001364c   _system_pre_init
+00002ea0   _unlock
+00013650   abort
 ffffffff   binit
-00001c00   gBlue
-00001c01   gGreen
-00001c02   gRed
-00010394   getI2Cdata
-000103d6   i2c_data_low
-000102ec   init_clock
-00010000   main
-00010344   select_global_colors
-000100e2   update_segment_LINE
+000135e4   cos
+000135a4   delay_100KHz
+000133ae   feraiseexcept
+000118e6   fmod
+00002d00   gBlue
+00002d01   gGreen
+00002d02   gRed
+0001354a   getI2Cdata
+00013638   i2c_data_low
+000131f4   init_clock
+000135f2   log10
+00002000   m_dFFTOutData
+00002400   m_dImaginary
+00002800   m_dReal
+000107c6   main
+0001357e   memcpy
+00010000   myFFT
+00013414   raise
+00013474   select_global_colors
+00013340   signal
+00013600   sin
+00012b50   update_segment_LINE
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -1637,18 +1828,45 @@ address    name
 0000073e   ADC12MEM15
 0000073e   ADC12MEM15_L
 0000073f   ADC12MEM15_H
-00001c00   gBlue
-00001c01   gGreen
-00001c02   gRed
+00001c00   A2Dvolts
+00002000   m_dFFTOutData
+00002400   m_dImaginary
+00002800   m_dReal
+00002c00   A2Dcounts
+00002d00   gBlue
+00002d01   gGreen
+00002d02   gRed
+00002db4   _Denorm
+00002dc4   _Eps
+00002dd4   _Hugeval
+00002de4   _Inf
+00002df4   _Nan
+00002e04   _Snan
+00002e14   _Rteps
+00002e24   _Xbig
+00002e2c   _Zero
+00002e34   _FDenorm
+00002e44   _FEps
+00002e54   _FInf
+00002e64   _FNan
+00002e74   _FSnan
+00002e84   _FRteps
+00002e94   _FXbig
+00002e98   _FZero
+00002e9c   _lock
+00002ea0   _unlock
+00002ea4   _Fenv
+00002ea8   _Tls_setup__Fenv
+00002eac   _Errno
 00005b60   _stack
 00005c00   __STACK_END
 00005c00   _c_int00
 00005c00   _c_int00_noexit
 00005c1a   __TI_ISR_TRAP
-00005c26   __TI_Handler_Table_Base
-00005c2a   __TI_CINIT_Base
-00005c2a   __TI_Handler_Table_Limit
-00005c32   __TI_CINIT_Limit
+00005d1a   __TI_Handler_Table_Base
+00005d26   __TI_Handler_Table_Limit
+00005d2c   __TI_CINIT_Base
+00005d3c   __TI_CINIT_Limit
 0000ffd2   __TI_int41
 0000ffd4   __TI_int42
 0000ffd6   __TI_int43
@@ -1672,25 +1890,115 @@ address    name
 0000fffa   __TI_int61
 0000fffc   __TI_int62
 0000fffe   _reset_vector
-00010000   main
-000100e2   update_segment_LINE
-000101a6   I2Cwrite_chip_address
-00010216   _auto_init_hold_wdt
-00010284   I2Cwrite_chip_data
-000102ec   init_clock
-00010344   select_global_colors
-00010370   __TI_zero_init
-00010394   getI2Cdata
-000103b2   I2Cstart
-000103c4   I2Cstop
-000103d6   i2c_data_low
-000103de   _system_pre_init
-000103e2   C$$EXIT
-000103e2   abort
+00010000   myFFT
+000107c6   main
+00010cb2   __TI_frcdivd
+00011104   _Log
+00011524   _Sin
+000118e6   fmod
+00011c00   __TI_frcmpyd
+00011ee4   __mspabi_addd
+000121bc   __mspabi_mpyd
+0001243e   __TI_frcaddd
+00012690   __mspabi_divd
+000128b2   _Dscale
+00012a50   _Dnorm
+00012b50   update_segment_LINE
+00012c3a   __mspabi_cmpd
+00012d12   __TI_renormd
+00012dc4   I2Cwrite_chip_address
+00012e5e   __mspabi_fltlid
+00012ef2   I2Cwrite_chip_data
+00012f72   __mspabi_fltuld
+00012fe8   _Dunscale
+0001305a   _auto_init_hold_wdt
+000130c8   __mspabi_fixdli
+0001312e   __mspabi_cvtfd
+000131f4   init_clock
+0001324c   __mspabi_sral_15
+00013250   __mspabi_sral_14
+00013254   __mspabi_sral_13
+00013258   __mspabi_sral_12
+0001325c   __mspabi_sral_11
+00013260   __mspabi_sral_10
+00013264   __mspabi_sral_9
+00013268   __mspabi_sral_8
+0001326c   __mspabi_sral_7
+00013270   __mspabi_sral_6
+00013274   __mspabi_sral_5
+00013278   __mspabi_sral_4
+0001327c   __mspabi_sral_3
+00013280   __mspabi_sral_2
+00013284   __mspabi_sral_1
+0001328a   __mspabi_slll_15
+0001328e   __mspabi_slll_14
+00013292   __mspabi_slll_13
+00013296   __mspabi_slll_12
+0001329a   __mspabi_slll_11
+0001329e   __mspabi_slll_10
+000132a2   __mspabi_slll_9
+000132a6   __mspabi_slll_8
+000132aa   __mspabi_slll_7
+000132ae   __mspabi_slll_6
+000132b2   __mspabi_slll_5
+000132b6   __mspabi_slll_4
+000132ba   __mspabi_slll_3
+000132be   __mspabi_slll_2
+000132c2   __mspabi_slll_1
+000132c8   __mspabi_srll_15
+000132cc   __mspabi_srll_14
+000132d0   __mspabi_srll_13
+000132d4   __mspabi_srll_12
+000132d8   __mspabi_srll_11
+000132dc   __mspabi_srll_10
+000132e0   __mspabi_srll_9
+000132e4   __mspabi_srll_8
+000132e8   __mspabi_srll_7
+000132ec   __mspabi_srll_6
+000132f0   __mspabi_srll_5
+000132f4   __mspabi_srll_4
+000132f8   __mspabi_srll_3
+000132fc   __mspabi_srll_2
+00013300   __mspabi_srll_1
+00013306   __mspabi_srlll
+00013340   signal
+00013378   _Feraise
+000133ae   feraiseexcept
+000133e2   __mspabi_subd
+00013414   raise
+00013446   __mspabi_negd
+00013474   select_global_colors
+000134a0   __mspabi_fixdi
+000134c8   __TI_zero_init
+000134ec   __mspabi_mpyl_f5hw
+0001350e   I2Cstart
+0001352c   I2Cstop
+0001354a   getI2Cdata
+00013568   __mspabi_mpyi_f5hw
+0001357e   memcpy
+00013592   __TI_decompress_none
+000135a4   delay_100KHz
+000135b4   __mspabi_sral
+000135c4   __mspabi_slll
+000135d4   __mspabi_srll
+000135e4   cos
+000135f2   log10
+00013600   sin
+0001360e   __mspabi_fltid
+0001361a   __mspabi_negf
+00013624   __mspabi_slli
+0001362e   __mspabi_srli
+00013638   i2c_data_low
+00013640   __mspabi_fltud
+00013646   __TI_decompress_rle24
+0001364c   _system_pre_init
+00013650   C$$EXIT
+00013650   abort
+00013654   _nop
 ffffffff   __binit__
 ffffffff   __c_args__
 ffffffff   binit
 UNDEFED    __TI_INITARRAY_Base
 UNDEFED    __TI_INITARRAY_Limit
 
-[732 symbols]
+[849 symbols]

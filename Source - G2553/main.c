@@ -27,7 +27,7 @@ unsigned char receiving_data;
 volatile unsigned char myaddr;//changed JUNE18
 //unsigned char first_serial_byte;
 volatile unsigned char halt_update;
-
+volatile unsigned char blank_display;
 
 
 //*******  PROTOTYPES  *******************************************************************************
@@ -40,6 +40,7 @@ void init_system_clock(void);
 void display_red_green_blue(void);
 void process_data_packet(void);
 void init_i2c(void); //added JUNE18
+void process_column(unsigned char index, unsigned char column_length);
 
 //  G2
 //  G2
@@ -133,6 +134,8 @@ int main(void)
 	halt_update=0;
 	data_index=0;
 	//packet_started=0;
+	blank_display=1;//start with display off
+
 
 	//__bis_SR_register(LPM0_bits + GIE);       // Enter LPM0 w/ interrupt
 	__bis_SR_register(GIE);                   // Enable global interrupts
@@ -144,16 +147,18 @@ int main(void)
 	//these color levels will be set by every ASCII character request sent from the central processor
 	current_red_level   = 0;   //red
 	current_blue_level  = 0;   //blue
-	current_green_level = 200; //green
+	current_green_level = 0; //green
 
-	for(x=0; x<0xFF; x++)
+	//two steps are required to make all LEDs turn off:
+	for(x=0; x<260; x++)
 		LED_data[x] = 0;//turn all LEDs off in this 8x8 segment
+	P3OUT = 25;//all LEDs off by writing to dead/skip zone in the 8-bit counter
 
 
 	skip=0;
 	charsel=0;
 	//first_serial_byte=0;
-	init_LED_data(charsel);
+	//init_LED_data(charsel);
 	while(1)
 	{
 		//******  ASCII character display DEMO ONLY - to be removed later  ***********
@@ -173,6 +178,12 @@ int main(void)
 		//strobe LEDs based on the data in the LED_data[] array
 		for(x=0; x<255; x+=3)
 		{
+			if(blank_display==1)
+			{
+				P3OUT = 25;//all LEDs off by writing to dead/skip zone in the 8-bit counter
+				continue;
+			}
+
 			if((x & 0x18) == 0x18)//skip over P3 and P4 equal "11" state
 				x+=8;
 
@@ -181,20 +192,24 @@ int main(void)
 			if(LED_data[x])//if data > zero
 				P3OUT = x;
 			us_delay(LED_data[x]);
+			P3OUT = 25;//all LEDs off by writing to dead/skip zone in the 8-bit counter
 
 			while(halt_update==1);
 
 			if(LED_data[x+1])
 				P3OUT = x+1;
 			us_delay(LED_data[x+1]);
+			P3OUT = 25;//all LEDs off by writing to dead/skip zone in the 8-bit counter
 
 			while(halt_update==1);
 
 			if(LED_data[x+2])
 				P3OUT = x+2;
 			us_delay(LED_data[x+2]);
+			P3OUT = 25;//all LEDs off by writing to dead/skip zone in the 8-bit counter
 
 			while(halt_update==1);
+
 
 		}
 	}
@@ -210,8 +225,7 @@ void init_i2c()
 {
 	myaddr = P2IN;//read this MSP430's segment ID as defined by the termination of P2.0, P2.1 and P2.2
 	myaddr &= 0x07;
-	myaddr++;//segments are numbered 1-8 so increment by 1.  segment zero packets from the host/central processor are broadcast packets to all 8 segments
-	//my_id = 1;//for debug purposes
+//myaddr = 7;//for debug purposes
 
 	P1DIR &= ~BIT7;//input
 	P1DIR &= ~BIT6;//input
@@ -219,7 +233,8 @@ void init_i2c()
 	P1SEL2|= BIT6 + BIT7;                     // Assign I2C pins to USCI_B0
 	UCB0CTL1 |= UCSWRST;                      // Enable SW reset
 	UCB0CTL0 = UCMODE_3 + UCSYNC;             // I2C Slave, synchronous mode
-	UCB0I2COA = myaddr>>1;                    // assign my Address
+	UCB0I2COA = myaddr;                       // assign my **hardware** Address - logical address for interrupt routine is myaddr+1
+	myaddr++;								  //increment so the interrupt routine has the correct id for incoming packets
 	UCB0CTL1 &= ~UCSWRST;                     // Clear SW reset, resume operation
 	IE2 |= UCB0RXIE;                          // Enable RX interrupt
 }
@@ -229,7 +244,7 @@ void init_i2c()
 void process_data_packet()
 {
 	volatile unsigned int x, lindex, segment_mode;
-	volatile char c1, c2, c3, c4, c5, c6, c7, c8;
+	volatile unsigned char c1, c2, c3, c4, c5, c6, c7, c8;
 
 	//determine if this is a ASCII characrter request or a binary image bitmap
 	//load LED_data[] accordingly
@@ -262,6 +277,7 @@ void process_data_packet()
 
 	if(segment_mode == BINARY)
 	{
+		blank_display=0;//display on
 		//byte 5:    First byte of data. Single byte if ASCII, 255 if binary. All bytes must be 10-255.
 		lindex=5;
 		for(x=0; x<0xFF; x++)
@@ -269,143 +285,73 @@ void process_data_packet()
 	}
 
 	if(segment_mode == ASCIIFONT1)
+	{
+		blank_display=0;//display on
 		init_LED_data(LED_data[5]-31);//load selected character in font set
-
-
-
-
-
-	//LED_data[data_index++] = rxbyte; //save to the buffer
-
-
+	}
 
 
 	if(segment_mode == VERTLINEBOTTOM)
 	{
-		c1 = (LED_data[5]-10); //subtract 10 from desired column height
-		c2 = (LED_data[6]-10); //subtract 10 from desired column height
-		c3 = (LED_data[7]-10); //subtract 10 from desired column height
-		c4 = (LED_data[8]-10); //subtract 10 from desired column height
-		c5 = (LED_data[9]-10); //subtract 10 from desired column height
-		c6 = (LED_data[10]-10); //subtract 10 from desired column height
-		c7 = (LED_data[11]-10); //subtract 10 from desired column height
-		c8 = (LED_data[12]-10); //subtract 10 from desired column height
+		blank_display=0;//display on
 
-		for(x=0; x<0xFF; x++)
-			LED_data[x] = 0;//turn all LEDs off in this 8x8 segment
+		c1 = LED_data[5]-10;
+		c2 = LED_data[6]-10;
+		c3 = LED_data[7]-10;
+		c4 = LED_data[8]-10;
+		c5 = LED_data[9]-10;
+		c6 = LED_data[10]-10;
+		c7 = LED_data[11]-10;
+		c8 = LED_data[12]-10;
 
-		//column 1
-		if(c1) //if column 1 height > 0, process this column - skip otherwise
-		{
-			lindex=224;  //point to base of first column
-			for(x=0;  x<c1; x++) //light the number of requested LEDs in the requested color
-			{
-				LED_data[lindex++] = current_red_level;
-				LED_data[lindex++] = current_blue_level;
-				LED_data[lindex] = current_green_level;
-				lindex-=34;  //point to next LED up on the column
-			}
-		}
-
-		//column 2
-		if(c2)
-		{
-			lindex=227;
-			for(x=0;  x<c2; x++)
-			{
-				LED_data[lindex++] = current_red_level;
-				LED_data[lindex++] = current_blue_level;
-				LED_data[lindex] = current_green_level;
-				lindex-=34;
-			}
-		}
-
-		//column 3
-		if(c3)
-		{
-			lindex=230;
-			for(x=0;  x<c3; x++)
-			{
-				LED_data[lindex++] = current_red_level;
-				LED_data[lindex++] = current_blue_level;
-				LED_data[lindex] = current_green_level;
-				lindex-=34;
-			}
-		}
-
-		//column 4
-		if(c4)
-		{
-			lindex=233;
-			for(x=0;  x<c4; x++)
-			{
-				LED_data[lindex++] = current_red_level;
-				LED_data[lindex++] = current_blue_level;
-				LED_data[lindex] = current_green_level;
-				lindex-=34;
-			}
-		}
-
-		//column 5
-		if(c5)
-		{
-			lindex=236;
-			for(x=0;  x<c5; x++)
-			{
-				LED_data[lindex++] = current_red_level;
-				LED_data[lindex++] = current_blue_level;
-				LED_data[lindex] = current_green_level;
-				lindex-=34;
-			}
-		}
-
-		//column 6
-		if(c6)
-		{
-			lindex=239;
-			for(x=0;  x<c6; x++)
-			{
-				LED_data[lindex++] = current_red_level;
-				LED_data[lindex++] = current_blue_level;
-				LED_data[lindex] = current_green_level;
-				lindex-=34;
-			}
-		}
-
-		//column 7
-		if(c7)
-		{
-			lindex=242;
-			for(x=0;  x<c7; x++)
-			{
-				LED_data[lindex++] = current_red_level;
-				LED_data[lindex++] = current_blue_level;
-				LED_data[lindex] = current_green_level;
-				lindex-=34;
-			}
-		}
-
-		//column 8
-		if(c8)
-		{
-			lindex=245;
-			for(x=0;  x<c8; x++)
-			{
-				LED_data[lindex++] = current_red_level;
-				LED_data[lindex++] = current_blue_level;
-				LED_data[lindex] = current_green_level;
-				lindex-=34;
-			}
-		}
-
-
-
+		process_column(224, c1);//starting address for base LED in column 1, number of LEDs in this column to turn on
+		process_column(227, c2);//column 2
+		process_column(230, c3);//column 3
+		process_column(233, c4);//column 4
+		process_column(236, c5);//column 5
+		process_column(239, c6);//column 6
+		process_column(242, c7);//column 7
+		process_column(245, c8);//column 8
 	}
-
-
 }
 
 
+//for(x=0; x<260; x++)
+//	LED_data[x] = 0;//turn all LEDs off in this 8x8 segment
+
+
+//***********************************************************************************************
+void process_column(unsigned char index, unsigned char column_length)
+{
+	volatile unsigned char x, len;
+
+	//index is the starting address for base LED in desired column
+
+	len = column_length;
+
+	if(len<9)//if desired column height > 0, process this column - skip otherwise
+	{
+		for(x=0;  x<len; x++)
+		{
+			LED_data[index++] = current_red_level;
+			LED_data[index++] = current_blue_level;
+			LED_data[index] = current_green_level;
+			index-=34;
+		}
+
+		len++;
+
+		for(x=len; x<9; x++)//blank out rest of column
+		{
+			LED_data[index++] = 0;
+			LED_data[index++] = 0;
+			LED_data[index] = 0;
+			index-=34;
+		}
+
+
+	}
+}
 
 
 
