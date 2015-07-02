@@ -1,6 +1,7 @@
 #include <msp430.h> 
 
 extern const unsigned char font1[95][64];
+extern const unsigned char font_basic[ ][8];
 
 #define  BINARY 10
 #define  ASCIIFONT1 11
@@ -38,6 +39,7 @@ void init_uart(void);
 void init_timer(void);
 void init_system_clock(void);
 void display_red_green_blue(void);
+void display_LED_data(void);
 void process_data_packet(void);
 void init_i2c(void); //added JUNE18
 void process_column(unsigned char index, unsigned char column_length);
@@ -147,7 +149,7 @@ int main(void)
 	//these color levels will be set by every ASCII character request sent from the central processor
 	current_red_level   = 0;   //red
 	current_blue_level  = 0;   //blue
-	current_green_level = 0; //green
+	current_green_level = 250; //green
 
 	//two steps are required to make all LEDs turn off:
 	for(x=0; x<260; x++)
@@ -176,42 +178,8 @@ int main(void)
 
 
 		//strobe LEDs based on the data in the LED_data[] array
-		for(x=0; x<255; x+=3)
-		{
-			if(blank_display==1)
-			{
-				P3OUT = 25;//all LEDs off by writing to dead/skip zone in the 8-bit counter
-				continue;
-			}
+		display_LED_data();
 
-			if((x & 0x18) == 0x18)//skip over P3 and P4 equal "11" state
-				x+=8;
-
-			while(halt_update==1);
-
-			if(LED_data[x])//if data > zero
-				P3OUT = x;
-			us_delay(LED_data[x]);
-			P3OUT = 25;//all LEDs off by writing to dead/skip zone in the 8-bit counter
-
-			while(halt_update==1);
-
-			if(LED_data[x+1])
-				P3OUT = x+1;
-			us_delay(LED_data[x+1]);
-			P3OUT = 25;//all LEDs off by writing to dead/skip zone in the 8-bit counter
-
-			while(halt_update==1);
-
-			if(LED_data[x+2])
-				P3OUT = x+2;
-			us_delay(LED_data[x+2]);
-			P3OUT = 25;//all LEDs off by writing to dead/skip zone in the 8-bit counter
-
-			while(halt_update==1);
-
-
-		}
 	}
 
 	return 0;
@@ -225,7 +193,7 @@ void init_i2c()
 {
 	myaddr = P2IN;//read this MSP430's segment ID as defined by the termination of P2.0, P2.1 and P2.2
 	myaddr &= 0x07;
-//myaddr = 7;//for debug purposes
+//myaddr = 6;//for debug purposes
 
 	P1DIR &= ~BIT7;//input
 	P1DIR &= ~BIT6;//input
@@ -243,8 +211,8 @@ void init_i2c()
 //***********************************************************************************************
 void process_data_packet()
 {
-	volatile unsigned int x, lindex, segment_mode;
-	volatile unsigned char c1, c2, c3, c4, c5, c6, c7, c8;
+	volatile unsigned int x, lindex, segment_mode, offset;
+	volatile unsigned char c1, c2, c3, c4, c5, c6, c7, c8, f1, f2;
 
 	//determine if this is a ASCII characrter request or a binary image bitmap
 	//load LED_data[] accordingly
@@ -290,6 +258,14 @@ void process_data_packet()
 		init_LED_data(LED_data[5]-31);//load selected character in font set
 	}
 
+	if(segment_mode == ASCIIFONT2)
+	{
+		blank_display=0;//display on
+		f1 = LED_data[5]-10;
+		f2 = LED_data[6]-10;
+		offset = LED_data[7]-10;
+		init_font_LED_data(f1, f2, offset);
+	}
 
 	if(segment_mode == VERTLINEBOTTOM)
 	{
@@ -384,7 +360,49 @@ void init_LED_data(unsigned char data)
 	}
 }
 
+//****************************************************************************************************
+void init_font_LED_data(unsigned char ctxt, unsigned char cnext, unsigned int offset)
+{
+	unsigned int h, i, j;
+	const unsigned char mask = 1;
+	volatile unsigned int tempbit = 0;
 
+	h =0;
+
+	// Loops Through Each Byte in both the ctxt and cnext arrays
+	for( j = 0; j < 8; j++)
+	{
+		// Loops Through Each Bit in each Byte in data array
+		for ( i = 0; i < 8; i++ )
+		{
+			if ( i >= offset ) {  // Skips bits of offset value to be filled in with cnext array for scrolling text
+				if((h & 0x18) == 0x18) { h+=8; } //skip over P3 and P4 equal "11" state
+				tempbit   = (font_basic[ctxt][j] & ( mask << i ) ) != 0;
+				LED_data[h] = tempbit * current_red_level;
+				LED_data[h+1] = tempbit * current_blue_level;
+				LED_data[h+2] = tempbit * current_green_level;
+				h+=3;
+			}
+		}
+
+		if (offset >= 1) {  // Only do this second loop if needed
+			// Loops Through Each Bit in each Byte in datanext array
+			for ( i = 0; i < 8; i++ )
+			{
+				if ( offset > i ) {  // Fills in the bits skipped in the first byte with bits from the next byte
+					if((h & 0x18) == 0x18) { h+=8; } //skip over P3 and P4 equal "11" state
+					tempbit   = (font_basic[cnext][j] & ( mask << i ) ) != 0;
+					LED_data[h] = tempbit * current_red_level;
+					LED_data[h+1] = tempbit * current_blue_level;
+					LED_data[h+2] = tempbit * current_green_level;
+					h+=3;
+				}
+			}
+		}
+
+	}
+
+}
 
 //****************************************************************************************************
 void init_system_clock()
@@ -399,7 +417,63 @@ void init_system_clock()
 	DCOCTL = CALDCO_16MHZ;
 }
 
+//****************************************************************************************************
+void display_LED_data()
+{
+	unsigned int x;
 
+	//strobe LEDs based on the data in the LED_data[] array
+	for(x=0; x<255; x+=3)
+	{
+
+		if(blank_display==1)
+		{
+			P3OUT = 25;//all LEDs off by writing to dead/skip zone in the 8-bit counter
+			continue;
+		}
+
+		if((x & 0x18) == 0x18)//skip over P3 and P4 equal "11" state
+			x+=8;
+
+		while(halt_update==1);
+
+		int delay1, delay2, delay3;
+		//*** If LED is completley off we still need a minimum delay for consistency
+		if ((LED_data[x] == 0) && (LED_data[x+1] == 0) && (LED_data[x+2] == 0)) {
+			delay1 = 50;
+		    delay2 = 50;
+		    delay3 = 50;
+		} else {
+			delay1 = LED_data[x];
+			delay2 = LED_data[x+1];
+			delay3 = LED_data[x+2];
+		}
+
+		while(halt_update==1);
+
+		if(LED_data[x])//if data > zero
+			P3OUT = x;
+		us_delay(delay1);
+		P3OUT = 25;//all LEDs off by writing to dead/skip zone in the 8-bit counter
+
+		while(halt_update==1);
+
+		if(LED_data[x+1])
+			P3OUT = x+1;
+		us_delay(delay2);
+		P3OUT = 25;//all LEDs off by writing to dead/skip zone in the 8-bit counter
+
+		while(halt_update==1);
+
+		if(LED_data[x+2])
+			P3OUT = x+2;
+		us_delay(delay3);
+		P3OUT = 25;//all LEDs off by writing to dead/skip zone in the 8-bit counter
+
+		while(halt_update==1);
+
+	}
+}
 
 
 
