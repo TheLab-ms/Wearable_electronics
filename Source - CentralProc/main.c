@@ -24,6 +24,7 @@ unsigned char getI2Cdata(void);
 void I2Cstop(void);
 void delay_100KHz(void);//10uS delay
 void update_segment_ASCII(unsigned char seg_id, unsigned char ASCII_value);
+void update_segment_font2(unsigned char seg_id, unsigned char font_value, unsigned char next_font_value, unsigned int offset);
 void update_segment_LINE(unsigned char seg_id, char c1, char c2, char c3, char c4, char c5, char c6, char c7, char c8);
 
 void Harris(int iNumData);
@@ -152,7 +153,8 @@ int main(void)
     i2c_clk_high;     //init clock high
     i2c_clock_out;    //make the clock line an output
 
-    select_global_colors(255,0,0);//red, blue, green
+	select_global_colors(255,0,0);//red, blue, green
+
 
 
 	P3DIR |= BIT6;
@@ -190,6 +192,10 @@ while(1);
 	__delay_cycles(15000); //15000 (2mS) is the minimum delay between packets is writing to the same 8x8 array repeatedly
 	//*****************************************************************************************************************
 
+	//************************************************
+	//*** Start Of Don's Spectral Output Test Code
+	//************************************************
+	/*
 	ccounter=0;
 	while(1)
 	{
@@ -205,8 +211,6 @@ while(1);
 		select_global_colors(255,255,255);//red, blue, green
 		if(ccounter>120)
 			ccounter=0;
-
-
 
 		index=0;
 		for(index=0; index<16; index++) //acquire 16 samples
@@ -253,6 +257,175 @@ while(1);
 		update_segment_LINE(8, dB[7], dB[7], dB[7], dB[7], dB[7], dB[7], dB[7], dB[7]);
 		__delay_cycles(15000);//1.2mS
 	}
+	*/
+	//************************************************
+	//*** End Of Don's Spectral Output Test Code
+	//************************************************
+
+
+	//************************************************
+	//*** Start Of Richard's Font Output Test Code
+	//************************************************
+
+	// ***
+	// Below spells out T h e L A B . m s (space) in unicode HEX
+	// ***
+	const unsigned char charstodisplay[ ] = {0x54, 0x68, 0x65, 0x4C, 0x41, 0x42, 0x2E, 0x6D, 0x73, 0x00};
+
+	// ***
+	// Determine if you want scrolling text or not ** set scroll=1 to smooth scroll ** set scroll=2 to panel scroll
+	// ***
+	unsigned int scroll = 1;
+
+	// ***
+	// Set Starting Color
+	// ***
+	select_global_colors(255,0,0);
+	ccounter=0;
+
+	while(1)
+	{
+		// ***
+		// Change Colors (stole this from Don's code above)
+		// ***
+		/*
+		ccounter++;
+		if(ccounter>0) { select_global_colors(255,0,0); }
+		if(ccounter>30) { select_global_colors(0,255,0); }
+		if(ccounter>60) { select_global_colors(0,0,255); }
+		if(ccounter>90) { select_global_colors(255,255,255); }
+		if(ccounter>120) { ccounter=0; }
+		*/
+
+		// ***
+		// Display Our Text Sting In Chosen Scroll Format
+		// ***
+		if (scroll == 2)  //Panel Scroll
+		{
+			unsigned int csel1, csel2, csel3, csel4, csel5, csel6, csel7, csel8, sdly1;
+			for (csel1=0; csel1<(sizeof(charstodisplay)); csel1++)
+			{
+				if( (csel1 + 1) > (sizeof(charstodisplay)-1) ) { csel2 = 0; } else { csel2 = csel1 + 1; }
+				if( (csel2 + 1) > (sizeof(charstodisplay)-1) ) { csel3 = 0; } else { csel3 = csel2 + 1; }
+				if( (csel3 + 1) > (sizeof(charstodisplay)-1) ) { csel4 = 0; } else { csel4 = csel3 + 1; }
+				if( (csel4 + 1) > (sizeof(charstodisplay)-1) ) { csel5 = 0; } else { csel5 = csel4 + 1; }
+				if( (csel5 + 1) > (sizeof(charstodisplay)-1) ) { csel6 = 0; } else { csel6 = csel5 + 1; }
+				if( (csel6 + 1) > (sizeof(charstodisplay)-1) ) { csel7 = 0; } else { csel7 = csel6 + 1; }
+				if( (csel7 + 1) > (sizeof(charstodisplay)-1) ) { csel8 = 0; } else { csel8 = csel7 + 1; }
+				for (sdly1=0; sdly1<50; sdly1++)
+				{
+					update_segment_font2(1, charstodisplay[csel1], 0, 0 );
+					__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+					update_segment_font2(2, charstodisplay[csel2], 0, 0 );
+					__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+					update_segment_font2(3, charstodisplay[csel3], 0, 0 );
+					__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+					update_segment_font2(4, charstodisplay[csel4], 0, 0 );
+					__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+					update_segment_font2(5, charstodisplay[csel5], 0, 0 );
+					__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+					update_segment_font2(6, charstodisplay[csel6], 0, 0 );
+					__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+					update_segment_font2(7, charstodisplay[csel7], 0, 0 );
+					__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+					update_segment_font2(8, charstodisplay[csel8], 0, 0 );
+					__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+				}
+				// ***
+				// Change Colors (stole this from Don's code above)
+				// ***
+				ccounter++;
+				if(ccounter>0) { select_global_colors(255,0,0); }
+				if(ccounter>8) { select_global_colors(0,255,0); }
+				if(ccounter>16) { select_global_colors(0,0,255); }
+				if(ccounter>24) { select_global_colors(255,255,255); }
+				if(ccounter>32) { ccounter=0; }
+			}
+
+		} else if (scroll == 1) // Smooth Scroll
+		{
+			unsigned int csel1, csel2, csel3, csel4, csel5, csel6, csel7, csel8, csel9, sdly1, offset;
+			for (csel1=0; csel1<(sizeof(charstodisplay)); csel1++)
+			{
+				if( (csel1 + 1) > (sizeof(charstodisplay)-1) ) { csel2 = 0; } else { csel2 = csel1 + 1; }
+				if( (csel2 + 1) > (sizeof(charstodisplay)-1) ) { csel3 = 0; } else { csel3 = csel2 + 1; }
+				if( (csel3 + 1) > (sizeof(charstodisplay)-1) ) { csel4 = 0; } else { csel4 = csel3 + 1; }
+				if( (csel4 + 1) > (sizeof(charstodisplay)-1) ) { csel5 = 0; } else { csel5 = csel4 + 1; }
+				if( (csel5 + 1) > (sizeof(charstodisplay)-1) ) { csel6 = 0; } else { csel6 = csel5 + 1; }
+				if( (csel6 + 1) > (sizeof(charstodisplay)-1) ) { csel7 = 0; } else { csel7 = csel6 + 1; }
+				if( (csel7 + 1) > (sizeof(charstodisplay)-1) ) { csel8 = 0; } else { csel8 = csel7 + 1; }
+				if( (csel8 + 1) > (sizeof(charstodisplay)-1) ) { csel9 = 0; } else { csel9 = csel8 + 1; }
+				for (offset=0; offset<9; offset++)
+				{
+
+					for (sdly1=0; sdly1<10; sdly1++)
+					{
+						update_segment_font2(1, charstodisplay[csel1], charstodisplay[csel2], offset );
+						__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+						update_segment_font2(2, charstodisplay[csel2], charstodisplay[csel3], offset );
+						__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+						update_segment_font2(3, charstodisplay[csel3], charstodisplay[csel4], offset );
+						__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+						update_segment_font2(4, charstodisplay[csel4], charstodisplay[csel5], offset );
+						__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+						update_segment_font2(5, charstodisplay[csel5], charstodisplay[csel6], offset );
+						__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+						update_segment_font2(6, charstodisplay[csel6], charstodisplay[csel7], offset );
+						__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+						update_segment_font2(7, charstodisplay[csel7], charstodisplay[csel8], offset );
+						__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+						update_segment_font2(8, charstodisplay[csel8], charstodisplay[csel9], offset );
+						__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+					}
+					// ***
+					// Change Colors (stole this from Don's code above)
+					// ***
+					ccounter++;
+					if(ccounter>0) { select_global_colors(255,0,0); }
+					if(ccounter>8) { select_global_colors(0,255,0); }
+					if(ccounter>16) { select_global_colors(0,0,255); }
+					if(ccounter>24) { select_global_colors(255,255,255); }
+					if(ccounter>32) { ccounter=0; }
+
+				}
+
+			}
+
+		} else // Static Display - No Scroll - Only First 8 Array Elements Used
+		{
+			update_segment_font2(1, charstodisplay[0], 0, 0 );
+			__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+			update_segment_font2(2, charstodisplay[1], 0, 0 );
+			__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+			update_segment_font2(3, charstodisplay[2], 0, 0 );
+			__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+			update_segment_font2(4, charstodisplay[3], 0, 0 );
+			__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+			update_segment_font2(5, charstodisplay[4], 0, 0 );
+			__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+			update_segment_font2(6, charstodisplay[5], 0, 0 );
+			__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+			update_segment_font2(7, charstodisplay[6], 0, 0 );
+			__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+			update_segment_font2(8, charstodisplay[7], 0, 0 );
+			__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
+			// ***
+			// Change Colors (stole this from Don's code above)
+			// ***
+			ccounter++;
+			if(ccounter>0) { select_global_colors(255,0,0); }
+			if(ccounter>30) { select_global_colors(0,255,0); }
+			if(ccounter>60) { select_global_colors(0,0,255); }
+			if(ccounter>90) { select_global_colors(255,255,255); }
+			if(ccounter>120) { ccounter=0; }
+		}
+
+	}
+
+	//************************************************
+	//*** End Of Richard's Font Output Test Code
+	//************************************************
+
 
 
 /*	while(1)
@@ -328,7 +501,25 @@ void update_segment_ASCII(unsigned char seg_id, unsigned char ASCII_value)
     I2Cstop();
 }
 
-
+//******************************************************************************************************************
+void update_segment_font2(unsigned char seg_id, unsigned char font_value, unsigned char next_font_value, unsigned int offset)
+{
+	font_value+=10;
+	next_font_value+=10;
+	offset+=10;
+    I2Cstart();
+    I2Cwrite_chip_address(seg_id, 0);//0=write  1=read //address i2c destination in G2 silicon
+    I2Cwrite_chip_data(seg_id);//address the i2c destination G2 in firmware
+    I2Cwrite_chip_data(12);
+    I2Cwrite_chip_data(gRed);
+    I2Cwrite_chip_data(gBlue);
+    I2Cwrite_chip_data(gGreen);
+    I2Cwrite_chip_data(font_value);//desired font character - HEX unicode value EX: "J" = 4A
+    I2Cwrite_chip_data(next_font_value);//next desired font character - HEX unicode value EX: "J" = 4A
+    I2Cwrite_chip_data(offset);
+    I2Cwrite_chip_data(9);//packet terminator
+    I2Cstop();
+}
 
 //******************************************************************************************************************
 void update_segment_LINE(unsigned char seg_id, char c1, char c2, char c3, char c4, char c5, char c6, char c7, char c8)//must be values from 0 to 8
