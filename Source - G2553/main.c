@@ -372,6 +372,7 @@ void init_font_LED_data(unsigned char ctxt, unsigned char cnext, unsigned int of
 	// Loops Through Each Byte in both the ctxt and cnext arrays
 	for( j = 0; j < 8; j++)
 	{
+
 		// Loops Through Each Bit in each Byte in data array
 		for ( i = 0; i < 8; i++ )
 		{
