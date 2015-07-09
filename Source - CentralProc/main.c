@@ -358,7 +358,7 @@ while(1);
 				for (offset=0; offset<9; offset++)
 				{
 
-					for (sdly1=0; sdly1<10; sdly1++)
+					for (sdly1=0; sdly1<3; sdly1++)
 					{
 						update_segment_font2(1, charstodisplay[csel1], charstodisplay[csel2], offset );
 						__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
