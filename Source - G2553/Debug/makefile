@@ -2,21 +2,20 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-SHELL = cmd.exe
-
-CG_TOOL_ROOT := c:/ti/ccsv6/tools/compiler/msp430_4.3.5
+CG_TOOL_ROOT := /home/richardg/ccs/ccs61/ccsv6/tools/compiler/ti-cgt-msp430_4.4.4
 
 ORDERED_OBJS += \
-$(GEN_CMDS__FLAG) \
 "./font1.obj" \
+"./font_basic.obj" \
 "./main.obj" \
 "../lnk_msp430g2553.cmd" \
+$(GEN_CMDS__FLAG) \
 -l"libc.a" \
 
 -include ../makefile.init
 
-RM := DEL /F
-RMDIR := RMDIR /S/Q
+RM := rm -rf
+RMDIR := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
@@ -49,11 +48,11 @@ endif
 ifneq ($(strip $(C67_DEPS)),)
 -include $(C67_DEPS)
 endif
-ifneq ($(strip $(C??_DEPS)),)
--include $(C??_DEPS)
-endif
 ifneq ($(strip $(CLA_DEPS)),)
 -include $(CLA_DEPS)
+endif
+ifneq ($(strip $(C??_DEPS)),)
+-include $(C??_DEPS)
 endif
 ifneq ($(strip $(CPP_DEPS)),)
 -include $(CPP_DEPS)
@@ -82,6 +81,9 @@ endif
 ifneq ($(strip $(C43_DEPS)),)
 -include $(C43_DEPS)
 endif
+ifneq ($(strip $(INO_DEPS)),)
+-include $(INO_DEPS)
+endif
 ifneq ($(strip $(S67_DEPS)),)
 -include $(S67_DEPS)
 endif
@@ -93,6 +95,9 @@ ifneq ($(strip $(S43_DEPS)),)
 endif
 ifneq ($(strip $(OPT_DEPS)),)
 -include $(OPT_DEPS)
+endif
+ifneq ($(strip $(PDE_DEPS)),)
+-include $(PDE_DEPS)
 endif
 ifneq ($(strip $(S64_DEPS)),)
 -include $(S64_DEPS)
@@ -128,21 +133,21 @@ all: Breathalizer.out
 Breathalizer.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MSP430 Linker'
-	"c:/ti/ccsv6/tools/compiler/msp430_4.3.5/bin/cl430" -vmsp --abi=coffabi --advice:power=all -g --define=__MSP430G2553__ --diag_warning=225 --display_error_number --diag_wrap=off --printf_support=minimal -z -m"Breathalizer.map" --heap_size=80 --stack_size=80 -i"c:/ti/ccsv6/ccs_base/msp430/include" -i"c:/ti/ccsv6/tools/compiler/msp430_4.3.5/lib" -i"c:/ti/ccsv6/tools/compiler/msp430_4.3.5/include" --reread_libs --warn_sections --display_error_number --diag_wrap=off --xml_link_info="Breathalizer_linkInfo.xml" --rom_model -o "Breathalizer.out" $(ORDERED_OBJS)
+	"/home/richardg/ccs/ccs61/ccsv6/tools/compiler/ti-cgt-msp430_4.4.4/bin/cl430" -vmsp --abi=coffabi --advice:power=all -g --define=__MSP430G2553__ --diag_warning=225 --display_error_number --diag_wrap=off --printf_support=minimal -z -m"Breathalizer.map" --heap_size=80 --stack_size=80 -i"/home/richardg/ccs/ccs61/ccsv6/ccs_base/msp430/include" -i"/home/richardg/ccs/ccs61/ccsv6/tools/compiler/ti-cgt-msp430_4.4.4/lib" -i"/home/richardg/ccs/ccs61/ccsv6/tools/compiler/ti-cgt-msp430_4.4.4/include" --reread_libs --warn_sections --display_error_number --diag_wrap=off --xml_link_info="Breathalizer_linkInfo.xml" --rom_model -o "Breathalizer.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 Breathalizer.hex: $(EXE_OUTPUTS)
 	@echo 'Invoking: MSP430 Hex Utility'
-	"c:/ti/ccsv6/tools/compiler/msp430_4.3.5/bin/hex430" --memwidth=8 --romwidth=8 -o "Breathalizer.hex" $(EXE_OUTPUTS__QUOTED)
+	"/home/richardg/ccs/ccs61/ccsv6/tools/compiler/ti-cgt-msp430_4.4.4/bin/hex430" --memwidth=8 --romwidth=8 -o "Breathalizer.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "font1.pp" "main.pp" 
-	-$(RM) "font1.obj" "main.obj" 
+	-$(RM) "font1.pp" "font_basic.pp" "main.pp" 
+	-$(RM) "font1.obj" "font_basic.obj" "main.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

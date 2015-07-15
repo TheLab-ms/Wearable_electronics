@@ -312,7 +312,7 @@ while(1);
 				if( (csel5 + 1) > (sizeof(charstodisplay)-1) ) { csel6 = 0; } else { csel6 = csel5 + 1; }
 				if( (csel6 + 1) > (sizeof(charstodisplay)-1) ) { csel7 = 0; } else { csel7 = csel6 + 1; }
 				if( (csel7 + 1) > (sizeof(charstodisplay)-1) ) { csel8 = 0; } else { csel8 = csel7 + 1; }
-				for (sdly1=0; sdly1<50; sdly1++)
+				for (sdly1=0; sdly1<20; sdly1++)
 				{
 					update_segment_font2(1, charstodisplay[csel1], 0, 0 );
 					__delay_cycles(13000);//delay needed between writes to the G2s so they can keep up...
@@ -355,7 +355,7 @@ while(1);
 				if( (csel6 + 1) > (sizeof(charstodisplay)-1) ) { csel7 = 0; } else { csel7 = csel6 + 1; }
 				if( (csel7 + 1) > (sizeof(charstodisplay)-1) ) { csel8 = 0; } else { csel8 = csel7 + 1; }
 				if( (csel8 + 1) > (sizeof(charstodisplay)-1) ) { csel9 = 0; } else { csel9 = csel8 + 1; }
-				for (offset=0; offset<9; offset++)
+				for (offset=0; offset<8; offset++)
 				{
 
 					for (sdly1=0; sdly1<3; sdly1++)

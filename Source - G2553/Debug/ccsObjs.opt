@@ -1,1 +1,1 @@
-"./font1.obj" "./main.obj" "../lnk_msp430g2553.cmd" -l"libc.a" 
+"./font1.obj" "./font_basic.obj" "./main.obj" "../lnk_msp430g2553.cmd" -l"libc.a" 
