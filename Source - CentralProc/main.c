@@ -1000,7 +1000,7 @@ void myFFT(unsigned int iLength, unsigned char bAverage)
 		// For now remove the normalization
 		//m_dFFTOutData[j] = 10 * log10( max(1.e-14, (m_dFFTOutData[j]/maxMag)));
 
-		m_dFFTOutData[j] = 10 * log10( MAX(1.e-14, m_dFFTOutData[j]));
+		m_dFFTOutData[j] = 10 * (int)log10f( (double)MAX(1.e-14, m_dFFTOutData[j]));
 	}
 
 	return;
