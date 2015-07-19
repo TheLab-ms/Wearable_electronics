@@ -11,3 +11,6 @@ all: $(OBJS)
 
 clean:
 	rm -fr main.elf $(OBJS)
+
+install: main.elf
+	mspdebug rf2500 "prog main.elf"
