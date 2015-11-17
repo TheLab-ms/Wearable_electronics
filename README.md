@@ -8,8 +8,5 @@ Don has volunteered to lead us in designing and manufacturing a wearable electro
 
 • All proceeds will go to TheLab.ms
 
-• Use branch 'develop' for code related to small 64 LED prototype
+• The directory TAP-Gen1 contains all the code and documents for the first generation prototype
 
-• Use this master repo for code related to the full sized prototype
-
-test text
