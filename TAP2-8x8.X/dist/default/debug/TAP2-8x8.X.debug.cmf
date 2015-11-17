@@ -1,0 +1,881 @@
+%CMF
+# %PSECTS Section
+# For each object file, details of its psects are enumerated here.
+# The begining of the section is indicated by %PSECTS.  The first
+# line indicates the name of the first object file, e.g.
+#    $foo.obj
+# Each line that follows describes a psect in that object file, until
+# the next object file.  The lines that describe a psect have the
+# format:
+#    <psect name> <class name> <space> <link address> <load addresses> <length> <delta>
+# All addresses and the length are given in unqualified hexadecimal
+# in delta units.  Any other numeric values are decimal.
+%PSECTS
+$dist/default/debug/TAP2-8x8.X.debug.obj
+cinit CODE 0 3E 3E 1D 2
+text1 CODE 0 361 361 11 2
+text2 CODE 0 28C 28C 31 2
+text3 CODE 0 5B 5B 19A 2
+text4 CODE 0 38A 38A B 2
+text5 CODE 0 37E 37E C 2
+text6 CODE 0 253 253 39 2
+text7 CODE 0 39C 39C 6 2
+text8 CODE 0 32D 32D 1A 2
+text9 CODE 0 347 347 1A 2
+text11 CODE 0 395 395 7 2
+text12 CODE 0 2BD 2BD 1D 2
+text13 CODE 0 2F7 2F7 1B 2
+text14 CODE 0 2DA 2DA 1D 2
+text15 CODE 0 312 312 1B 2
+nvBANK0 BANK0 1 4E 4E 2 1
+maintext CODE 0 1F5 1F5 5E 2
+cstackCOMMON COMMON 1 70 70 8 1
+cstackBANK0 BANK0 1 48 48 6 1
+intentry CODE 0 4 4 38 2
+bssBANK0 BANK0 1 20 20 28 1
+clrtext CODE 0 372 372 C 2
+bssCOMMON COMMON 1 78 78 4 1
+$/tmp/xcX7X4llf.obj
+reset_vec CODE 0 0 0 3 2
+end_init CODE 0 3C 3C 2 2
+config CONFIG 0 8007 8007 2 2
+# %UNUSED Section
+# This section enumerates the unused ranges of each CLASS. Each entry
+# is described on a single line as follows:
+#    <class name> <range> <delta>
+# Addresses given in the range are in hexadecimal and units of delta.
+%UNUSED
+RAM 50-6F 1
+RAM A0-EF 1
+RAM 120-16F 1
+RAM 1A0-1EF 1
+RAM 220-26F 1
+RAM 2A0-2EF 1
+RAM 320-36F 1
+RAM 3A0-3EF 1
+RAM 420-46F 1
+RAM 4A0-4EF 1
+RAM 520-52F 1
+BANK0 50-6F 1
+BANK1 A0-EF 1
+BANK2 120-16F 1
+BANK3 1A0-1EF 1
+BANK4 220-26F 1
+BANK5 2A0-2EF 1
+BANK6 320-36F 1
+BANK7 3A0-3EF 1
+BANK8 420-46F 1
+BANK9 4A0-4EF 1
+CONST 3-3 2
+CONST 3A2-3FFF 2
+ENTRY 3-3 2
+ENTRY 3A2-3FFF 2
+IDLOC 8000-8003 2
+SFR10 500-51F 1
+SFR11 580-59F 1
+SFR12 600-61F 1
+SFR13 680-6EF 1
+SFR14 700-76F 1
+SFR15 780-7EF 1
+SFR16 800-86F 1
+SFR17 880-8EF 1
+SFR18 900-96F 1
+SFR19 980-9EF 1
+SFR20 A00-A6F 1
+SFR21 A80-AEF 1
+SFR22 B00-B6F 1
+SFR23 B80-BEF 1
+SFR24 C00-C6F 1
+SFR25 C80-CEF 1
+SFR26 D00-D6F 1
+SFR27 D80-DEF 1
+SFR28 E00-E6F 1
+SFR29 E80-EEF 1
+SFR30 F00-F6F 1
+SFR31 F80-FEF 1
+STACK 2030-232F 1
+CODE 3-3 2
+CODE 3A2-3FFF 2
+SFR0 0-1F 1
+SFR1 80-9F 1
+SFR2 100-11F 1
+SFR3 180-19F 1
+SFR4 200-21F 1
+SFR5 280-29F 1
+SFR6 300-31F 1
+SFR7 380-39F 1
+SFR8 400-41F 1
+SFR9 480-49F 1
+BANK10 520-52F 1
+BIGRAM 2000-23EF 1
+COMMON 7C-7D 1
+EEDATA F000-F0FF 2
+STRCODE 3-3 2
+STRCODE 3A2-3FFF 2
+STRING 3-3 2
+STRING 3A2-3FFF 2
+# %LINETAB Section
+# This section enumerates the file/line to address mappings.
+# The beginning of the section is indicated by %LINETAB.
+# The first line indicates the name of the first object file, e.g.
+#   $foo.obj
+# Each line that follows describes a single mapping until the next
+# object file.  Mappings have the following format:
+#    <address> <psect name> <class name> ><line number>:<file name>
+# The address is absolute and given given in unqualified hex 
+# in delta units of the psect. All mappings within an object file
+# are in ascending order of addresses.
+# All other numeric values are in decimal.
+%LINETAB
+$dist/default/debug/TAP2-8x8.X.debug.obj
+3E cinit CODE >3021:/tmp/xcXdQSlai
+3E cinit CODE >3024:/tmp/xcXdQSlai
+3E cinit CODE >3103:/tmp/xcXdQSlai
+3F cinit CODE >3104:/tmp/xcXdQSlai
+40 cinit CODE >3105:/tmp/xcXdQSlai
+41 cinit CODE >3106:/tmp/xcXdQSlai
+42 cinit CODE >3107:/tmp/xcXdQSlai
+43 cinit CODE >3108:/tmp/xcXdQSlai
+44 cinit CODE >3109:/tmp/xcXdQSlai
+45 cinit CODE >3110:/tmp/xcXdQSlai
+46 cinit CODE >3111:/tmp/xcXdQSlai
+49 cinit CODE >3115:/tmp/xcXdQSlai
+4A cinit CODE >3116:/tmp/xcXdQSlai
+4B cinit CODE >3117:/tmp/xcXdQSlai
+4C cinit CODE >3118:/tmp/xcXdQSlai
+4D cinit CODE >3122:/tmp/xcXdQSlai
+4E cinit CODE >3123:/tmp/xcXdQSlai
+4F cinit CODE >3124:/tmp/xcXdQSlai
+50 cinit CODE >3125:/tmp/xcXdQSlai
+51 cinit CODE >3126:/tmp/xcXdQSlai
+52 cinit CODE >3127:/tmp/xcXdQSlai
+53 cinit CODE >3128:/tmp/xcXdQSlai
+54 cinit CODE >3129:/tmp/xcXdQSlai
+55 cinit CODE >3130:/tmp/xcXdQSlai
+57 cinit CODE >3136:/tmp/xcXdQSlai
+57 cinit CODE >3138:/tmp/xcXdQSlai
+58 cinit CODE >3139:/tmp/xcXdQSlai
+59 cinit CODE >3140:/tmp/xcXdQSlai
+4 intentry CODE >52:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/interrupt_manager.c
+9 intentry CODE >54:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/interrupt_manager.c
+C intentry CODE >55:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/interrupt_manager.c
+F intentry CODE >58:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/interrupt_manager.c
+10 intentry CODE >59:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/interrupt_manager.c
+17 intentry CODE >60:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/interrupt_manager.c
+1A intentry CODE >61:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/interrupt_manager.c
+21 intentry CODE >62:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/interrupt_manager.c
+24 intentry CODE >63:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/interrupt_manager.c
+2B intentry CODE >64:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/interrupt_manager.c
+2E intentry CODE >65:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/interrupt_manager.c
+35 intentry CODE >66:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/interrupt_manager.c
+37 intentry CODE >70:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/interrupt_manager.c
+312 text15 CODE >161:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+312 text15 CODE >162:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+315 text15 CODE >165:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+316 text15 CODE >166:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+317 text15 CODE >170:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+324 text15 CODE >171:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+327 text15 CODE >172:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+328 text15 CODE >174:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+32C text15 CODE >175:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+2DA text14 CODE >147:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+2DA text14 CODE >150:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+2DF text14 CODE >151:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+2EB text14 CODE >152:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+2EE text14 CODE >153:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+2EF text14 CODE >155:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+2F3 text14 CODE >156:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+2F4 text14 CODE >157:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+2F7 text13 CODE >161:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+2F7 text13 CODE >162:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+2FA text13 CODE >165:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+2FB text13 CODE >166:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+2FC text13 CODE >170:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+308 text13 CODE >171:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+30B text13 CODE >172:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+30C text13 CODE >174:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+311 text13 CODE >175:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+2BD text12 CODE >147:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+2BD text12 CODE >150:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+2C2 text12 CODE >151:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+2CD text12 CODE >152:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+2D0 text12 CODE >153:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+2D1 text12 CODE >155:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+2D6 text12 CODE >156:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+2D7 text12 CODE >157:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+395 text11 CODE >90:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+395 text11 CODE >91:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+39A text11 CODE >95:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+347 text9 CODE >76:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+347 text9 CODE >78:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+349 text9 CODE >79:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+34A text9 CODE >84:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+34D text9 CODE >87:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+34F text9 CODE >90:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+351 text9 CODE >93:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+353 text9 CODE >96:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+354 text9 CODE >100:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+356 text9 CODE >101:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+357 text9 CODE >102:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+35B text9 CODE >104:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+35C text9 CODE >105:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+35D text9 CODE >106:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+35E text9 CODE >109:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+360 text9 CODE >110:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart1.c
+32D text8 CODE >76:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+32D text8 CODE >78:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+32F text8 CODE >79:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+330 text8 CODE >84:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+333 text8 CODE >87:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+335 text8 CODE >90:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+337 text8 CODE >93:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+339 text8 CODE >96:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+33A text8 CODE >100:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+33B text8 CODE >101:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+33C text8 CODE >102:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+341 text8 CODE >104:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+342 text8 CODE >105:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+343 text8 CODE >106:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+344 text8 CODE >109:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+346 text8 CODE >110:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/eusart2.c
+39C text7 CODE >78:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/mcc.c
+39C text7 CODE >80:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/mcc.c
+39F text7 CODE >82:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/mcc.c
+3A0 text7 CODE >84:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/mcc.c
+3A1 text7 CODE >87:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/mcc.c
+253 text6 CODE >50:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+253 text6 CODE >51:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+255 text6 CODE >52:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+258 text6 CODE >53:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+25A text6 CODE >55:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+25D text6 CODE >56:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+260 text6 CODE >57:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+262 text6 CODE >59:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+264 text6 CODE >60:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+267 text6 CODE >62:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+26A text6 CODE >63:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+26C text6 CODE >65:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+26F text6 CODE >66:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+271 text6 CODE >67:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+273 text6 CODE >69:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+276 text6 CODE >70:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+278 text6 CODE >71:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+27A text6 CODE >73:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+27C text6 CODE >74:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+27F text6 CODE >75:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+282 text6 CODE >76:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+284 text6 CODE >78:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+286 text6 CODE >80:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+288 text6 CODE >83:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+28A text6 CODE >86:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+28B text6 CODE >88:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/pin_manager.c
+37E text5 CODE >71:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/mcc.c
+37E text5 CODE >72:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/mcc.c
+381 text5 CODE >73:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/mcc.c
+384 text5 CODE >74:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/mcc.c
+387 text5 CODE >75:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/mcc.c
+389 text5 CODE >76:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/mcc_generated_files/mcc.c
+38A text4 CODE >239:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+38B text4 CODE >244:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+5B text3 CODE >158:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+5B text3 CODE >160:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+5D text3 CODE >161:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+5F text3 CODE >163:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+6D text3 CODE >164:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+6F text3 CODE >165:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+70 text3 CODE >166:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+7E text3 CODE >167:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+80 text3 CODE >168:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+81 text3 CODE >169:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+8F text3 CODE >170:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+91 text3 CODE >171:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+92 text3 CODE >172:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+A0 text3 CODE >173:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+A2 text3 CODE >174:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+A3 text3 CODE >175:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+B1 text3 CODE >176:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+B3 text3 CODE >177:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+B4 text3 CODE >178:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+C2 text3 CODE >179:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+C4 text3 CODE >180:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+C5 text3 CODE >181:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+D3 text3 CODE >182:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+D5 text3 CODE >183:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+D6 text3 CODE >184:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+E4 text3 CODE >185:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+E6 text3 CODE >186:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+E7 text3 CODE >187:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+F5 text3 CODE >188:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+F7 text3 CODE >189:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+F8 text3 CODE >190:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+106 text3 CODE >191:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+108 text3 CODE >192:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+109 text3 CODE >193:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+117 text3 CODE >194:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+119 text3 CODE >195:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+11A text3 CODE >196:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+128 text3 CODE >197:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+12A text3 CODE >198:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+12B text3 CODE >199:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+139 text3 CODE >200:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+13B text3 CODE >201:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+13C text3 CODE >202:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+14A text3 CODE >203:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+14C text3 CODE >204:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+14D text3 CODE >205:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+15B text3 CODE >206:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+15D text3 CODE >207:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+15E text3 CODE >208:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+16C text3 CODE >209:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+16E text3 CODE >210:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+170 text3 CODE >211:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+17E text3 CODE >212:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+180 text3 CODE >213:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+181 text3 CODE >214:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+18F text3 CODE >215:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+191 text3 CODE >216:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+192 text3 CODE >217:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1A0 text3 CODE >218:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1A2 text3 CODE >219:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1A3 text3 CODE >220:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1B1 text3 CODE >221:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1B3 text3 CODE >222:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1B4 text3 CODE >223:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1C2 text3 CODE >224:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1C4 text3 CODE >225:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1C5 text3 CODE >226:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1D3 text3 CODE >227:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1D5 text3 CODE >228:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1D6 text3 CODE >229:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1E4 text3 CODE >230:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1E6 text3 CODE >231:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1E7 text3 CODE >232:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1F4 text3 CODE >233:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+28C text2 CODE >110:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+28D text2 CODE >112:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+28F text2 CODE >114:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+291 text2 CODE >115:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+292 text2 CODE >116:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+293 text2 CODE >117:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+295 text2 CODE >119:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+297 text2 CODE >120:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+298 text2 CODE >121:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+299 text2 CODE >122:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+29B text2 CODE >124:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+29D text2 CODE >125:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+29E text2 CODE >126:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+29F text2 CODE >127:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2A1 text2 CODE >129:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2A3 text2 CODE >130:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2A4 text2 CODE >131:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2A5 text2 CODE >132:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2A7 text2 CODE >134:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2A9 text2 CODE >135:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2AA text2 CODE >136:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2AB text2 CODE >137:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2AD text2 CODE >139:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2AF text2 CODE >141:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2B0 text2 CODE >142:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2B2 text2 CODE >145:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2B4 text2 CODE >146:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2B5 text2 CODE >147:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2B7 text2 CODE >149:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2B9 text2 CODE >150:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2BA text2 CODE >153:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+2BC text2 CODE >155:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+361 text1 CODE >94:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+361 text1 CODE >98:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+362 text1 CODE >99:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+367 text1 CODE >100:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+36A text1 CODE >102:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+36E text1 CODE >103:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+371 text1 CODE >100:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1F5 maintext CODE >63:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1F5 maintext CODE >67:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1F8 maintext CODE >77:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+1FE maintext CODE >78:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+20A maintext CODE >77:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+212 maintext CODE >80:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+217 maintext CODE >82:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+223 maintext CODE >83:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+235 maintext CODE >84:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+247 maintext CODE >80:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+24F maintext CODE >89:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+252 maintext CODE >87:/home/richardg/git-source/TheLAB.ms/TAP_G2/TAP2-8x8.X/main.c
+372 clrtext CODE >3086:/tmp/xcXdQSlai
+372 clrtext CODE >3087:/tmp/xcXdQSlai
+373 clrtext CODE >3088:/tmp/xcXdQSlai
+373 clrtext CODE >3089:/tmp/xcXdQSlai
+374 clrtext CODE >3090:/tmp/xcXdQSlai
+375 clrtext CODE >3091:/tmp/xcXdQSlai
+376 clrtext CODE >3092:/tmp/xcXdQSlai
+377 clrtext CODE >3093:/tmp/xcXdQSlai
+378 clrtext CODE >3094:/tmp/xcXdQSlai
+379 clrtext CODE >3095:/tmp/xcXdQSlai
+37A clrtext CODE >3096:/tmp/xcXdQSlai
+37B clrtext CODE >3097:/tmp/xcXdQSlai
+37C clrtext CODE >3099:/tmp/xcXdQSlai
+37D clrtext CODE >3098:/tmp/xcXdQSlai
+# %SYMTAB Section
+# An enumeration of all symbols in the program.
+# The beginning of the section is indicated by %SYMTAB.
+# Each line describes a single symbol as follows:
+#    <label> <value> [-]<load-adj> <class> <space> <psect> <file-name>
+# The value and load-adj are both in unqualified hexadecimal.
+# All other numeric values are in decimal.  The load-adj is the
+# quantity one needs to add to the symbol value in order to obtain the load
+# address of the symbol.  This value may be signed. If the symbol
+# was defined in a psect then <psect> will be "-". File-name
+# is the name of the object file in which the symbol was defined.
+%SYMTAB
+___latbits 3 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__Hspace_0 8009 0 ABS 0 - -
+__Hspace_1 7C 0 ABS 0 - -
+__Hspace_2 0 0 ABS 0 - -
+__Hspace_3 0 0 ABS 0 - -
+__end_of_big_switch_columns 3EA 0 CODE 0 text3 dist/default/debug/TAP2-8x8.X.debug.obj
+_EUSART1_Initialize 68E 0 CODE 0 text9 dist/default/debug/TAP2-8x8.X.debug.obj
+__Heeprom_data 0 0 EEDATA 3 eeprom_data -
+__CFG_MCLRE$ON 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of_PIN_MANAGER_IOC 738 0 CODE 0 text11 dist/default/debug/TAP2-8x8.X.debug.obj
+_my_delay 714 0 CODE 0 text4 dist/default/debug/TAP2-8x8.X.debug.obj
+ltemp0 7E 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+ltemp1 82 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+ltemp2 86 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+ltemp3 80 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+main@x 4D 0 BANK0 1 cstackBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+__Hstrings 0 0 ABS 0 strings -
+_LATA 10C 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATB 10D 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATC 10E 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATD 10F 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATE 110 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATF 38C 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATG 38D 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_WPUB 20D 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_WPUG 48D 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+___sp 0 0 STACK 2 stack /tmp/xcX7X4llf.obj
+_main 3EA 0 CODE 0 maintext dist/default/debug/TAP2-8x8.X.debug.obj
+btemp 7E 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+ltemp 7E 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+start 78 0 CODE 0 init /tmp/xcX7X4llf.obj
+ttemp 7E 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+wtemp 7E 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__size_of_main 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of_my_delay 72A 0 CODE 0 text4 dist/default/debug/TAP2-8x8.X.debug.obj
+__HbssCOMMON 0 0 ABS 0 bssCOMMON -
+_RC2STAbits 495 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__size_of_EUSART1_Receive_ISR 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_OPTION_REGbits 95 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_big_switch_columns B6 0 CODE 0 text3 dist/default/debug/TAP2-8x8.X.debug.obj
+__Hpowerup 0 0 CODE 0 powerup -
+_EUSART2_Transmit_ISR 57A 0 CODE 0 text12 dist/default/debug/TAP2-8x8.X.debug.obj
+ttemp0 7E 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+ttemp1 81 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+ttemp2 84 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+ttemp3 87 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+ttemp4 7F 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__size_of_SYSTEM_Initialize 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+intlevel0 0 0 CODE 0 functab /tmp/xcX7X4llf.obj
+intlevel1 0 0 CODE 0 functab /tmp/xcX7X4llf.obj
+intlevel2 0 0 CODE 0 functab /tmp/xcX7X4llf.obj
+intlevel3 0 0 CODE 0 functab /tmp/xcX7X4llf.obj
+intlevel4 0 0 CODE 0 functab /tmp/xcX7X4llf.obj
+intlevel5 0 0 CODE 0 functab /tmp/xcX7X4llf.obj
+__LbssCOMMON 0 0 ABS 0 bssCOMMON -
+__end_of_EUSART2_Initialize 68E 0 CODE 0 text8 dist/default/debug/TAP2-8x8.X.debug.obj
+wtemp0 7E 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+wtemp1 80 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+wtemp2 82 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+wtemp3 84 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+wtemp4 86 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+wtemp5 88 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+wtemp6 7F 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__Hfunctab 0 0 CODE 0 functab -
+_RC1STAbits 19D 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_PIN_MANAGER_IOC 72A 0 CODE 0 text11 dist/default/debug/TAP2-8x8.X.debug.obj
+__Hclrtext 0 0 ABS 0 clrtext -
+_eusart2TxBuffer 38 0 BANK0 1 bssBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+_EUSART1_Receive_ISR 624 0 CODE 0 text15 dist/default/debug/TAP2-8x8.X.debug.obj
+_ANSELA 18C 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_ANSELE 190 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_ANSELF 40C 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_ANSELG 40D 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_APFCON 11D 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of_INTERRUPT_InterruptManager 78 0 CODE 0 intentry dist/default/debug/TAP2-8x8.X.debug.obj
+_EUSART2_Initialize 65A 0 CODE 0 text8 dist/default/debug/TAP2-8x8.X.debug.obj
+__Lmaintext 0 0 ABS 0 maintext -
+__LnvBANK0 0 0 ABS 0 nvBANK0 -
+_IOCBF0 1CB0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_IOCBN0 1CA8 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_PIN_MANAGER_Initialize 4A6 0 CODE 0 text6 dist/default/debug/TAP2-8x8.X.debug.obj
+start_initialization 7C 0 CODE 0 cinit dist/default/debug/TAP2-8x8.X.debug.obj
+_OSCCON 99 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_eusart2RxBuffer 30 0 BANK0 1 bssBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+_RC1REG 199 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_RC1STA 19D 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_RC2REG 491 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_RC2STA 495 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__size_of_PIN_MANAGER_IOC 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of_SYSTEM_Initialize 714 0 CODE 0 text5 dist/default/debug/TAP2-8x8.X.debug.obj
+clear_ram0 6E4 0 CODE 0 clrtext dist/default/debug/TAP2-8x8.X.debug.obj
+__pcstackBANK0 48 0 BANK0 1 cstackBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+_TX1REG 19A 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_TX1STA 19E 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_TX2REG 492 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_TX2STA 496 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_eusart2TxBufferRemaining 4F 0 BANK0 1 nvBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of_EUSART1_Receive_ISR 65A 0 CODE 0 text15 dist/default/debug/TAP2-8x8.X.debug.obj
+__size_of_EUSART2_Receive_ISR 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__size_of_EUSART1_Initialize 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+___int_sp 0 0 STACK 2 stack /tmp/xcX7X4llf.obj
+__Hbank0 0 0 ABS 0 bank0 -
+__Hbank1 0 0 ABS 0 bank1 -
+__Hbank2 0 0 ABS 0 bank2 -
+__Hbank3 0 0 ABS 0 bank3 -
+__Hbank4 0 0 ABS 0 bank4 -
+__Hbank5 0 0 ABS 0 bank5 -
+__Hbank6 0 0 ABS 0 bank6 -
+__Hbank7 0 0 ABS 0 bank7 -
+__Hbank8 0 0 ABS 0 bank8 -
+__Hbank9 0 0 ABS 0 bank9 -
+__Hcinit B6 0 CODE 0 cinit -
+__Hidloc 0 0 IDLOC 0 idloc -
+__size_of_OSCILLATOR_Initialize 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__Hsfr10 0 0 ABS 0 sfr10 -
+__Hsfr11 0 0 ABS 0 sfr11 -
+__Hsfr12 0 0 ABS 0 sfr12 -
+__Hsfr13 0 0 ABS 0 sfr13 -
+__Hsfr14 0 0 ABS 0 sfr14 -
+__Hsfr15 0 0 ABS 0 sfr15 -
+__Hsfr16 0 0 ABS 0 sfr16 -
+__Hsfr17 0 0 ABS 0 sfr17 -
+__Hsfr18 0 0 ABS 0 sfr18 -
+__Hsfr19 0 0 ABS 0 sfr19 -
+__Hsfr20 0 0 ABS 0 sfr20 -
+__Hsfr21 0 0 ABS 0 sfr21 -
+__Hsfr22 0 0 ABS 0 sfr22 -
+__Hsfr23 0 0 ABS 0 sfr23 -
+__Hsfr24 0 0 ABS 0 sfr24 -
+__Hsfr25 0 0 ABS 0 sfr25 -
+__Hsfr26 0 0 ABS 0 sfr26 -
+__Hsfr27 0 0 ABS 0 sfr27 -
+__Hsfr28 0 0 ABS 0 sfr28 -
+__Hsfr29 0 0 ABS 0 sfr29 -
+__Hsfr30 0 0 ABS 0 sfr30 -
+__Hsfr31 0 0 ABS 0 sfr31 -
+__Hstack 0 0 STACK 2 stack -
+__size_of_EUSART1_Transmit_ISR 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__Hbank10 0 0 ABS 0 bank10 -
+__Hbank11 0 0 ABS 0 bank11 -
+__Hbank12 0 0 ABS 0 bank12 -
+__Hbank13 0 0 BANK13 1 bank13 -
+__Hbank14 0 0 BANK14 1 bank14 -
+__Hbank15 0 0 BANK15 1 bank15 -
+__Hbank16 0 0 BANK16 1 bank16 -
+__Hbank17 0 0 BANK17 1 bank17 -
+__Hbank18 0 0 BANK18 1 bank18 -
+__Hbank19 0 0 BANK19 1 bank19 -
+__Hbank20 0 0 BANK20 1 bank20 -
+__Hbank21 0 0 BANK21 1 bank21 -
+__Hbank22 0 0 BANK22 1 bank22 -
+__Hbank23 0 0 BANK23 1 bank23 -
+__Hbank24 0 0 BANK24 1 bank24 -
+__Hbank25 0 0 BANK25 1 bank25 -
+__Hbank26 0 0 BANK26 1 bank26 -
+__Hbank27 0 0 BANK27 1 bank27 -
+__Hbank28 0 0 BANK28 1 bank28 -
+__Hbank29 0 0 BANK29 1 bank29 -
+__Hbank30 0 0 BANK30 1 bank30 -
+__Hbank31 0 0 BANK31 1 bank31 -
+__Hbigram 0 0 ABS 0 bigram -
+__Hmaintext 0 0 ABS 0 maintext -
+_BAUD1CON 19F 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_BAUD2CON 497 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of_big_switch_rows 57A 0 CODE 0 text2 dist/default/debug/TAP2-8x8.X.debug.obj
+__CFG_FOSC$INTOSC 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__Hcommon 0 0 ABS 0 common -
+__Hconfig 10012 0 CONFIG 0 config -
+__Lbank0 0 0 ABS 0 bank0 -
+__Lbank1 0 0 ABS 0 bank1 -
+__Lbank2 0 0 ABS 0 bank2 -
+__Lbank3 0 0 ABS 0 bank3 -
+__Lbank4 0 0 ABS 0 bank4 -
+__Lbank5 0 0 ABS 0 bank5 -
+__Lbank6 0 0 ABS 0 bank6 -
+__Lbank7 0 0 ABS 0 bank7 -
+__Lbank8 0 0 ABS 0 bank8 -
+__Lbank9 0 0 ABS 0 bank9 -
+__Lcinit 7C 0 CODE 0 cinit -
+__Lidloc 0 0 IDLOC 0 idloc -
+_eusart1TxBufferRemaining 4E 0 BANK0 1 nvBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+__Lsfr10 0 0 ABS 0 sfr10 -
+__Lsfr11 0 0 ABS 0 sfr11 -
+__Lsfr12 0 0 ABS 0 sfr12 -
+__Lsfr13 0 0 ABS 0 sfr13 -
+__Lsfr14 0 0 ABS 0 sfr14 -
+__Lsfr15 0 0 ABS 0 sfr15 -
+__Lsfr16 0 0 ABS 0 sfr16 -
+__Lsfr17 0 0 ABS 0 sfr17 -
+__Lsfr18 0 0 ABS 0 sfr18 -
+__Lsfr19 0 0 ABS 0 sfr19 -
+__Lsfr20 0 0 ABS 0 sfr20 -
+__Lsfr21 0 0 ABS 0 sfr21 -
+__Lsfr22 0 0 ABS 0 sfr22 -
+__Lsfr23 0 0 ABS 0 sfr23 -
+__Lsfr24 0 0 ABS 0 sfr24 -
+__Lsfr25 0 0 ABS 0 sfr25 -
+__Lsfr26 0 0 ABS 0 sfr26 -
+__Lsfr27 0 0 ABS 0 sfr27 -
+__Lsfr28 0 0 ABS 0 sfr28 -
+__Lsfr29 0 0 ABS 0 sfr29 -
+__Lsfr30 0 0 ABS 0 sfr30 -
+__Lsfr31 0 0 ABS 0 sfr31 -
+__Lstack 0 0 STACK 2 stack -
+__size_of_big_switch_columns 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of_EUSART1_Transmit_ISR 5EE 0 CODE 0 text14 dist/default/debug/TAP2-8x8.X.debug.obj
+_INTCONbits B 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__Habs1 0 0 ABS 0 abs1 -
+__Hcode 0 0 ABS 0 code -
+__Hinit 78 0 CODE 0 init -
+__Hsfr0 0 0 ABS 0 sfr0 -
+__Hsfr1 0 0 ABS 0 sfr1 -
+__Hsfr2 0 0 ABS 0 sfr2 -
+__Hsfr3 0 0 ABS 0 sfr3 -
+__Hsfr4 0 0 ABS 0 sfr4 -
+__Hsfr5 0 0 ABS 0 sfr5 -
+__Hsfr6 0 0 ABS 0 sfr6 -
+__Hsfr7 0 0 ABS 0 sfr7 -
+__Hsfr8 0 0 ABS 0 sfr8 -
+__Hsfr9 0 0 ABS 0 sfr9 -
+__Htext 0 0 ABS 0 text -
+__Labs1 0 0 ABS 0 abs1 -
+__Lcode 0 0 ABS 0 code -
+__Linit 78 0 CODE 0 init -
+__Lsfr0 0 0 ABS 0 sfr0 -
+__Lsfr1 0 0 ABS 0 sfr1 -
+__Lsfr2 0 0 ABS 0 sfr2 -
+__Lsfr3 0 0 ABS 0 sfr3 -
+__Lsfr4 0 0 ABS 0 sfr4 -
+__Lsfr5 0 0 ABS 0 sfr5 -
+__Lsfr6 0 0 ABS 0 sfr6 -
+__Lsfr7 0 0 ABS 0 sfr7 -
+__Lsfr8 0 0 ABS 0 sfr8 -
+__Lsfr9 0 0 ABS 0 sfr9 -
+__Ltext 0 0 ABS 0 text -
+__pnvBANK0 4E 0 BANK0 1 nvBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+__LcstackBANK0 0 0 ABS 0 cstackBANK0 -
+int$flags 7E 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__HcstackCOMMON 0 0 ABS 0 cstackCOMMON -
+__size_of_INTERRUPT_InterruptManager 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__S0 8009 0 ABS 0 - -
+__S1 7C 0 ABS 0 - -
+__S2 0 0 ABS 0 - -
+__S3 0 0 ABS 0 - -
+_EUSART2_Receive_ISR 5EE 0 CODE 0 text13 dist/default/debug/TAP2-8x8.X.debug.obj
+__CFG_PLLEN$ON 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_strobe_all 6C2 0 CODE 0 text1 dist/default/debug/TAP2-8x8.X.debug.obj
+_SYSTEM_Initialize 6FC 0 CODE 0 text5 dist/default/debug/TAP2-8x8.X.debug.obj
+_big_switch_rows 518 0 CODE 0 text2 dist/default/debug/TAP2-8x8.X.debug.obj
+__CFG_BOREN$ON 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__HnvBANK0 0 0 ABS 0 nvBANK0 -
+__Lintentry 8 0 CODE 0 intentry -
+reset_vec 0 0 CODE 0 reset_vec /tmp/xcX7X4llf.obj
+__LbssBANK0 0 0 ABS 0 bssBANK0 -
+__size_of_EUSART2_Initialize 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__CFG_FCMEN$ON 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_INTERRUPT_InterruptManager 8 0 CODE 0 intentry dist/default/debug/TAP2-8x8.X.debug.obj
+_PIE1bits 91 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_PIE4bits 94 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_eusart1RxHead 42 0 BANK0 1 bssBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+_eusart1RxTail 43 0 BANK0 1 bssBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+__ptext11 72A 0 CODE 0 text11 dist/default/debug/TAP2-8x8.X.debug.obj
+__ptext12 57A 0 CODE 0 text12 dist/default/debug/TAP2-8x8.X.debug.obj
+__ptext13 5EE 0 CODE 0 text13 dist/default/debug/TAP2-8x8.X.debug.obj
+__ptext14 5B4 0 CODE 0 text14 dist/default/debug/TAP2-8x8.X.debug.obj
+__ptext15 624 0 CODE 0 text15 dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of_PIN_MANAGER_Initialize 518 0 CODE 0 text6 dist/default/debug/TAP2-8x8.X.debug.obj
+__Lbank10 0 0 ABS 0 bank10 -
+__Lbank11 0 0 ABS 0 bank11 -
+__Lbank12 0 0 ABS 0 bank12 -
+__Lbank13 0 0 BANK13 1 bank13 -
+__Lbank14 0 0 BANK14 1 bank14 -
+__Lbank15 0 0 BANK15 1 bank15 -
+__Lbank16 0 0 BANK16 1 bank16 -
+__Lbank17 0 0 BANK17 1 bank17 -
+__Lbank18 0 0 BANK18 1 bank18 -
+__Lbank19 0 0 BANK19 1 bank19 -
+__Lbank20 0 0 BANK20 1 bank20 -
+__Lbank21 0 0 BANK21 1 bank21 -
+__Lbank22 0 0 BANK22 1 bank22 -
+__Lbank23 0 0 BANK23 1 bank23 -
+__Lbank24 0 0 BANK24 1 bank24 -
+__Lbank25 0 0 BANK25 1 bank25 -
+__Lbank26 0 0 BANK26 1 bank26 -
+__Lbank27 0 0 BANK27 1 bank27 -
+__Lbank28 0 0 BANK28 1 bank28 -
+__Lbank29 0 0 BANK29 1 bank29 -
+__Lbank30 0 0 BANK30 1 bank30 -
+__Lbank31 0 0 BANK31 1 bank31 -
+__pmaintext 3EA 0 CODE 0 maintext dist/default/debug/TAP2-8x8.X.debug.obj
+__Lbigram 0 0 ABS 0 bigram -
+_eusart1TxHead 44 0 BANK0 1 bssBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+_eusart1TxTail 45 0 BANK0 1 bssBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+__CFG_BORV$LO 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__Lcommon 0 0 ABS 0 common -
+__Lconfig 1000E 0 CONFIG 0 config -
+__CFG_CP$OFF 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__CFG_IESO$ON 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__CFG_WDTE$OFF 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__size_of_EUSART2_Transmit_ISR 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of_strobe_all 6E4 0 CODE 0 text1 dist/default/debug/TAP2-8x8.X.debug.obj
+__CFG_VCAPEN$OFF 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+stackhi 232F 0 ABS 0 - /tmp/xcX7X4llf.obj
+stacklo 2030 0 ABS 0 - /tmp/xcX7X4llf.obj
+my_delay@x 74 0 COMMON 1 cstackCOMMON dist/default/debug/TAP2-8x8.X.debug.obj
+_OSCSTAT 9A 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_OSCTUNE 98 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of_EUSART2_Transmit_ISR 5B4 0 CODE 0 text12 dist/default/debug/TAP2-8x8.X.debug.obj
+__CFG_LVP$OFF 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of_EUSART2_Receive_ISR 624 0 CODE 0 text13 dist/default/debug/TAP2-8x8.X.debug.obj
+__pbssBIGRAM 2330 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__Lspace_0 0 0 ABS 0 - -
+__Lspace_1 0 0 ABS 0 - -
+__Lspace_2 0 0 ABS 0 - -
+__Lspace_3 0 0 ABS 0 - -
+__pbssCOMMON 78 0 COMMON 1 bssCOMMON dist/default/debug/TAP2-8x8.X.debug.obj
+__HcstackBANK0 0 0 ABS 0 cstackBANK0 -
+_PIR1bits 11 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_PIR4bits 14 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__Lend_init 78 0 CODE 0 end_init -
+__LcstackCOMMON 0 0 ABS 0 cstackCOMMON -
+_eusart1TxBuffer 28 0 BANK0 1 bssBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+__size_of_big_switch_rows 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+end_of_initialization AE 0 CODE 0 cinit dist/default/debug/TAP2-8x8.X.debug.obj
+__Hintentry 78 0 CODE 0 intentry -
+__CFG_STVREN$ON 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__Lstrings 0 0 ABS 0 strings -
+__Hreset_vec 6 0 CODE 0 reset_vec -
+__HbssBANK0 0 0 ABS 0 bssBANK0 -
+__ptext1 6C2 0 CODE 0 text1 dist/default/debug/TAP2-8x8.X.debug.obj
+__ptext2 518 0 CODE 0 text2 dist/default/debug/TAP2-8x8.X.debug.obj
+__ptext3 B6 0 CODE 0 text3 dist/default/debug/TAP2-8x8.X.debug.obj
+__ptext4 714 0 CODE 0 text4 dist/default/debug/TAP2-8x8.X.debug.obj
+__ptext5 6FC 0 CODE 0 text5 dist/default/debug/TAP2-8x8.X.debug.obj
+__ptext6 4A6 0 CODE 0 text6 dist/default/debug/TAP2-8x8.X.debug.obj
+__ptext7 738 0 CODE 0 text7 dist/default/debug/TAP2-8x8.X.debug.obj
+__ptext8 65A 0 CODE 0 text8 dist/default/debug/TAP2-8x8.X.debug.obj
+__ptext9 68E 0 CODE 0 text9 dist/default/debug/TAP2-8x8.X.debug.obj
+strobe_all@x 48 0 BANK0 1 cstackBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+__Lpowerup 0 0 CODE 0 powerup -
+__Leeprom_data 0 0 EEDATA 3 eeprom_data -
+_delay_ptr 78 0 COMMON 1 bssCOMMON dist/default/debug/TAP2-8x8.X.debug.obj
+__Lreset_vec 0 0 CODE 0 reset_vec -
+my_delay@dly 73 0 COMMON 1 cstackCOMMON dist/default/debug/TAP2-8x8.X.debug.obj
+__CFG_CLKOUTEN$OFF 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of__initialization AE 0 CODE 0 cinit dist/default/debug/TAP2-8x8.X.debug.obj
+__Lfunctab 0 0 CODE 0 functab -
+_SP1BRGH 19C 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_SP1BRGL 19B 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_SP2BRGH 494 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_SP2BRGL 493 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_eusart2RxCount 46 0 BANK0 1 bssBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+__Lclrtext 0 0 ABS 0 clrtext -
+_eusart1RxBuffer 20 0 BANK0 1 bssBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+__pcstackCOMMON 70 0 COMMON 1 cstackCOMMON dist/default/debug/TAP2-8x8.X.debug.obj
+_EUSART1_Transmit_ISR 5B4 0 CODE 0 text14 dist/default/debug/TAP2-8x8.X.debug.obj
+__Hend_init 7C 0 CODE 0 end_init -
+_eusart2RxHead 79 0 COMMON 1 bssCOMMON dist/default/debug/TAP2-8x8.X.debug.obj
+_eusart2RxTail 47 0 BANK0 1 bssBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of_main 4A6 0 CODE 0 maintext dist/default/debug/TAP2-8x8.X.debug.obj
+_delay_time 2330 0 ABS 1 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATB1 869 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATB2 86A 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATB3 86B 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATB4 86C 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATB5 86D 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATB7 86F 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATC1 871 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATD0 878 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATD1 879 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATD2 87A 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATD3 87B 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATD4 87C 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATD5 87D 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATD6 87E 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATD7 87F 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATE0 880 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATE1 881 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATE2 882 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATE3 883 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATE4 884 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATE5 885 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATE6 886 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATE7 887 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATF0 1C60 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATF1 1C61 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATF2 1C62 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATF3 1C63 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATF4 1C64 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATF5 1C65 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATF6 1C66 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_LATF7 1C67 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_TRISA 8C 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_TRISB 8D 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_TRISC 8E 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_TRISD 8F 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_TRISE 90 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_TRISF 30C 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_TRISG 30D 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__size_of_my_delay 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_eusart2TxHead 7A 0 COMMON 1 bssCOMMON dist/default/debug/TAP2-8x8.X.debug.obj
+_eusart2TxTail 7B 0 COMMON 1 bssCOMMON dist/default/debug/TAP2-8x8.X.debug.obj
+__Hram 0 0 ABS 0 ram -
+__Lram 0 0 ABS 0 ram -
+__CFG_CPD$OFF 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__size_of_PIN_MANAGER_Initialize 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_eusart1RxCount 41 0 BANK0 1 bssBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+__pintentry 8 0 CODE 0 intentry dist/default/debug/TAP2-8x8.X.debug.obj
+big_switch_rows@pos 76 0 COMMON 1 cstackCOMMON dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of_EUSART1_Initialize 6C2 0 CODE 0 text9 dist/default/debug/TAP2-8x8.X.debug.obj
+__end_of_OSCILLATOR_Initialize 744 0 CODE 0 text7 dist/default/debug/TAP2-8x8.X.debug.obj
+__initialization 7C 0 CODE 0 cinit dist/default/debug/TAP2-8x8.X.debug.obj
+__CFG_PWRTE$OFF 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__size_of_strobe_all 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+__pbssBANK0 20 0 BANK0 1 bssBANK0 dist/default/debug/TAP2-8x8.X.debug.obj
+__CFG_WRT$OFF 0 0 ABS 0 - dist/default/debug/TAP2-8x8.X.debug.obj
+_OSCILLATOR_Initialize 738 0 CODE 0 text7 dist/default/debug/TAP2-8x8.X.debug.obj
+# %SPLITSTAB Section
+# This section enumerates all the psect splits performed by the assembler.
+# The beginning of the section is indicated by %SPLITSTAB.
+# Each line is a record a particular split, where the parent psect is on
+# the left and the child on the right.  Note that a child psect is always
+# split form the top of the parent psect. All splits from a given parent
+# are listed in the order in which they occurred.
+%SPLITSTAB
+# %DABS Section
+# This section contains a table of all usuage of the assember
+# directive DABS in the program. Each line has the following format:
+#   <name> <space> <address> <size>
+# If the DABS was originally labelled then that shall be <name>,
+# otherwise name will be "-".  The <space> number is in decimal.
+# <address> and <size> are in byte units as unqaulified hexadecimal
+%DABS
+_delay_time 1 2330 0
+- 1 620 30
+- 1 5A0 50
+- 1 530 40
+- 1 7E 2
+# %SEGMENTS Section
+# This sections enumerates the segments of the program.  Each segment
+# is described on a single line as follows:
+#    <name> <space> <link address> <file address> <size> <delta>
+# Addresses and size are in unqualified hexadecimal.  The link address
+# and size are in units of delta. The file address is in units of bytes.
+# All other numeric quantities are in decimal.
+%SEGMENTS
+cstackCOMMON 1 70 70 C 1
+intentry 0 4 8 39E 2
+reset_vec 0 0 0 3 2
+bssBANK0 1 20 20 30 1
+config 0 8007 1000E 2 2
