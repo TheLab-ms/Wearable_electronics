@@ -1,5 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"2322 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic16f1947.h
+"2322 /opt/microchip/xc8/v1.35/include/pic16f1947.h
 [s S103 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S103 . TMR1IE TMR2IE CCP1IE SSP1IE TX1IE RC1IE ADIE TMR1GIE ]
 "2332
@@ -36,7 +36,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic16f1947.h: 49: extern volatile unsigned char INDF0 @ 0x000;
-"51 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic16f1947.h
+"51 /opt/microchip/xc8/v1.35/include/pic16f1947.h
 [; ;pic16f1947.h: 51: asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
 [; ;pic16f1947.h: 54: typedef union {

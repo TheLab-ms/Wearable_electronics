@@ -1,5 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"343 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic16f1947.h
+"343 /opt/microchip/xc8/v1.35/include/pic16f1947.h
 [s S27 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S27 . IOCIF INTF TMR0IF IOCIE INTE TMR0IE PEIE GIE ]
 "353
@@ -12,7 +12,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _INTCONbits `VS26 ~T0 @X0 0 e@11 ]
 "669 mcc_generated_files/pin_manager.h
 [v _PIN_MANAGER_IOC `(v ~T0 @X0 0 ef ]
-"2322 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic16f1947.h
+"2322 /opt/microchip/xc8/v1.35/include/pic16f1947.h
 [s S103 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S103 . TMR1IE TMR2IE CCP1IE SSP1IE TX1IE RC1IE ADIE TMR1GIE ]
 "2332
@@ -38,7 +38,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EUSART1_Receive_ISR `(v ~T0 @X0 0 ef ]
 "201
 [v _EUSART1_Transmit_ISR `(v ~T0 @X0 0 ef ]
-"2510 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic16f1947.h
+"2510 /opt/microchip/xc8/v1.35/include/pic16f1947.h
 [s S110 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S110 . SSP2IE BCL2IE . TX2IE RC2IE ]
 "2509
@@ -63,7 +63,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic16f1947.h: 49: extern volatile unsigned char INDF0 @ 0x000;
-"51 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic16f1947.h
+"51 /opt/microchip/xc8/v1.35/include/pic16f1947.h
 [; ;pic16f1947.h: 51: asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
 [; ;pic16f1947.h: 54: typedef union {

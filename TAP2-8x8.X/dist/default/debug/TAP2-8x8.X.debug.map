@@ -5,7 +5,7 @@ Linker command line:
 --edf=/opt/microchip/xc8/v1.35/dat/en_msgs.txt -cs \
   -h+dist/default/debug/TAP2-8x8.X.debug.sym \
   --cmf=dist/default/debug/TAP2-8x8.X.debug.cmf -z -Q16F1947 \
-  -o/tmp/xcXdtY4kA -Mdist/default/debug/TAP2-8x8.X.debug.map -E1 -ver=XC8 \
+  -o/tmp/xcXhtBrgT -Mdist/default/debug/TAP2-8x8.X.debug.map -E1 -ver=XC8 \
   -ASTACK=02030h-0232fh -pstack=STACK -ACODE=00h-07FFhx8 \
   -ASTRCODE=00h-03FFFh -ASTRING=00h-0FFhx64 -ACONST=00h-0FFhx64 \
   -AENTRY=00h-0FFhx64 -ACOMMON=070h-07Fh -ABANK0=020h-06Fh \
@@ -30,7 +30,7 @@ Linker command line:
   -ppowerup=CODE -pcinit=CODE -pfunctab=CODE -ACONFIG=08007h-08008h \
   -pconfig=CONFIG -DCONFIG=2 -AIDLOC=08000h-08003h -pidloc=IDLOC -DIDLOC=2 \
   -AEEDATA=00h-0FFh/0F000h -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 \
-  -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 -k /tmp/xcX7X4llf.obj \
+  -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 -k /tmp/xcXrd46Ry.obj \
   dist/default/debug/TAP2-8x8.X.debug.obj 
 
 Object code version is 3.11
@@ -40,7 +40,7 @@ Machine type is 16F1947
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-/tmp/xcX7X4llf.obj
+/tmp/xcXrd46Ry.obj
                 end_init                             3C       3C        2        8       0
                 reset_vec                             0        0        3        0       0
                 config                             8007     8007        2    1000E       0
