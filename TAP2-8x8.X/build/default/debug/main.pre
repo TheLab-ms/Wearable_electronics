@@ -6466,6 +6466,12 @@ unsigned char delay_time[192];
 void strobe_all();
 void big_switch_rows(unsigned char pos);
 void big_switch_columns();
+void all_off();
+void all_on();
+void all_red();
+void all_green();
+void all_blue();
+void test_pattern();
 void my_delay(unsigned char dly);
 
 
@@ -6476,7 +6482,7 @@ unsigned char x;
 
 SYSTEM_Initialize();
 
-# 77
+# 83
 for(x=0; x<192; x++)
 delay_time[x] = 100;
 
@@ -6489,7 +6495,8 @@ delay_time[x+2] = 0;
 
 while (1)
 {
-strobe_all();
+
+test_pattern();
 }
 }
 
@@ -6507,6 +6514,93 @@ x >>= 1;
 
 
 }
+}
+
+
+void all_off()
+{
+
+do { LATB1 = 0; } while(0);
+do { LATB2 = 0; } while(0);
+do { LATB3 = 0; } while(0);
+do { LATB4 = 0; } while(0);
+do { LATB5 = 0; } while(0);
+do { LATB6 = 0; } while(0);
+do { LATB7 = 0; } while(0);
+do { LATC1 = 0; } while(0);
+
+do { LATD0 = 1; } while(0);
+do { LATD1 = 1; } while(0);
+do { LATD2 = 1; } while(0);
+do { LATD3 = 1; } while(0);
+do { LATD4 = 1; } while(0);
+do { LATD5 = 1; } while(0);
+do { LATD6 = 1; } while(0);
+do { LATD7 = 1; } while(0);
+do { LATE0 = 1; } while(0);
+do { LATE1 = 1; } while(0);
+do { LATE2 = 1; } while(0);
+do { LATE3 = 1; } while(0);
+do { LATE4 = 1; } while(0);
+do { LATE5 = 1; } while(0);
+do { LATE6 = 1; } while(0);
+do { LATE7 = 1; } while(0);
+do { LATF0 = 1; } while(0);
+do { LATF1 = 1; } while(0);
+do { LATF2 = 1; } while(0);
+do { LATF3 = 1; } while(0);
+do { LATF4 = 1; } while(0);
+do { LATF5 = 1; } while(0);
+do { LATF6 = 1; } while(0);
+do { LATF7 = 1; } while(0);
+
+}
+
+void all_on()
+{
+
+do { LATB1 = 1; } while(0);
+
+# 168
+do { LATD0 = 0; } while(0);
+
+
+do { LATD3 = 0; } while(0);
+
+
+do { LATD6 = 0; } while(0);
+
+
+do { LATE1 = 0; } while(0);
+
+
+do { LATE4 = 0; } while(0);
+
+
+do { LATE7 = 0; } while(0);
+
+
+do { LATF2 = 0; } while(0);
+
+
+do { LATF5 = 0; } while(0);
+
+
+
+}
+
+
+void test_pattern()
+{
+unsigned char t;
+for(t=0; t<3; t++)
+{
+all_off();
+my_delay(10000);
+all_on();
+my_delay(10000);
+}
+
 }
 
 
@@ -6540,11 +6634,11 @@ do { LATB5 = 1; } while(0);
 else if(pos & 0x04)
 {
 do { LATB5 = 0; } while(0);
-
+do { LATB6 = 1; } while(0);
 }
 else if(pos & 0x02)
 {
-
+do { LATB6 = 0; } while(0);
 do { LATB7 = 1; } while(0);
 }
 else if(pos & 0x01)
@@ -6635,7 +6729,7 @@ do { LATF7 = 0; } while(0);
 my_delay(delay_time[delay_ptr++]);
 }
 
-# 239
+# 339
 void my_delay(unsigned char dly)
 {
 unsigned char volatile x;

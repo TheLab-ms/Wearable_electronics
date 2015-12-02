@@ -11,15 +11,19 @@
 [v _eecpymem eecpymem `(v  1 e 0 0 ]
 "24
 [v _memcpyee memcpyee `(v  1 e 0 0 ]
-"63 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/main.c
+"69 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/main.c
 [v _main main `(v  1 e 0 0 ]
-"94
-[v _strobe_all strobe_all `(v  1 e 0 0 ]
-"110
+"117
+[v _all_off all_off `(v  1 e 0 0 ]
+"156
+[v _all_on all_on `(v  1 e 0 0 ]
+"196
+[v _test_pattern test_pattern `(v  1 e 0 0 ]
+"210
 [v _big_switch_rows big_switch_rows `(v  1 e 0 0 ]
-"158
+"258
 [v _big_switch_columns big_switch_columns `(v  1 e 0 0 ]
-"239
+"339
 [v _my_delay my_delay `(v  1 e 0 0 ]
 "76 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/mcc_generated_files/eusart1.c
 [v _EUSART1_Initialize EUSART1_Initialize `(v  1 e 0 0 ]
@@ -233,6 +237,8 @@
 [v _LATB4 LATB4 `VEb  1 e 0 @2156 ]
 "11903
 [v _LATB5 LATB5 `VEb  1 e 0 @2157 ]
+"11905
+[v _LATB6 LATB6 `VEb  1 e 0 @2158 ]
 "11907
 [v _LATB7 LATB7 `VEb  1 e 0 @2159 ]
 "11911
@@ -321,45 +327,41 @@
 [v _eusart2RxBuffer eusart2RxBuffer `[8]uc  1 s 8 eusart2RxBuffer ]
 "70
 [v _eusart2RxCount eusart2RxCount `VEuc  1 e 1 0 ]
-"63 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/main.c
+"69 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/main.c
 [v _main main `(v  1 e 0 0 ]
 {
-"65
-[v main@x x `uc  1 a 1 5 ]
-"91
+"71
+[v main@x x `uc  1 a 1 7 ]
+"98
 } 0
-"94
-[v _strobe_all strobe_all `(v  1 e 0 0 ]
+"196
+[v _test_pattern test_pattern `(v  1 e 0 0 ]
 {
-"96
-[v strobe_all@x x `uc  1 a 1 0 ]
-"107
+"198
+[v test_pattern@t t `uc  1 a 1 6 ]
+"207
 } 0
-"110
-[v _big_switch_rows big_switch_rows `(v  1 e 0 0 ]
-{
-[v big_switch_rows@pos pos `uc  1 a 1 wreg ]
-[v big_switch_rows@pos pos `uc  1 a 1 wreg ]
-"112
-[v big_switch_rows@pos pos `uc  1 a 1 6 ]
-"155
-} 0
-"158
-[v _big_switch_columns big_switch_columns `(v  1 e 0 0 ]
-{
-"233
-} 0
-"239
+"339
 [v _my_delay my_delay `(v  1 e 0 0 ]
 {
 [v my_delay@dly dly `uc  1 a 1 wreg ]
-"241
+"341
 [v my_delay@x x `VEuc  1 a 1 4 ]
-"239
+"339
 [v my_delay@dly dly `uc  1 a 1 wreg ]
-"244
+"344
 [v my_delay@dly dly `uc  1 a 1 3 ]
-"247
+"347
+} 0
+"156
+[v _all_on all_on `(v  1 e 0 0 ]
+{
+"193
+} 0
+"117
+[v _all_off all_off `(v  1 e 0 0 ]
+{
+"154
 } 0
 "71 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 0 0 ]

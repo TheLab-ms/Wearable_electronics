@@ -44,7 +44,7 @@
             <resource customName="RE2_C11G" digital="true" direction="OUTPUT" function="RE2" module="GPIO" name="RE2" start="true" type="pin" wpu="false"/>
             <resource customName="RE3_C12B" digital="true" direction="OUTPUT" function="RE3" module="GPIO" name="RE3" start="true" type="pin" wpu="false"/>
             <resource customName="RE4_C13R" digital="true" direction="OUTPUT" function="RE4" module="GPIO" name="RE4" start="true" type="pin" wpu="false"/>
-            <resource customName="RE5_C13R" digital="true" direction="OUTPUT" function="RE5" module="GPIO" name="RE5" start="true" type="pin" wpu="false"/>
+            <resource customName="RE5_C14G" digital="true" direction="OUTPUT" function="RE5" module="GPIO" name="RE5" start="true" type="pin" wpu="false"/>
             <resource customName="RE6_C15B" digital="true" direction="OUTPUT" function="RE6" module="GPIO" name="RE6" start="true" type="pin" wpu="false"/>
             <resource customName="RE7_C16R" digital="true" direction="OUTPUT" function="RE7" module="GPIO" name="RE7" start="true" type="pin" wpu="false"/>
             <resource customName="RF0_C17G" digital="true" direction="OUTPUT" function="RF0" module="GPIO" name="RF0" start="true" type="pin" wpu="false"/>
@@ -134,7 +134,7 @@
             <resource customName="RE2_C11G" digital="true" direction="OUTPUT" function="RE2" module="GPIO" name="RE2" start="true" type="pin" wpu="false"/>
             <resource customName="RE3_C12B" digital="true" direction="OUTPUT" function="RE3" module="GPIO" name="RE3" start="true" type="pin" wpu="false"/>
             <resource customName="RE4_C13R" digital="true" direction="OUTPUT" function="RE4" module="GPIO" name="RE4" start="true" type="pin" wpu="false"/>
-            <resource customName="RE5_C13R" digital="true" direction="OUTPUT" function="RE5" module="GPIO" name="RE5" start="true" type="pin" wpu="false"/>
+            <resource customName="RE5_C14G" digital="true" direction="OUTPUT" function="RE5" module="GPIO" name="RE5" start="true" type="pin" wpu="false"/>
             <resource customName="RE6_C15B" digital="true" direction="OUTPUT" function="RE6" module="GPIO" name="RE6" start="true" type="pin" wpu="false"/>
             <resource customName="RE7_C16R" digital="true" direction="OUTPUT" function="RE7" module="GPIO" name="RE7" start="true" type="pin" wpu="false"/>
             <resource customName="RF0_C17G" digital="true" direction="OUTPUT" function="RF0" module="GPIO" name="RF0" start="true" type="pin" wpu="false"/>

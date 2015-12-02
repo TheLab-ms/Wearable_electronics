@@ -6466,6 +6466,10 @@ unsigned char delay_time[192];
 void strobe_all();
 void big_switch_rows(unsigned char pos);
 void big_switch_columns();
+void all_off();
+void all_on(unsigned char ao);
+void test_pattern();
+void usec_delay(unsigned char usec);
 void my_delay(unsigned char dly);
 
 
@@ -6476,7 +6480,7 @@ unsigned char x;
 
 SYSTEM_Initialize();
 
-# 77
+# 81
 for(x=0; x<192; x++)
 delay_time[x] = 100;
 
@@ -6489,7 +6493,8 @@ delay_time[x+2] = 0;
 
 while (1)
 {
-strobe_all();
+
+test_pattern();
 }
 }
 
@@ -6507,6 +6512,279 @@ x >>= 1;
 
 
 }
+}
+
+
+void all_off()
+{
+do { LATB1 = 0; } while(0);
+do { LATB2 = 0; } while(0);
+do { LATB3 = 0; } while(0);
+do { LATB4 = 0; } while(0);
+do { LATB5 = 0; } while(0);
+do { LATB6 = 0; } while(0);
+do { LATB7 = 0; } while(0);
+do { LATC1 = 0; } while(0);
+
+do { LATD0 = 1; } while(0);
+do { LATD1 = 1; } while(0);
+do { LATD2 = 1; } while(0);
+do { LATD3 = 1; } while(0);
+do { LATD4 = 1; } while(0);
+do { LATD5 = 1; } while(0);
+do { LATD6 = 1; } while(0);
+do { LATD7 = 1; } while(0);
+do { LATE0 = 1; } while(0);
+do { LATE1 = 1; } while(0);
+do { LATE2 = 1; } while(0);
+do { LATE3 = 1; } while(0);
+do { LATE4 = 1; } while(0);
+do { LATE5 = 1; } while(0);
+do { LATE6 = 1; } while(0);
+do { LATE7 = 1; } while(0);
+do { LATF0 = 1; } while(0);
+do { LATF1 = 1; } while(0);
+do { LATF2 = 1; } while(0);
+do { LATF3 = 1; } while(0);
+do { LATF4 = 1; } while(0);
+do { LATF5 = 1; } while(0);
+do { LATF6 = 1; } while(0);
+do { LATF7 = 1; } while(0);
+}
+
+void all_on(unsigned char ao)
+{
+
+# 160
+unsigned char r;
+unsigned char usec;
+
+
+if ((ao == 0x01)||(ao == 0x02)||(ao == 0x04)) usec = 90;
+if ((ao == 0x03)||(ao == 0x05)||(ao == 0x06)) usec = 45;
+if (ao == 0x07) usec = 30;
+
+for(r=0; r<8; r++)
+{
+switch (r) {
+case 0:
+do { LATB1 = 1; } while(0);
+break;
+case 1:
+do { LATB2 = 1; } while(0);
+break;
+case 2:
+do { LATB3 = 1; } while(0);
+break;
+case 3:
+do { LATB4 = 1; } while(0);
+break;
+case 4:
+do { LATB5 = 1; } while(0);
+break;
+case 5:
+do { LATB6 = 1; } while(0);
+break;
+case 6:
+do { LATB7 = 1; } while(0);
+break;
+case 7:
+do { LATC1 = 1; } while(0);
+break;
+};
+
+
+if ((ao == 0x01)||(ao == 0x03)||(ao == 0x05)||(ao == 0x07)) {
+do { LATD0 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATD0 = 1; } while(0);
+if ((ao == 0x02)||(ao == 0x03)||(ao == 0x06)||(ao == 0x07)) {
+do { LATD1 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATD1 = 1; } while(0);
+if ((ao == 0x04)||(ao == 0x05)||(ao == 0x06)||(ao == 0x07)) {
+do { LATD2 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATD2 = 1; } while(0);
+
+
+if ((ao == 0x01)||(ao == 0x03)||(ao == 0x05)||(ao == 0x07)) {
+do { LATD3 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATD3 = 1; } while(0);
+if ((ao == 0x02)||(ao == 0x03)||(ao == 0x06)||(ao == 0x07)) {
+do { LATD4 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATD4 = 1; } while(0);
+if ((ao == 0x04)||(ao == 0x05)||(ao == 0x06)||(ao == 0x07)) {
+do { LATD5 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATD5 = 1; } while(0);
+
+
+if ((ao == 0x01)||(ao == 0x03)||(ao == 0x05)||(ao == 0x07)) {
+do { LATD6 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATD6 = 1; } while(0);
+if ((ao == 0x02)||(ao == 0x03)||(ao == 0x06)||(ao == 0x07)) {
+do { LATD7 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATD7 = 1; } while(0);
+if ((ao == 0x04)||(ao == 0x05)||(ao == 0x06)||(ao == 0x07)) {
+do { LATE0 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATE0 = 1; } while(0);
+
+
+if ((ao == 0x01)||(ao == 0x03)||(ao == 0x05)||(ao == 0x07)) {
+do { LATE1 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATE1 = 1; } while(0);
+if ((ao == 0x02)||(ao == 0x03)||(ao == 0x06)||(ao == 0x07)) {
+do { LATE2 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATE2 = 1; } while(0);
+if ((ao == 0x04)||(ao == 0x05)||(ao == 0x06)||(ao == 0x07)) {
+do { LATE3 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATE3 = 1; } while(0);
+
+
+if ((ao == 0x01)||(ao == 0x03)||(ao == 0x05)||(ao == 0x07)) {
+do { LATE4 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATE4 = 1; } while(0);
+if ((ao == 0x02)||(ao == 0x03)||(ao == 0x06)||(ao == 0x07)) {
+do { LATE5 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATE5 = 1; } while(0);
+if ((ao == 0x04)||(ao == 0x05)||(ao == 0x06)||(ao == 0x07)) {
+do { LATE6 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATE6 = 1; } while(0);
+
+
+if ((ao == 0x01)||(ao == 0x03)||(ao == 0x05)||(ao == 0x07)) {
+do { LATE7 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATE7 = 1; } while(0);
+if ((ao == 0x02)||(ao == 0x03)||(ao == 0x06)||(ao == 0x07)) {
+do { LATF0 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATF0 = 1; } while(0);
+if ((ao == 0x04)||(ao == 0x05)||(ao == 0x06)||(ao == 0x07)) {
+do { LATF1 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATF1 = 1; } while(0);
+
+
+if ((ao == 0x01)||(ao == 0x03)||(ao == 0x05)||(ao == 0x07)) {
+do { LATF2 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATF2 = 1; } while(0);
+if ((ao == 0x02)||(ao == 0x03)||(ao == 0x06)||(ao == 0x07)) {
+do { LATF3 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATF3 = 1; } while(0);
+if ((ao == 0x04)||(ao == 0x05)||(ao == 0x06)||(ao == 0x07)) {
+do { LATF4 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATF4 = 1; } while(0);
+
+
+if ((ao == 0x01)||(ao == 0x03)||(ao == 0x05)||(ao == 0x07)) {
+do { LATF5 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATF5 = 1; } while(0);
+if ((ao == 0x02)||(ao == 0x03)||(ao == 0x06)||(ao == 0x07)) {
+do { LATF6 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATF6 = 1; } while(0);
+if ((ao == 0x04)||(ao == 0x05)||(ao == 0x06)||(ao == 0x07)) {
+do { LATF7 = 0; } while(0);
+usec_delay(usec);
+}
+do { LATF7 = 1; } while(0);
+
+do { LATB1 = 0; } while(0);
+do { LATB2 = 0; } while(0);
+do { LATB3 = 0; } while(0);
+do { LATB4 = 0; } while(0);
+do { LATB5 = 0; } while(0);
+do { LATB6 = 0; } while(0);
+do { LATB7 = 0; } while(0);
+do { LATC1 = 0; } while(0);
+
+}
+
+}
+
+
+void test_pattern()
+{
+
+
+unsigned char r;
+
+
+for(r=90000; r>0; r--)
+{
+all_on(0x01);
+}
+
+for(r=90000; r>0; r--)
+{
+all_on(0x02);
+}
+
+for(r=90000; r>0; r--)
+{
+all_on(0x04);
+}
+
+for(r=90000; r>0; r--)
+{
+all_on(0x03);
+}
+
+for(r=90000; r>0; r--)
+{
+all_on(0x05);
+}
+
+for(r=90000; r>0; r--)
+{
+all_on(0x06);
+}
+
+for(r=90000; r>0; r--)
+{
+all_on(0x07);
+}
+
 }
 
 
@@ -6540,11 +6818,11 @@ do { LATB5 = 1; } while(0);
 else if(pos & 0x04)
 {
 do { LATB5 = 0; } while(0);
-
+do { LATB6 = 1; } while(0);
 }
 else if(pos & 0x02)
 {
-
+do { LATB6 = 0; } while(0);
 do { LATB7 = 1; } while(0);
 }
 else if(pos & 0x01)
@@ -6635,7 +6913,17 @@ do { LATF7 = 0; } while(0);
 my_delay(delay_time[delay_ptr++]);
 }
 
-# 239
+
+void usec_delay(unsigned char usec)
+{
+while (usec > 0) {
+_delay((unsigned long)((1)*(16000000/4000000.0)));
+usec--;
+}
+}
+
+
+
 void my_delay(unsigned char dly)
 {
 unsigned char volatile x;

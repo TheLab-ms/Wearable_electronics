@@ -459,16 +459,16 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #define RE4_C13R_SetDigitalInput()    do { TRISE4 = 1; } while(0)
 #define RE4_C13R_SetDigitalOutput()   do { TRISE4 = 0; } while(0)
 
-// get/set RE5_C13R aliases
-#define RE5_C13R_TRIS               TRISE5
-#define RE5_C13R_LAT                LATE5
-#define RE5_C13R_PORT               RE5
-#define RE5_C13R_SetHigh()    do { LATE5 = 1; } while(0)
-#define RE5_C13R_SetLow()   do { LATE5 = 0; } while(0)
-#define RE5_C13R_Toggle()   do { LATE5 = ~LATE5; } while(0)
-#define RE5_C13R_GetValue()         RE5
-#define RE5_C13R_SetDigitalInput()    do { TRISE5 = 1; } while(0)
-#define RE5_C13R_SetDigitalOutput()   do { TRISE5 = 0; } while(0)
+// get/set RE5_C14G aliases
+#define RE5_C14G_TRIS               TRISE5
+#define RE5_C14G_LAT                LATE5
+#define RE5_C14G_PORT               RE5
+#define RE5_C14G_SetHigh()    do { LATE5 = 1; } while(0)
+#define RE5_C14G_SetLow()   do { LATE5 = 0; } while(0)
+#define RE5_C14G_Toggle()   do { LATE5 = ~LATE5; } while(0)
+#define RE5_C14G_GetValue()         RE5
+#define RE5_C14G_SetDigitalInput()    do { TRISE5 = 1; } while(0)
+#define RE5_C14G_SetDigitalOutput()   do { TRISE5 = 0; } while(0)
 
 // get/set RE6_C15B aliases
 #define RE6_C15B_TRIS               TRISE6
