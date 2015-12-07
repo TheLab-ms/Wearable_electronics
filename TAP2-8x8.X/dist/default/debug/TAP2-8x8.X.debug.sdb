@@ -7,23 +7,29 @@
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
 "86 /opt/microchip/xc8/v1.35/sources/common/ftadd.c
 [v ___ftadd __ftadd `(f  1 e 3 0 ]
+"15 /opt/microchip/xc8/v1.35/sources/common/Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
 "6 /opt/microchip/xc8/v1.35/sources/pic/eeprom.c
 [v _eecpymem eecpymem `(v  1 e 0 0 ]
 "24
 [v _memcpyee memcpyee `(v  1 e 0 0 ]
-"69 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/main.c
+"159 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/main.c
 [v _main main `(v  1 e 0 0 ]
-"117
+"228
+[v _init_font_LED_data init_font_LED_data `(v  1 e 0 0 ]
+"281
+[v _Display_LED_data Display_LED_data `(v  1 e 0 0 ]
+"436
 [v _all_off all_off `(v  1 e 0 0 ]
-"156
+"474
 [v _all_on all_on `(v  1 e 0 0 ]
-"196
-[v _test_pattern test_pattern `(v  1 e 0 0 ]
-"210
+"714
 [v _big_switch_rows big_switch_rows `(v  1 e 0 0 ]
-"258
+"762
 [v _big_switch_columns big_switch_columns `(v  1 e 0 0 ]
-"339
+"840
+[v _usec_delay usec_delay `(v  1 e 0 0 ]
+"850
 [v _my_delay my_delay `(v  1 e 0 0 ]
 "76 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/mcc_generated_files/eusart1.c
 [v _EUSART1_Initialize EUSART1_Initialize `(v  1 e 0 0 ]
@@ -291,10 +297,24 @@
 [v _LATF6 LATF6 `VEb  1 e 0 @7270 ]
 "11971
 [v _LATF7 LATF7 `VEb  1 e 0 @7271 ]
-"52 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/main.c
+"7 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/font_basic.c
+[v _font_basic font_basic `DCC[256][8]uc  1 e 2048 0 ]
+"136 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/main.c
 [v _delay_ptr delay_ptr `uc  1 e 1 0 ]
-"53
-[v _delay_time delay_time `[192]uc  1 e 192 @9008 ]
+"137
+[v _delay_time delay_time `[192]uc  1 e 192 @8624 ]
+"138
+[v _current_red_level current_red_level `uc  1 e 1 0 ]
+"139
+[v _current_green_level current_green_level `uc  1 e 1 0 ]
+"140
+[v _current_blue_level current_blue_level `uc  1 e 1 0 ]
+"141
+[v _LED_R LED_R `[64]ui  1 e 128 @8816 ]
+"142
+[v _LED_G LED_G `[64]ui  1 e 128 @8944 ]
+"143
+[v _LED_B LED_B `[64]ui  1 e 128 @9072 ]
 "62 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/mcc_generated_files/eusart1.c
 [v _eusart1TxHead eusart1TxHead `uc  1 s 1 eusart1TxHead ]
 "63
@@ -327,41 +347,55 @@
 [v _eusart2RxBuffer eusart2RxBuffer `[8]uc  1 s 8 eusart2RxBuffer ]
 "70
 [v _eusart2RxCount eusart2RxCount `VEuc  1 e 1 0 ]
-"69 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/main.c
+"159 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/main.c
 [v _main main `(v  1 e 0 0 ]
 {
-"71
-[v main@x x `uc  1 a 1 7 ]
-"98
+"162
+[v main@offset offset `ui  1 a 2 3 ]
+"183
+[v main@scroll scroll `ui  1 a 2 0 ]
+"161
+[v main@x x `uc  1 a 1 6 ]
+[v main@y y `uc  1 a 1 5 ]
+"163
+[v main@charnext charnext `uc  1 a 1 2 ]
+"188
+[v main@charstodisplay charstodisplay `DCC[12]uc  1 s 12 charstodisplay ]
+"225
 } 0
-"196
-[v _test_pattern test_pattern `(v  1 e 0 0 ]
+"228
+[v _init_font_LED_data init_font_LED_data `(v  1 e 0 0 ]
 {
-"198
-[v test_pattern@t t `uc  1 a 1 6 ]
-"207
+[v init_font_LED_data@ctxt ctxt `uc  1 a 1 wreg ]
+"230
+[v init_font_LED_data@i i `ui  1 a 2 22 ]
+"232
+[v init_font_LED_data@tempbit tempbit `VEui  1 a 2 24 ]
+"230
+[v init_font_LED_data@h h `ui  1 a 2 20 ]
+[v init_font_LED_data@j j `ui  1 a 2 18 ]
+"234
+[v init_font_LED_data@testvalue2 testvalue2 `VEui  1 a 2 15 ]
+"233
+[v init_font_LED_data@testvalue testvalue `VEui  1 a 2 13 ]
+"228
+[v init_font_LED_data@ctxt ctxt `uc  1 a 1 wreg ]
+[v init_font_LED_data@cnext cnext `uc  1 p 1 0 ]
+[v init_font_LED_data@offset offset `ui  1 p 2 1 ]
+"231
+[v init_font_LED_data@mask mask `DCCuc  1 s 1 mask ]
+[v init_font_LED_data@ctxt ctxt `uc  1 a 1 17 ]
+"278
 } 0
-"339
-[v _my_delay my_delay `(v  1 e 0 0 ]
+"15 /opt/microchip/xc8/v1.35/sources/common/Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
 {
-[v my_delay@dly dly `uc  1 a 1 wreg ]
-"341
-[v my_delay@x x `VEuc  1 a 1 4 ]
-"339
-[v my_delay@dly dly `uc  1 a 1 wreg ]
-"344
-[v my_delay@dly dly `uc  1 a 1 3 ]
-"347
-} 0
-"156
-[v _all_on all_on `(v  1 e 0 0 ]
-{
-"193
-} 0
-"117
-[v _all_off all_off `(v  1 e 0 0 ]
-{
-"154
+"17
+[v ___wmul@product product `ui  1 a 2 6 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 2 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 4 ]
+"53
 } 0
 "71 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 0 0 ]
@@ -387,6 +421,24 @@
 [v _EUSART1_Initialize EUSART1_Initialize `(v  1 e 0 0 ]
 {
 "110
+} 0
+"281 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/main.c
+[v _Display_LED_data Display_LED_data `(v  1 e 0 0 ]
+{
+"283
+[v Display_LED_data@i i `ui  1 a 2 0 ]
+"417
+} 0
+"840
+[v _usec_delay usec_delay `(v  1 e 0 0 ]
+{
+[v usec_delay@usec usec `ui  1 p 2 2 ]
+"846
+} 0
+"436
+[v _all_off all_off `(v  1 e 0 0 ]
+{
+"472
 } 0
 "52 /home/richardg/git-source/TheLAB.ms/TAP20151117/Wearable_electronics/TAP2-8x8.X/mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 0 0 ]

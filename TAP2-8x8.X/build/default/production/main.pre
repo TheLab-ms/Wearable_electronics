@@ -6457,10 +6457,19 @@ void SYSTEM_Initialize(void);
 # 83
 void OSCILLATOR_Initialize(void);
 
-# 51 "main.c"
+# 50 "main.c"
+extern const unsigned char font_basic[ ][8];
+
+# 135
 unsigned char current_column_position;
 unsigned char delay_ptr;
 unsigned char delay_time[192];
+unsigned char current_red_level;
+unsigned char current_green_level;
+unsigned char current_blue_level;
+unsigned int LED_R[64];
+unsigned int LED_G[64];
+unsigned int LED_B[64];
 
 
 void strobe_all();
@@ -6469,32 +6478,267 @@ void big_switch_columns();
 void all_off();
 void all_on(unsigned char ao);
 void test_pattern();
-void usec_delay(unsigned char usec);
+void usec_delay(unsigned int usec);
 void my_delay(unsigned char dly);
+void init_font_LED_data(unsigned char ctxt, unsigned char cnext, unsigned int offset);
+void Display_LED_data();
 
 
 
 void main(void)
 {
-unsigned char x;
+unsigned char x, y;
+unsigned int offset;
+unsigned char charnext;
 
 SYSTEM_Initialize();
 
-# 81
-for(x=0; x<192; x++)
-delay_time[x] = 100;
+# 177
+current_red_level = 10;
+current_green_level = 10;
+current_blue_level = 10;
 
-for(x=0; x<192; x+=3)
-{
-delay_time[x] = 100;
-delay_time[x+1] = 0;
-delay_time[x+2] = 0;
-}
+
+
+unsigned int scroll = 1;
+
+
+
+
+const unsigned char charstodisplay[ ] = {0x54, 0x68, 0x65, 0x4C, 0x41, 0x42, 0x2E, 0x6D, 0x73, 0x00};
 
 while (1)
 {
 
-test_pattern();
+all_off();
+
+if (scroll == 0)
+{
+
+for (x=0; x<(sizeof(charstodisplay)); x++)
+{
+init_font_LED_data(charstodisplay[x], 0x00, 0);
+
+for (y=0; y<100; y++)
+{
+Display_LED_data();
+}
+}
+}
+else
+{
+
+for (x=0; x<(sizeof(charstodisplay)); x++)
+{
+for (offset=0; offset<8; offset++)
+{
+if( (x+1) > (sizeof(charstodisplay)-1) ) { charnext = charstodisplay[0]; } else { charnext = charstodisplay[x+1]; }
+init_font_LED_data(charstodisplay[x], charnext, offset);
+
+for (y=0; y<12; y++)
+{
+Display_LED_data();
+}
+}
+}
+}
+}
+
+
+}
+
+
+void init_font_LED_data(unsigned char ctxt, unsigned char cnext, unsigned int offset)
+{
+unsigned int h, i, j;
+const unsigned char mask = 1;
+volatile unsigned int tempbit = 0;
+volatile unsigned int dvalue = 0;
+
+h =0;
+
+
+for( j = 0; j < 8; j++)
+{
+
+
+for ( i = 0; i < 8; i++ )
+{
+if ( i >= offset ) {
+tempbit = (font_basic[ctxt][j] & ( mask << i ) ) != 0;
+
+
+
+dvalue = ((400-ctxt));
+LED_R[h] = tempbit * (((dvalue)*current_red_level)/400);
+LED_G[h] = tempbit * (((dvalue)*current_green_level)/400);
+LED_B[h] = tempbit * (((dvalue)*current_blue_level)/400);
+
+
+
+h++;
+}
+}
+
+if (offset >= 1) {
+
+for ( i = 0; i < 8; i++ )
+{
+if ( offset > i ) {
+tempbit = (font_basic[cnext][j] & ( mask << i ) ) != 0;
+
+
+
+dvalue = ((400-cnext));
+LED_R[h] = tempbit * (((dvalue)*current_red_level)/400);
+LED_G[h] = tempbit * (((dvalue)*current_green_level)/400);
+LED_B[h] = tempbit * (((dvalue)*current_blue_level)/400);
+
+
+
+h++;
+}
+}
+}
+
+}
+
+}
+
+
+void Display_LED_data()
+{
+unsigned int i;
+
+# 297
+for ( i = 0; i < 64; i++)
+{
+if (LED_R[i] > 0)
+{
+
+if (i < 8) { do { LATB1 = 1; } while(0); }
+if ((i >= 8) && (i < 16)) { do { LATB2 = 1; } while(0); }
+if ((i >= 16) && (i < 24)) { do { LATB3 = 1; } while(0); }
+if ((i >= 24) && (i < 32)) { do { LATB4 = 1; } while(0); }
+if ((i >= 32) && (i < 40)) { do { LATB5 = 1; } while(0); }
+if ((i >= 40) && (i < 48)) { do { LATB6 = 1; } while(0); }
+if ((i >= 48) && (i < 56)) { do { LATB7 = 1; } while(0); }
+if ((i >= 56) && (i < 64)) { do { LATC1 = 1; } while(0); }
+
+if ((i == 0)||(i == 8)||(i == 16)||(i == 24)||(i == 32)||(i == 40)||(i == 48)||(i == 56)) { do { LATD0 = 0; } while(0); }
+if ((i == 1)||(i == 9)||(i == 17)||(i == 25)||(i == 33)||(i == 41)||(i == 49)||(i == 57)) { do { LATD3 = 0; } while(0); }
+if ((i == 2)||(i == 10)||(i == 18)||(i == 26)||(i == 34)||(i == 42)||(i == 50)||(i == 58)) { do { LATD6 = 0; } while(0); }
+if ((i == 3)||(i == 11)||(i == 19)||(i == 27)||(i == 35)||(i == 43)||(i == 51)||(i == 59)) { do { LATE1 = 0; } while(0); }
+if ((i == 4)||(i == 12)||(i == 20)||(i == 28)||(i == 36)||(i == 44)||(i == 52)||(i == 60)) { do { LATE4 = 0; } while(0); }
+if ((i == 5)||(i == 13)||(i == 21)||(i == 29)||(i == 37)||(i == 45)||(i == 53)||(i == 61)) { do { LATE7 = 0; } while(0); }
+if ((i == 6)||(i == 14)||(i == 22)||(i == 30)||(i == 38)||(i == 46)||(i == 54)||(i == 62)) { do { LATF2 = 0; } while(0); }
+if ((i == 7)||(i == 15)||(i == 23)||(i == 31)||(i == 39)||(i == 47)||(i == 55)||(i == 63)) { do { LATF5 = 0; } while(0); }
+
+usec_delay(LED_R[i]);
+
+do { LATB1 = 0; } while(0);
+do { LATB2 = 0; } while(0);
+do { LATB3 = 0; } while(0);
+do { LATB4 = 0; } while(0);
+do { LATB5 = 0; } while(0);
+do { LATB6 = 0; } while(0);
+do { LATB7 = 0; } while(0);
+do { LATC1 = 0; } while(0);
+do { LATD0 = 1; } while(0);
+do { LATD3 = 1; } while(0);
+do { LATD6 = 1; } while(0);
+do { LATE1 = 1; } while(0);
+do { LATE4 = 1; } while(0);
+do { LATE7 = 1; } while(0);
+do { LATF2 = 1; } while(0);
+do { LATF5 = 1; } while(0);
+}
+if (LED_G[i] > 0)
+{
+
+if (i < 8) { do { LATB1 = 1; } while(0); }
+if ((i >= 8) && (i < 16)) { do { LATB2 = 1; } while(0); }
+if ((i >= 16) && (i < 24)) { do { LATB3 = 1; } while(0); }
+if ((i >= 24) && (i < 32)) { do { LATB4 = 1; } while(0); }
+if ((i >= 32) && (i < 40)) { do { LATB5 = 1; } while(0); }
+if ((i >= 40) && (i < 48)) { do { LATB6 = 1; } while(0); }
+if ((i >= 48) && (i < 56)) { do { LATB7 = 1; } while(0); }
+if ((i >= 56) && (i < 64)) { do { LATC1 = 1; } while(0); }
+
+if ((i == 0)||(i == 8)||(i == 16)||(i == 24)||(i == 32)||(i == 40)||(i == 48)||(i == 56)) { do { LATD1 = 0; } while(0); }
+if ((i == 1)||(i == 9)||(i == 17)||(i == 25)||(i == 33)||(i == 41)||(i == 49)||(i == 57)) { do { LATD4 = 0; } while(0); }
+if ((i == 2)||(i == 10)||(i == 18)||(i == 26)||(i == 34)||(i == 42)||(i == 50)||(i == 58)) { do { LATD7 = 0; } while(0); }
+if ((i == 3)||(i == 11)||(i == 19)||(i == 27)||(i == 35)||(i == 43)||(i == 51)||(i == 59)) { do { LATE2 = 0; } while(0); }
+if ((i == 4)||(i == 12)||(i == 20)||(i == 28)||(i == 36)||(i == 44)||(i == 52)||(i == 60)) { do { LATE5 = 0; } while(0); }
+if ((i == 5)||(i == 13)||(i == 21)||(i == 29)||(i == 37)||(i == 45)||(i == 53)||(i == 61)) { do { LATF0 = 0; } while(0); }
+if ((i == 6)||(i == 14)||(i == 22)||(i == 30)||(i == 38)||(i == 46)||(i == 54)||(i == 62)) { do { LATF3 = 0; } while(0); }
+if ((i == 7)||(i == 15)||(i == 23)||(i == 31)||(i == 39)||(i == 47)||(i == 55)||(i == 63)) { do { LATF6 = 0; } while(0); }
+
+usec_delay(LED_G[i]);
+
+do { LATB1 = 0; } while(0);
+do { LATB2 = 0; } while(0);
+do { LATB3 = 0; } while(0);
+do { LATB4 = 0; } while(0);
+do { LATB5 = 0; } while(0);
+do { LATB6 = 0; } while(0);
+do { LATB7 = 0; } while(0);
+do { LATC1 = 0; } while(0);
+do { LATD1 = 1; } while(0);
+do { LATD4 = 1; } while(0);
+do { LATD7 = 1; } while(0);
+do { LATE2 = 1; } while(0);
+do { LATE5 = 1; } while(0);
+do { LATF0 = 1; } while(0);
+do { LATF3 = 1; } while(0);
+do { LATF6 = 1; } while(0);
+}
+if (LED_B[i] > 0)
+{
+
+if (i < 8) { do { LATB1 = 1; } while(0); }
+if ((i >= 8) && (i < 16)) { do { LATB2 = 1; } while(0); }
+if ((i >= 16) && (i < 24)) { do { LATB3 = 1; } while(0); }
+if ((i >= 24) && (i < 32)) { do { LATB4 = 1; } while(0); }
+if ((i >= 32) && (i < 40)) { do { LATB5 = 1; } while(0); }
+if ((i >= 40) && (i < 48)) { do { LATB6 = 1; } while(0); }
+if ((i >= 48) && (i < 56)) { do { LATB7 = 1; } while(0); }
+if ((i >= 56) && (i < 64)) { do { LATC1 = 1; } while(0); }
+
+if ((i == 0)||(i == 8)||(i == 16)||(i == 24)||(i == 32)||(i == 40)||(i == 48)||(i == 56)) { do { LATD2 = 0; } while(0); }
+if ((i == 1)||(i == 9)||(i == 17)||(i == 25)||(i == 33)||(i == 41)||(i == 49)||(i == 57)) { do { LATD5 = 0; } while(0); }
+if ((i == 2)||(i == 10)||(i == 18)||(i == 26)||(i == 34)||(i == 42)||(i == 50)||(i == 58)) { do { LATE0 = 0; } while(0); }
+if ((i == 3)||(i == 11)||(i == 19)||(i == 27)||(i == 35)||(i == 43)||(i == 51)||(i == 59)) { do { LATE3 = 0; } while(0); }
+if ((i == 4)||(i == 12)||(i == 20)||(i == 28)||(i == 36)||(i == 44)||(i == 52)||(i == 60)) { do { LATE6 = 0; } while(0); }
+if ((i == 5)||(i == 13)||(i == 21)||(i == 29)||(i == 37)||(i == 45)||(i == 53)||(i == 61)) { do { LATF1 = 0; } while(0); }
+if ((i == 6)||(i == 14)||(i == 22)||(i == 30)||(i == 38)||(i == 46)||(i == 54)||(i == 62)) { do { LATF4 = 0; } while(0); }
+if ((i == 7)||(i == 15)||(i == 23)||(i == 31)||(i == 39)||(i == 47)||(i == 55)||(i == 63)) { do { LATF7 = 0; } while(0); }
+
+usec_delay(LED_B[i]);
+
+do { LATB1 = 0; } while(0);
+do { LATB2 = 0; } while(0);
+do { LATB3 = 0; } while(0);
+do { LATB4 = 0; } while(0);
+do { LATB5 = 0; } while(0);
+do { LATB6 = 0; } while(0);
+do { LATB7 = 0; } while(0);
+do { LATC1 = 0; } while(0);
+do { LATD2 = 1; } while(0);
+do { LATD5 = 1; } while(0);
+do { LATE0 = 1; } while(0);
+do { LATE3 = 1; } while(0);
+do { LATE6 = 1; } while(0);
+do { LATF1 = 1; } while(0);
+do { LATF4 = 1; } while(0);
+do { LATF7 = 1; } while(0);
+}
+if ((LED_R[i] == 0)&&(LED_G[i] == 0)&&(LED_B[i] == 0))
+{
+
+
+usec_delay(2);
+}
 }
 }
 
@@ -6517,6 +6761,7 @@ x >>= 1;
 
 void all_off()
 {
+
 do { LATB1 = 0; } while(0);
 do { LATB2 = 0; } while(0);
 do { LATB3 = 0; } while(0);
@@ -6525,37 +6770,37 @@ do { LATB5 = 0; } while(0);
 do { LATB6 = 0; } while(0);
 do { LATB7 = 0; } while(0);
 do { LATC1 = 0; } while(0);
-
 do { LATD0 = 1; } while(0);
-do { LATD1 = 1; } while(0);
-do { LATD2 = 1; } while(0);
 do { LATD3 = 1; } while(0);
-do { LATD4 = 1; } while(0);
-do { LATD5 = 1; } while(0);
 do { LATD6 = 1; } while(0);
-do { LATD7 = 1; } while(0);
-do { LATE0 = 1; } while(0);
 do { LATE1 = 1; } while(0);
-do { LATE2 = 1; } while(0);
-do { LATE3 = 1; } while(0);
 do { LATE4 = 1; } while(0);
-do { LATE5 = 1; } while(0);
-do { LATE6 = 1; } while(0);
 do { LATE7 = 1; } while(0);
-do { LATF0 = 1; } while(0);
-do { LATF1 = 1; } while(0);
 do { LATF2 = 1; } while(0);
-do { LATF3 = 1; } while(0);
-do { LATF4 = 1; } while(0);
 do { LATF5 = 1; } while(0);
+do { LATD1 = 1; } while(0);
+do { LATD4 = 1; } while(0);
+do { LATD7 = 1; } while(0);
+do { LATE2 = 1; } while(0);
+do { LATE5 = 1; } while(0);
+do { LATF0 = 1; } while(0);
+do { LATF3 = 1; } while(0);
 do { LATF6 = 1; } while(0);
+do { LATD2 = 1; } while(0);
+do { LATD5 = 1; } while(0);
+do { LATE0 = 1; } while(0);
+do { LATE3 = 1; } while(0);
+do { LATE6 = 1; } while(0);
+do { LATF1 = 1; } while(0);
+do { LATF4 = 1; } while(0);
 do { LATF7 = 1; } while(0);
+
 }
 
 void all_on(unsigned char ao)
 {
 
-# 160
+# 491
 unsigned char r;
 unsigned char usec;
 
@@ -6914,7 +7159,7 @@ my_delay(delay_time[delay_ptr++]);
 }
 
 
-void usec_delay(unsigned char usec)
+void usec_delay(unsigned int usec)
 {
 while (usec > 0) {
 _delay((unsigned long)((1)*(16000000/4000000.0)));
