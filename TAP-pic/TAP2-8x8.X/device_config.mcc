@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration device="PIC16F1947" mcc_version="v2.25.2">
+    <managers>
+        <manager generated="true" name="Pin Manager" reloadPin="manual">
+            <setting name="P3CSEL" option="RE3"/>
+            <setting name="P2BSEL" option="RE2"/>
+            <setting name="P2CSEL" option="RE1"/>
+            <setting name="P3BSEL" option="RE4"/>
+            <setting name="P1BSEL" option="RE6"/>
+            <setting name="P2DSEL" option="RE0"/>
+            <setting name="P1CSEL" option="RE5"/>
+            <setting name="CCP2SEL" option="RC1"/>
+            <setting name="package" option="QFN64"/>
+            <setting name="sorting" option="true"/>
+            <resource customName="IO_RA0" digital="true" direction="INPUT" function="RA0" module="GPIO" name="RA0" start="false" type="pin" wpu="false"/>
+            <resource customName="IO_RA1" digital="true" direction="INPUT" function="RA1" module="GPIO" name="RA1" start="false" type="pin" wpu="false"/>
+            <resource customName="IO_RA2" digital="true" direction="INPUT" function="RA2" module="GPIO" name="RA2" start="false" type="pin" wpu="false"/>
+            <resource customName="IO_RA3" digital="true" direction="INPUT" function="RA3" module="GPIO" name="RA3" start="false" type="pin" wpu="false"/>
+            <resource customName="IO_RA4" digital="true" direction="INPUT" function="RA4" module="GPIO" name="RA4" start="false" type="pin" wpu="false"/>
+            <resource customName="IO_RA5" digital="true" direction="INPUT" function="RA5" module="GPIO" name="RA5" start="false" type="pin" wpu="false"/>
+            <resource customName="IO_RA6" digital="true" direction="INPUT" function="RA6" module="GPIO" name="RA6" start="false" type="pin" wpu="false"/>
+            <resource customName="IO_RA7" digital="true" direction="INPUT" function="RA7" module="GPIO" name="RA7" start="false" type="pin" wpu="false"/>
+            <resource customName="RB0_DLATCH" digital="true" direction="INPUT" function="RB0" ioc="2" module="GPIO" name="RB0" start="false" type="pin" wpu="false"/>
+            <resource customName="RB1_ROW0" digital="true" direction="OUTPUT" function="RB1" ioc="0" module="GPIO" name="RB1" start="true" type="pin" wpu="false"/>
+            <resource customName="RB2_ROW1" digital="true" direction="OUTPUT" function="RB2" ioc="0" module="GPIO" name="RB2" start="false" type="pin" wpu="false"/>
+            <resource customName="RB3_ROW2" digital="true" direction="OUTPUT" function="RB3" ioc="0" module="GPIO" name="RB3" start="false" type="pin" wpu="false"/>
+            <resource customName="RB4_ROW3" digital="true" direction="OUTPUT" function="RB4" ioc="0" module="GPIO" name="RB4" start="false" type="pin" wpu="false"/>
+            <resource customName="RB5_ROW4" digital="true" direction="OUTPUT" function="RB5" ioc="0" module="GPIO" name="RB5" start="false" type="pin" wpu="false"/>
+            <resource customName="RB6_ROW5" digital="true" direction="OUTPUT" function="RB6" ioc="0" module="GPIO" name="RB6" start="false" type="pin" wpu="false"/>
+            <resource customName="RB7_ROW6" digital="true" direction="OUTPUT" function="RB7" ioc="0" module="GPIO" name="RB7" start="false" type="pin" wpu="false"/>
+            <resource customName="RC1_ROW7" digital="true" direction="OUTPUT" function="RC1" module="GPIO" name="RC1" start="false" type="pin" wpu="false"/>
+            <resource customName="TX1" digital="true" direction="INPUT" function="TX1" module="EUSART1" name="RC6" start="false" type="pin" wpu="false"/>
+            <resource customName="RX1" digital="true" direction="INPUT" function="RX1" module="EUSART1" name="RC7" start="false" type="pin" wpu="false"/>
+            <resource customName="RD0_C1R" digital="true" direction="OUTPUT" function="RD0" module="GPIO" name="RD0" start="false" type="pin" wpu="false"/>
+            <resource customName="RD1_C2G" digital="true" direction="OUTPUT" function="RD1" module="GPIO" name="RD1" start="true" type="pin" wpu="false"/>
+            <resource customName="RD2_C3B" digital="true" direction="OUTPUT" function="RD2" module="GPIO" name="RD2" start="true" type="pin" wpu="false"/>
+            <resource customName="RD3_C4R" digital="true" direction="OUTPUT" function="RD3" module="GPIO" name="RD3" start="true" type="pin" wpu="false"/>
+            <resource customName="RD4_C5G" digital="true" direction="OUTPUT" function="RD4" module="GPIO" name="RD4" start="true" type="pin" wpu="false"/>
+            <resource customName="RD5_C6B" digital="true" direction="OUTPUT" function="RD5" module="GPIO" name="RD5" start="true" type="pin" wpu="false"/>
+            <resource customName="RD6_C7R" digital="true" direction="OUTPUT" function="RD6" module="GPIO" name="RD6" start="true" type="pin" wpu="false"/>
+            <resource customName="RD7_C8G" digital="true" direction="OUTPUT" function="RD7" module="GPIO" name="RD7" start="true" type="pin" wpu="false"/>
+            <resource customName="RE0_C9B" digital="true" direction="OUTPUT" function="RE0" module="GPIO" name="RE0" start="true" type="pin" wpu="false"/>
+            <resource customName="RE1_C10R" digital="true" direction="OUTPUT" function="RE1" module="GPIO" name="RE1" start="true" type="pin" wpu="false"/>
+            <resource customName="RE2_C11G" digital="true" direction="OUTPUT" function="RE2" module="GPIO" name="RE2" start="true" type="pin" wpu="false"/>
+            <resource customName="RE3_C12B" digital="true" direction="OUTPUT" function="RE3" module="GPIO" name="RE3" start="true" type="pin" wpu="false"/>
+            <resource customName="RE4_C13R" digital="true" direction="OUTPUT" function="RE4" module="GPIO" name="RE4" start="true" type="pin" wpu="false"/>
+            <resource customName="RE5_C14G" digital="true" direction="OUTPUT" function="RE5" module="GPIO" name="RE5" start="true" type="pin" wpu="false"/>
+            <resource customName="RE6_C15B" digital="true" direction="OUTPUT" function="RE6" module="GPIO" name="RE6" start="true" type="pin" wpu="false"/>
+            <resource customName="RE7_C16R" digital="true" direction="OUTPUT" function="RE7" module="GPIO" name="RE7" start="true" type="pin" wpu="false"/>
+            <resource customName="RF0_C17G" digital="true" direction="OUTPUT" function="RF0" module="GPIO" name="RF0" start="true" type="pin" wpu="false"/>
+            <resource customName="RF1_C18B" digital="true" direction="OUTPUT" function="RF1" module="GPIO" name="RF1" start="true" type="pin" wpu="false"/>
+            <resource customName="RF2_C19R" digital="true" direction="OUTPUT" function="RF2" module="GPIO" name="RF2" start="true" type="pin" wpu="false"/>
+            <resource customName="RF3_C20G" digital="true" direction="OUTPUT" function="RF3" module="GPIO" name="RF3" start="true" type="pin" wpu="false"/>
+            <resource customName="RF4_C21B" digital="true" direction="OUTPUT" function="RF4" module="GPIO" name="RF4" start="true" type="pin" wpu="false"/>
+            <resource customName="RF5_C22R" digital="true" direction="OUTPUT" function="RF5" module="GPIO" name="RF5" start="true" type="pin" wpu="false"/>
+            <resource customName="RF6_C23G" digital="true" direction="OUTPUT" function="RF6" module="GPIO" name="RF6" start="true" type="pin" wpu="false"/>
+            <resource customName="RF7_C24B" digital="true" direction="OUTPUT" function="RF7" module="GPIO" name="RF7" start="true" type="pin" wpu="false"/>
+            <resource customName="RG0_LRN" digital="true" direction="INPUT" function="RG0" module="GPIO" name="RG0" start="false" type="pin" wpu="false"/>
+            <resource customName="TX2" digital="true" direction="INPUT" function="TX2" module="EUSART2" name="RG1" start="false" type="pin" wpu="false"/>
+            <resource customName="RX2" digital="true" direction="INPUT" function="RX2" module="EUSART2" name="RG2" start="false" type="pin" wpu="false"/>
+            <file checksum="165679973" modified="false" name="pin_manager.c" path="mcc_generated_files/pin_manager.c"/>
+            <file checksum="1779347973" modified="false" name="pin_manager.h" path="mcc_generated_files/pin_manager.h"/>
+        </manager>
+        <manager generated="true" name="Interrupt Manager" reloadPin="manual">
+            <setting name="preemptHigh" option="true"/>
+            <setting name="preemptLow" option="true"/>
+            <setting name="useIPEN" option="false"/>
+            <interrupt module="Pin Manager" name="IOCI" priority="2"/>
+            <interrupt module="EUSART1" name="RCI" priority="2"/>
+            <interrupt module="EUSART1" name="TXI" priority="2"/>
+            <interrupt module="EUSART2" name="RCI" priority="2"/>
+            <interrupt module="EUSART2" name="TXI" priority="2"/>
+            <file checksum="1598699302" modified="false" name="interrupt_manager.c" path="mcc_generated_files/interrupt_manager.c"/>
+            <file checksum="4256562029" modified="false" name="interrupt_manager.h" path="mcc_generated_files/interrupt_manager.h"/>
+        </manager>
+        <manager generated="true" name="System" reloadPin="manual">
+            <initializer comment="" name="Initialize">
+                <setting name="SCS" option="INTOSC" register="OSCCON"/>
+                <setting name="SPLLEN" option="disabled" register="OSCCON"/>
+                <setting name="IRCF" option="16MHz_HF" register="OSCCON"/>
+                <setting name="LFIOFR" option="disabled" register="OSCSTAT"/>
+                <setting name="HFIOFL" option="not2percent_acc" register="OSCSTAT"/>
+                <setting name="OSTS" option="intosc" register="OSCSTAT"/>
+                <setting name="PLLR" option="disabled" register="OSCSTAT"/>
+                <setting name="HFIOFS" option="not0.5percent_acc" register="OSCSTAT"/>
+                <setting name="HFIOFR" option="disabled" register="OSCSTAT"/>
+                <setting name="MFIOFR" option="disabled" register="OSCSTAT"/>
+                <setting name="T1OSCR" option="disabled" register="OSCSTAT"/>
+                <setting name="TUN" option="0x0" register="OSCTUNE"/>
+                <additionalSetting name="pllMultiplier" option=""/>
+                <additionalSetting name="extclk" option="1.0 MHz"/>
+            </initializer>
+            <setting name="CLKOUTEN" option="OFF"/>
+            <setting name="FCMEN" option="ON"/>
+            <setting name="MCLRE" option="ON"/>
+            <setting name="WDTE" option="OFF"/>
+            <setting name="CPD" option="OFF"/>
+            <setting name="FOSC" option="INTOSC"/>
+            <setting name="BOREN" option="ON"/>
+            <setting name="IESO" option="ON"/>
+            <setting name="PWRTE" option="OFF"/>
+            <setting name="CP" option="OFF"/>
+            <setting name="PLLEN" option="ON"/>
+            <setting name="LVP" option="OFF"/>
+            <setting name="WRT" option="OFF"/>
+            <setting name="VCAPEN" option="OFF"/>
+            <setting name="STVREN" option="ON"/>
+            <setting name="BORV" option="LO"/>
+            <setting name="generateConfigBits" option="true"/>
+            <file checksum="2296903895" modified="false" name="mcc.c" path="mcc_generated_files/mcc.c"/>
+            <file checksum="1813257758" modified="false" name="mcc.h" path="mcc_generated_files/mcc.h"/>
+        </manager>
+    </managers>
+    <modules>
+        <module generated="true" mode="GPIO" name="GPIO" order="0" reloadPin="manual" type="GPIO">
+            <resource customName="RB1_ROW0" digital="true" direction="OUTPUT" function="RB1" ioc="0" module="GPIO" name="RB1" start="true" type="pin" wpu="false"/>
+            <resource customName="RD0_C1R" digital="true" direction="OUTPUT" function="RD0" module="GPIO" name="RD0" start="false" type="pin" wpu="false"/>
+            <resource customName="RD1_C2G" digital="true" direction="OUTPUT" function="RD1" module="GPIO" name="RD1" start="true" type="pin" wpu="false"/>
+            <resource customName="RD2_C3B" digital="true" direction="OUTPUT" function="RD2" module="GPIO" name="RD2" start="true" type="pin" wpu="false"/>
+            <resource customName="RB2_ROW1" digital="true" direction="OUTPUT" function="RB2" ioc="0" module="GPIO" name="RB2" start="false" type="pin" wpu="false"/>
+            <resource customName="RB3_ROW2" digital="true" direction="OUTPUT" function="RB3" ioc="0" module="GPIO" name="RB3" start="false" type="pin" wpu="false"/>
+            <resource customName="RB4_ROW3" digital="true" direction="OUTPUT" function="RB4" ioc="0" module="GPIO" name="RB4" start="false" type="pin" wpu="false"/>
+            <resource customName="RB5_ROW4" digital="true" direction="OUTPUT" function="RB5" ioc="0" module="GPIO" name="RB5" start="false" type="pin" wpu="false"/>
+            <resource customName="RB6_ROW5" digital="true" direction="OUTPUT" function="RB6" ioc="0" module="GPIO" name="RB6" start="false" type="pin" wpu="false"/>
+            <resource customName="RB7_ROW6" digital="true" direction="OUTPUT" function="RB7" ioc="0" module="GPIO" name="RB7" start="false" type="pin" wpu="false"/>
+            <resource customName="RC1_ROW7" digital="true" direction="OUTPUT" function="RC1" module="GPIO" name="RC1" start="false" type="pin" wpu="false"/>
+            <resource customName="RD3_C4R" digital="true" direction="OUTPUT" function="RD3" module="GPIO" name="RD3" start="true" type="pin" wpu="false"/>
+            <resource customName="RD4_C5G" digital="true" direction="OUTPUT" function="RD4" module="GPIO" name="RD4" start="true" type="pin" wpu="false"/>
+            <resource customName="RD5_C6B" digital="true" direction="OUTPUT" function="RD5" module="GPIO" name="RD5" start="true" type="pin" wpu="false"/>
+            <resource customName="RD6_C7R" digital="true" direction="OUTPUT" function="RD6" module="GPIO" name="RD6" start="true" type="pin" wpu="false"/>
+            <resource customName="RD7_C8G" digital="true" direction="OUTPUT" function="RD7" module="GPIO" name="RD7" start="true" type="pin" wpu="false"/>
+            <resource customName="RE0_C9B" digital="true" direction="OUTPUT" function="RE0" module="GPIO" name="RE0" start="true" type="pin" wpu="false"/>
+            <resource customName="RE1_C10R" digital="true" direction="OUTPUT" function="RE1" module="GPIO" name="RE1" start="true" type="pin" wpu="false"/>
+            <resource customName="RE2_C11G" digital="true" direction="OUTPUT" function="RE2" module="GPIO" name="RE2" start="true" type="pin" wpu="false"/>
+            <resource customName="RE3_C12B" digital="true" direction="OUTPUT" function="RE3" module="GPIO" name="RE3" start="true" type="pin" wpu="false"/>
+            <resource customName="RE4_C13R" digital="true" direction="OUTPUT" function="RE4" module="GPIO" name="RE4" start="true" type="pin" wpu="false"/>
+            <resource customName="RE5_C14G" digital="true" direction="OUTPUT" function="RE5" module="GPIO" name="RE5" start="true" type="pin" wpu="false"/>
+            <resource customName="RE6_C15B" digital="true" direction="OUTPUT" function="RE6" module="GPIO" name="RE6" start="true" type="pin" wpu="false"/>
+            <resource customName="RE7_C16R" digital="true" direction="OUTPUT" function="RE7" module="GPIO" name="RE7" start="true" type="pin" wpu="false"/>
+            <resource customName="RF0_C17G" digital="true" direction="OUTPUT" function="RF0" module="GPIO" name="RF0" start="true" type="pin" wpu="false"/>
+            <resource customName="RF1_C18B" digital="true" direction="OUTPUT" function="RF1" module="GPIO" name="RF1" start="true" type="pin" wpu="false"/>
+            <resource customName="RF2_C19R" digital="true" direction="OUTPUT" function="RF2" module="GPIO" name="RF2" start="true" type="pin" wpu="false"/>
+            <resource customName="RF3_C20G" digital="true" direction="OUTPUT" function="RF3" module="GPIO" name="RF3" start="true" type="pin" wpu="false"/>
+            <resource customName="RF4_C21B" digital="true" direction="OUTPUT" function="RF4" module="GPIO" name="RF4" start="true" type="pin" wpu="false"/>
+            <resource customName="RF5_C22R" digital="true" direction="OUTPUT" function="RF5" module="GPIO" name="RF5" start="true" type="pin" wpu="false"/>
+            <resource customName="RF6_C23G" digital="true" direction="OUTPUT" function="RF6" module="GPIO" name="RF6" start="true" type="pin" wpu="false"/>
+            <resource customName="RF7_C24B" digital="true" direction="OUTPUT" function="RF7" module="GPIO" name="RF7" start="true" type="pin" wpu="false"/>
+            <resource customName="IO_RA0" digital="true" direction="INPUT" function="RA0" module="GPIO" name="RA0" start="false" type="pin" wpu="false"/>
+            <resource customName="IO_RA1" digital="true" direction="INPUT" function="RA1" module="GPIO" name="RA1" start="false" type="pin" wpu="false"/>
+            <resource customName="IO_RA2" digital="true" direction="INPUT" function="RA2" module="GPIO" name="RA2" start="false" type="pin" wpu="false"/>
+            <resource customName="IO_RA3" digital="true" direction="INPUT" function="RA3" module="GPIO" name="RA3" start="false" type="pin" wpu="false"/>
+            <resource customName="IO_RA4" digital="true" direction="INPUT" function="RA4" module="GPIO" name="RA4" start="false" type="pin" wpu="false"/>
+            <resource customName="IO_RA5" digital="true" direction="INPUT" function="RA5" module="GPIO" name="RA5" start="false" type="pin" wpu="false"/>
+            <resource customName="IO_RA6" digital="true" direction="INPUT" function="RA6" module="GPIO" name="RA6" start="false" type="pin" wpu="false"/>
+            <resource customName="IO_RA7" digital="true" direction="INPUT" function="RA7" module="GPIO" name="RA7" start="false" type="pin" wpu="false"/>
+            <resource customName="RB0_DLATCH" digital="true" direction="INPUT" function="RB0" ioc="2" module="GPIO" name="RB0" start="false" type="pin" wpu="false"/>
+            <resource customName="RG0_LRN" digital="true" direction="INPUT" function="RG0" module="GPIO" name="RG0" start="false" type="pin" wpu="false"/>
+        </module>
+        <module generated="true" mode="EUSART Asynchronous(NRZ)" name="EUSART1" order="1" reloadPin="manual" type="uart_autobd">
+            <initializer comment="" name="Initialize">
+                <setting name="ABDOVF" option="no_overflow" register="BAUD1CON"/>
+                <setting name="SCKP" option="async_noninverted_sync_fallingedge" register="BAUD1CON"/>
+                <setting name="RCIDL" option="idle" register="BAUD1CON"/>
+                <setting name="BRG16" option="16bit_generator" register="BAUD1CON"/>
+                <setting name="WUE" option="disabled" register="BAUD1CON"/>
+                <setting name="ABDEN" option="disabled" register="BAUD1CON"/>
+                <setting name="SPEN" option="enabled" register="RC1STA"/>
+                <setting name="OERR" option="no_error" register="RC1STA"/>
+                <setting name="RX9" option="8-bit" register="RC1STA"/>
+                <setting name="RX9D" option="0x0" register="RC1STA"/>
+                <setting name="CREN" option="disabled" register="RC1STA"/>
+                <setting name="ADDEN" option="disabled" register="RC1STA"/>
+                <setting name="SREN" option="disabled" register="RC1STA"/>
+                <setting name="FERR" option="no_error" register="RC1STA"/>
+                <setting name="TRMT" option="TSR_empty" register="TX1STA"/>
+                <setting name="TX9" option="8-bit" register="TX1STA"/>
+                <setting name="TX9D" option="0x0" register="TX1STA"/>
+                <setting name="SENDB" option="sync_break_complete" register="TX1STA"/>
+                <setting name="TXEN" option="enabled" register="TX1STA"/>
+                <setting name="SYNC" option="asynchronous" register="TX1STA"/>
+                <setting name="BRGH" option="hi_speed" register="TX1STA"/>
+                <setting name="CSRC" option="slave_mode" register="TX1STA"/>
+                <setting name="SPBRGL" option="34" register="SP1BRGL"/>
+                <setting name="SPBRGH" option="0" register="SP1BRGH"/>
+                <setting name="TXREG" option="0x0" register="TX1REG"/>
+                <setting name="RCREG" option="0x0" register="RC1REG"/>
+                <additionalSetting name="baudrateString" option="115200"/>
+            </initializer>
+            <setting name="RCI" option="true"/>
+            <setting name="TXI" option="true"/>
+            <setting name="inputBuffer" option="8"/>
+            <setting name="outputBuffer" option="8"/>
+            <setting name="stdio" option="false"/>
+            <file checksum="117366323" modified="false" name="eusart1.c" path="mcc_generated_files/eusart1.c"/>
+            <file checksum="1373991727" modified="false" name="eusart1.h" path="mcc_generated_files/eusart1.h"/>
+        </module>
+        <module generated="true" mode="EUSART Asynchronous(NRZ)" name="EUSART2" order="2" reloadPin="manual" type="uart_autobd">
+            <initializer comment="" name="Initialize">
+                <setting name="ABDOVF" option="no_overflow" register="BAUD2CON"/>
+                <setting name="SCKP" option="async_noninverted_sync_fallingedge" register="BAUD2CON"/>
+                <setting name="RCIDL" option="idle" register="BAUD2CON"/>
+                <setting name="BRG16" option="16bit_generator" register="BAUD2CON"/>
+                <setting name="WUE" option="disabled" register="BAUD2CON"/>
+                <setting name="ABDEN" option="disabled" register="BAUD2CON"/>
+                <setting name="SPEN" option="enabled" register="RC2STA"/>
+                <setting name="OERR" option="no_error" register="RC2STA"/>
+                <setting name="RX9" option="8-bit" register="RC2STA"/>
+                <setting name="RX9D" option="0x0" register="RC2STA"/>
+                <setting name="CREN" option="disabled" register="RC2STA"/>
+                <setting name="ADDEN" option="disabled" register="RC2STA"/>
+                <setting name="SREN" option="disabled" register="RC2STA"/>
+                <setting name="FERR" option="no_error" register="RC2STA"/>
+                <setting name="TRMT" option="TSR_empty" register="TX2STA"/>
+                <setting name="TX9" option="8-bit" register="TX2STA"/>
+                <setting name="TX9D" option="0x0" register="TX2STA"/>
+                <setting name="SENDB" option="sync_break_complete" register="TX2STA"/>
+                <setting name="TXEN" option="enabled" register="TX2STA"/>
+                <setting name="SYNC" option="asynchronous" register="TX2STA"/>
+                <setting name="BRGH" option="hi_speed" register="TX2STA"/>
+                <setting name="CSRC" option="slave_mode" register="TX2STA"/>
+                <setting name="SPBRGL" option="34" register="SP2BRGL"/>
+                <setting name="SPBRGH" option="0" register="SP2BRGH"/>
+                <setting name="TXREG" option="0x0" register="TX2REG"/>
+                <setting name="RCREG" option="0x0" register="RC2REG"/>
+                <additionalSetting name="baudrateString" option="115200"/>
+            </initializer>
+            <setting name="RCI" option="true"/>
+            <setting name="TXI" option="true"/>
+            <setting name="inputBuffer" option="8"/>
+            <setting name="outputBuffer" option="8"/>
+            <setting name="stdio" option="false"/>
+            <file checksum="2560548511" modified="false" name="eusart2.c" path="mcc_generated_files/eusart2.c"/>
+            <file checksum="3945034574" modified="false" name="eusart2.h" path="mcc_generated_files/eusart2.h"/>
+        </module>
+    </modules>
+</configuration>
