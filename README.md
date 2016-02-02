@@ -10,3 +10,5 @@ Don has volunteered to lead us in designing and manufacturing a wearable electro
 
 • The directory TAP-Gen1 contains all the code and documents for the first generation prototype
 
+• The directory TAP2-pic contains all the code and documents for the second generation pic microcontroller prototype
+
