@@ -1,16 +1,13 @@
-#include <msp430.h>
-#include "tap.h"
+#include <msp430.h> 
+
+//*********** EXTERNAL VARIABLES ***********************************************
+extern const unsigned char font_basic[ ][8];
 
 //********  Globals  *************************************************************************
-unsigned char   *display_addr;
-unsigned char   *display_ptr;
-unsigned char   display_buffer[192];
-volatile unsigned int	loops;
-
 //#define BLUELEDDELAY 700
 //#define REDLEDDELAY 700
 //#define GREENLEDDELAY 700
-#define MAXDELAY	MAX_DELAY
+#define MAXDELAY 600
 unsigned int current_red_level;
 unsigned int current_green_level;
 unsigned int current_blue_level;
@@ -24,24 +21,11 @@ void my_delay(unsigned int x);
 void initU5(void);
 
 
-//*********** For demo *********************************************************
-#include "demo.h"
-
-//****************************************************************************************************
-// Port 1 interrupt service routine
-#pragma vector=PORT1_VECTOR
-__interrupt void Port_1(void)
-{
-	loops++;
-	P1IFG &= ~BIT0; // P1.0 IFG cleared
-}
-
 //****************************************************************************************************
 int main(void)
 {
-	volatile unsigned int i;
+	volatile unsigned int i, loops;
 	volatile unsigned char next_color;
-	unsigned char	x;
 
     WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
 
@@ -60,132 +44,130 @@ int main(void)
     //P4DIR |= BIT7;                            // MCLK set out to pins
     //P4SEL |= BIT7;
 
-    for (x = 0; x < 192; x++)
-    	display_buffer[x] = 0;
 
-    display_addr = display_buffer;
-
-    // Enable interrupt on port 1 pin 0
-//    P1IE |= BIT0; // P1.0 interrupt enabled
-//    P1IES |= BIT0; // P1.0 Hi/lo edge
-//    P1IFG &= ~BIT0; // P1.0 IFG cleared
-//	__bis_SR_register(GIE);                   // Enable global interrupts
-
-#ifdef DEMO
-    init_demo();
-#endif
-
-    loops=0;
-      while(1)
-      {
+//    loops=0;
+//      while(1)
+//      {
 //    	loops++;
+//    	if(loops>200)
+//    	{
+//    		loops=0;
+//    		next_color++;
+//    		if(next_color > 3) next_color=0;
+//    		set_full_array_color(next_color);
+//
+//    	}
+//
+//
+//    	//pulse all LEDs once
+//    	pulse_LEDs();
+//
+//        P6OUT ^= BIT2;                          // Toggle P6.2
+//        //my_delay(6000);
+//      }
+//
+//      return 0;
 
-#ifdef DEMO
-        if (scan == 0)
+    unsigned char x, y;
+    unsigned int offset;
+    unsigned char charnext;
+
+    current_red_level   = 10; //red
+    current_green_level = 10; //green
+    current_blue_level  = 10; //blue
+
+    // ***
+    // Determine if scrolling text or char by char display
+    unsigned int scroll = 1;
+
+    // ***
+    // Below spells out T h e L A B . m s (space) in unicode HEX
+    // ***
+    const unsigned char charstodisplay[ ] = {0x54, 0x68, 0x65, 0x4C, 0x41, 0x42, 0x2E, 0x6D, 0x73, 0x00};
+
+    while (1)
+    {
+        //ALL OFF
+        all_off();
+
+        if (scroll == 0)
+        {
+            //Loop through each char
+            for (x=0; x<(sizeof(charstodisplay)); x++)
             {
-            step_demo();
-
-            scan = num_cycles;
+                init_font_LED_data(charstodisplay[x], 0x00, 0);
+                //Loop same char a number of times so it stays on screen
+                for (y=0; y<100; y++)
+                {
+                    Display_LED_data();
+                }
             }
-        scan--;
-#endif
+        }
+        else
+        {
+            //
+            for (x=0; x<(sizeof(charstodisplay)); x++)
+            {
+                for (offset=0; offset<8; offset++)
+                {
+                    if( (x+1) > (sizeof(charstodisplay)-1) ) { charnext = charstodisplay[0]; } else { charnext = charstodisplay[x+1]; }
+                    init_font_LED_data(charstodisplay[x], charnext, offset);
+                    //Loop same char a number of times so it stays on screen
+                    for (y=0; y<12; y++)
+                    {
+                        Display_LED_data();
+                    }
+                }
+            }
+        }
+    }
 
-#if 0
-    	if(loops>0)
-    	{
-    		loops=0;
-    		next_color++;
-    		if(next_color > 3) next_color=0;
-    		set_full_array_color(next_color);
+}
 
-    	}
-#endif
+//*****************************************************************************************************
+void all_off()
+{
+    //ALL OFF
 
-    	//pulse all LEDs once
-    	pulse_LEDs();
-
-        P6OUT ^= BIT2;                          // Toggle P6.2
-        //my_delay(6000);
-      }
-
-      return 0;
 }
 
 
 //*****************************************************************************************************
 void set_full_array_color(color_number)
 {
-	unsigned int	x;
-
 	if(color_number == 0)//red
-		{
-		for (x = 0; x < 192; x = x + 3)
-			{
-			display_buffer[x] = MAXDELAY;
-			display_buffer[x + 1] = 0;
-			display_buffer[x + 2] = 0;
-			}
+	{
 		current_red_level = MAXDELAY;
 		current_green_level = 10;
 		current_blue_level = 10;
-		}
+	}
 	if(color_number == 1)//green
-		{
-		for (x = 0; x < 192; x = x + 3)
-			{
-			display_buffer[x] = 0;
-			display_buffer[x + 1] = MAXDELAY;
-			display_buffer[x + 2] = 0;
-			}
+	{
 		current_green_level = MAXDELAY;
 		current_red_level = 10;
 		current_blue_level = 10;
-		}
-	if(color_number == 2)//yellow
-		{
-		for (x = 0; x < 192; x = x + 3)
-			{
-			display_buffer[x] = 0;
-			display_buffer[x + 1] = 0;
-			display_buffer[x + 2] = MAXDELAY;
-			}
-		current_blue_level = 10;
-		current_red_level = MAXDELAY;
-		current_green_level = MAXDELAY;
+	}
+	if(color_number == 2)//blue
+	{
+		current_blue_level = MAXDELAY;
+		current_red_level = 10;
+		current_green_level = 10;
 
-		}
+	}
 	if(color_number == 3)//white
-		{
-		for (x = 0; x < 192; x = x + 3)
-			{
-			display_buffer[x] = MAXDELAY;
-			display_buffer[x + 1] = MAXDELAY;
-			display_buffer[x + 2] = MAXDELAY;
-			}
+	{
 		current_red_level = MAXDELAY;
 		current_green_level = MAXDELAY;
 		current_blue_level = MAXDELAY;
-		}
+	}
+
 }
 
 
 //*****************************************************************************************************
-#define SCAN_COLUMN(TURN_COLUMN_ON,TURN_COLUMN_OFF) \
-    { \
-    delay = *display_ptr++; \
-    if (delay != 0) \
-        { \
-        TURN_COLUMN_ON; \
-        my_delay(delay); \
-        TURN_COLUMN_OFF; \
-        } \
-    if (delay < MAX_DELAY) \
-        my_delay(MAX_DELAY - delay); \
-    }
 void pulse_LEDs()
 {
-	unsigned char	delay;
-	unsigned char	x;
+	unsigned char x;
 
 	//latch 0 into U5 B input - this will turn on power to first row
 	PJOUT &= ~BIT3;//make B input low
@@ -197,43 +179,106 @@ void pulse_LEDs()
 
 	PJOUT |= BIT3;//make B input on U5 high so the shift register clocks a single zero across to power each row
 
-	display_ptr = display_addr;
 
 	//pulse all columns with required delay times and then power the next row
 	for(x=0; x<8; x++)
 	{
 
-		SCAN_COLUMN(COL0R_ON, COL0R_OFF);
-		SCAN_COLUMN(COL0G_ON, COL0G_OFF);
-		SCAN_COLUMN(COL0B_ON, COL0B_OFF);
+		P3OUT |= BIT1;
+		my_delay(current_red_level);
+		P3OUT &= ~BIT1;
 
-		SCAN_COLUMN(COL1R_ON, COL1R_OFF);
-		SCAN_COLUMN(COL1G_ON, COL1G_OFF);
-		SCAN_COLUMN(COL1B_ON, COL1B_OFF);
+		P4OUT |= BIT1;
+		my_delay(current_green_level);
+		P4OUT &= ~BIT1;
 
-		SCAN_COLUMN(COL2R_ON, COL2R_OFF);
-		SCAN_COLUMN(COL2G_ON, COL2G_OFF);
-		SCAN_COLUMN(COL2B_ON, COL2B_OFF);
+		P1OUT |= BIT6;
+		my_delay(current_blue_level);
+		P1OUT &= ~BIT6;
 
-		SCAN_COLUMN(COL3R_ON, COL3R_OFF);
-		SCAN_COLUMN(COL3G_ON, COL3G_OFF);
-		SCAN_COLUMN(COL3B_ON, COL3B_OFF);
+		P4OUT |= BIT0;
+		my_delay(current_red_level);
+		P4OUT &= ~BIT0;
 
-		SCAN_COLUMN(COL4R_ON, COL4R_OFF);
-		SCAN_COLUMN(COL4G_ON, COL4G_OFF);
-		SCAN_COLUMN(COL4B_ON, COL4B_OFF);
+		P4OUT |= BIT2;
+		my_delay(current_green_level);
+		P4OUT &= ~BIT2;
 
-		SCAN_COLUMN(COL5R_ON, COL5R_OFF);
-		SCAN_COLUMN(COL5G_ON, COL5G_OFF);
-		SCAN_COLUMN(COL5B_ON, COL5B_OFF);
+		P1OUT |= BIT7;
+		my_delay(current_blue_level);
+		P1OUT &= ~BIT7;
 
-		SCAN_COLUMN(COL6R_ON, COL6R_OFF);
-		SCAN_COLUMN(COL6G_ON, COL6G_OFF);
-		SCAN_COLUMN(COL6B_ON, COL6B_OFF);
+		P4OUT |= BIT3;
+		my_delay(current_red_level);
+		P4OUT &= ~BIT3;
 
-		SCAN_COLUMN(COL7R_ON, COL7R_OFF);
-		SCAN_COLUMN(COL7G_ON, COL7G_OFF);
-		SCAN_COLUMN(COL7B_ON, COL7B_OFF);
+		P4OUT |= BIT7;
+		my_delay(current_green_level);
+		P4OUT &= ~BIT7;
+
+		P4OUT |= BIT6;
+		my_delay(current_blue_level);
+		P4OUT &= ~BIT6;
+
+		P3OUT |= BIT0;
+		my_delay(current_red_level);
+		P3OUT &= ~BIT0;
+
+		P3OUT |= BIT2;
+		my_delay(current_green_level);
+		P3OUT &= ~BIT2;
+
+		P1OUT |= BIT5;
+		my_delay(current_blue_level);
+		P1OUT &= ~BIT5;
+
+		P1OUT |= BIT4;
+		my_delay(current_red_level);
+		P1OUT &= ~BIT4;
+
+		P1OUT |= BIT2;
+		my_delay(current_green_level);
+		P1OUT &= ~BIT2;
+
+		P1OUT |= BIT3;
+		my_delay(current_blue_level);
+		P1OUT &= ~BIT3;
+
+		P5OUT |= BIT0;
+		my_delay(current_red_level);
+		P5OUT &= ~BIT0;
+
+		P6OUT |= BIT7;
+		my_delay(current_green_level);
+		P6OUT &= ~BIT7;
+
+		P6OUT |= BIT6;
+		my_delay(current_blue_level);
+		P6OUT &= ~BIT6;
+
+		P6OUT |= BIT0;
+		my_delay(current_red_level);
+		P6OUT &= ~BIT0;
+
+		P6OUT |= BIT5;
+		my_delay(current_green_level);
+		P6OUT &= ~BIT5;
+
+		P6OUT |= BIT4;
+		my_delay(current_blue_level);
+		P6OUT &= ~BIT4;
+
+		P6OUT |= BIT1;
+		my_delay(current_red_level);
+		P6OUT &= ~BIT1;
+
+		P5OUT |= BIT1;
+		my_delay(current_green_level);
+		P5OUT &= ~BIT1;
+
+		P6OUT |= BIT3;
+		my_delay(current_blue_level);
+		P6OUT &= ~BIT3;
 
 		//enable power to next row of LEDs
 		//clock U5 moving the zero across the shift register
@@ -286,7 +331,7 @@ void init_clock()
 void my_delay(unsigned int x)
 {
 	while(x--)
-		__delay_cycles(10);
+		__delay_cycles(1);
 }
 
 
@@ -409,3 +454,5 @@ void SetVcoreUp (unsigned int level)
   // Lock PMM registers for write access
   PMMCTL0_H = 0x00;
 }
+
+
