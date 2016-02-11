@@ -1,10 +1,10 @@
 ******************************************************************************
                   MSP430 Linker Unix v4.4.4                    
 ******************************************************************************
->> Linked Tue Feb  2 18:47:26 2016
+>> Linked Thu Feb 11 14:40:12 2016
 
 OUTPUT FILE NAME:   <TAP2-MSP430.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs_noexit"  address: 000084e2
+ENTRY POINT SYMBOL: "_c_int00_noargs_noexit"  address: 00008878
 
 
 MEMORY CONFIGURATION
@@ -19,8 +19,8 @@ MEMORY CONFIGURATION
   INFOB                 00001900   00000080  00000000  00000080  RWIX
   INFOA                 00001980   00000080  00000000  00000080  RWIX
   USBRAM                00001c00   00000800  00000000  00000800  RWIX
-  RAM                   00002400   00001000  000000a6  00000f5a  RWIX
-  FLASH                 00008000   00007f80  00000542  00007a3e  RWIX
+  RAM                   00002400   00001000  0000016e  00000e92  RWIX
+  FLASH                 00008000   00007f80  00001112  00006e6e  RWIX
   INT00                 0000ff80   00000002  00000000  00000002  RWIX
   INT01                 0000ff82   00000002  00000000  00000002  RWIX
   INT02                 0000ff84   00000002  00000000  00000002  RWIX
@@ -92,35 +92,48 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
-.bss       0    00002400    00000006     UNINITIALIZED
-                  00002400    00000002     (.common:current_blue_level)
-                  00002402    00000002     (.common:current_green_level)
-                  00002404    00000002     (.common:current_red_level)
+.bss       0    00002400    000000ce     UNINITIALIZED
+                  00002400    000000c0     (.common:display_buffer)
+                  000024c0    00000002     (.common:current_char)
+                  000024c2    00000002     (.common:display_addr)
+                  000024c4    00000002     (.common:display_ptr)
+                  000024c6    00000002     (.common:loops)
+                  000024c8    00000002     (.common:num_cycles)
+                  000024ca    00000002     (.common:offset)
+                  000024cc    00000002     (.common:scan)
 
 .stack     0    00003360    000000a0     UNINITIALIZED
                   00003360    00000002     rts430x_lc_sd_eabi.lib : boot.obj (.stack)
                   00003362    0000009e     --HOLE--
 
-.text      0    00008000    00000530     
-                  00008000    000001d2     main.obj (.text:pulse_LEDs)
-                  000081d2    000000fe     main.obj (.text:init_ioports)
-                  000082d0    00000080     rts430x_lc_sd_eabi.lib : autoinit_wdt.obj (.text:_auto_init_hold_wdt)
-                  00008350    00000060     main.obj (.text:init_clock)
-                  000083b0    0000005c     main.obj (.text:set_full_array_color)
-                  0000840c    0000004e     main.obj (.text:SetVcoreUp)
-                  0000845a    0000004a     main.obj (.text:main)
-                  000084a4    0000003e     rts430x_lc_sd_eabi.lib : copy_zero_init.obj (.text:decompress:ZI:__TI_zero_init)
-                  000084e2    0000001a                            : boot_special.obj (.text:_isr:_c_int00_noargs_noexit)
-                  000084fc    0000001a     main.obj (.text:initU5)
-                  00008516    0000000c     main.obj (.text:my_delay)
-                  00008522    00000006     rts430x_lc_sd_eabi.lib : isr_trap.obj (.text:_isr:__TI_ISR_TRAP)
-                  00008528    00000004                            : pre_init.obj (.text:_system_pre_init)
-                  0000852c    00000004                            : exit.obj (.text:abort)
+.text      0    00008000    000008f4     
+                  00008000    000004b0     main.obj (.text:pulse_LEDs)
+                  000084b0    000000fe     main.obj (.text:init_ioports)
+                  000085ae    000000a0     main.obj (.text:blt_char)
+                  0000864e    00000080     rts430x_lc_sd_eabi.lib : autoinit_wdt.obj (.text:_auto_init_hold_wdt)
+                  000086ce    00000068     main.obj (.text:step_demo)
+                  00008736    00000060     main.obj (.text:init_clock)
+                  00008796    00000056     main.obj (.text:main)
+                  000087ec    0000004e     main.obj (.text:SetVcoreUp)
+                  0000883a    0000003e     rts430x_lc_sd_eabi.lib : copy_zero_init.obj (.text:decompress:ZI:__TI_zero_init)
+                  00008878    0000001a                            : boot_special.obj (.text:_isr:_c_int00_noargs_noexit)
+                  00008892    0000001a     main.obj (.text:initU5)
+                  000088ac    00000014     main.obj (.text:my_delay)
+                  000088c0    00000012     main.obj (.text:init_demo)
+                  000088d2    0000000a     main.obj (.text:_isr:Port_1)
+                  000088dc    0000000a     rts430x_lc_sd_eabi.lib : abs.obj (.text:abs)
+                  000088e6    00000006                            : isr_trap.obj (.text:_isr:__TI_ISR_TRAP)
+                  000088ec    00000004                            : pre_init.obj (.text:_system_pre_init)
+                  000088f0    00000004                            : exit.obj (.text:abort)
 
-.cinit     0    00008530    00000012     
-                  00008530    00000006     (.cinit..bss.load) [load image, compression = zero_init]
-                  00008536    00000004     (__TI_handler_table)
-                  0000853a    00000008     (__TI_cinit_table)
+.const     0    000088f4    0000080c     
+                  000088f4    00000800     font_basic.obj (.const:font_basic)
+                  000090f4    0000000c     main.obj (.const:.string:charstodisplay)
+
+.cinit     0    00009100    00000012     
+                  00009100    00000006     (.cinit..bss.load) [load image, compression = zero_init]
+                  00009106    00000004     (__TI_handler_table)
+                  0000910a    00000008     (__TI_cinit_table)
 
 .init_array 
 *          0    00008000    00000000     UNINITIALIZED
@@ -146,7 +159,7 @@ USCI_A1    0    0000ffdc    00000002
                   0000ffdc    00000002     rts430x_lc_sd_eabi.lib : int46.obj (.int46)
 
 PORT1      0    0000ffde    00000002     
-                  0000ffde    00000002     rts430x_lc_sd_eabi.lib : int47.obj (.int47)
+                  0000ffde    00000002     main.obj (.int47)
 
 TIMER1_A1 
 *          0    0000ffe0    00000002     
@@ -205,13 +218,13 @@ SYSNMI     0    0000fffc    00000002
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 0000853a records: 1, size/record: 8, table size: 8
-	.bss: load addr=00008530, load size=00000006 bytes, run addr=00002400, run size=00000006 bytes, compression=zero_init
+__TI_cinit_table @ 0000910a records: 1, size/record: 8, table size: 8
+	.bss: load addr=00009100, load size=00000006 bytes, run addr=00002400, run size=000000ce bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 00008536 records: 1, size/record: 4, table size: 4
+__TI_handler_table @ 00009106 records: 1, size/record: 4, table size: 4
 	index: 0, handler: __TI_zero_init
 
 
@@ -249,7 +262,7 @@ address   name
 00000752  ADC10MEM0               
 00000753  ADC10MEM0_H             
 00000752  ADC10MEM0_L             
-0000852c  C$$EXIT                 
+000088f0  C$$EXIT                 
 000008c0  CBCTL0                  
 000008c1  CBCTL0_H                
 000008c0  CBCTL0_L                
@@ -496,6 +509,7 @@ address   name
 0000012e  PMMRIE                  
 0000012f  PMMRIE_H                
 0000012e  PMMRIE_L                
+000088d2  Port_1                  
 00000158  RCCTL0                  
 00000159  RCCTL0_H                
 00000158  RCCTL0_L                
@@ -608,7 +622,7 @@ address   name
 0000019a  SYSUNIV                 
 0000019b  SYSUNIV_H               
 0000019a  SYSUNIV_L               
-0000840c  SetVcoreUp              
+000087ec  SetVcoreUp              
 00000352  TA0CCR0                 
 00000354  TA0CCR1                 
 00000356  TA0CCR2                 
@@ -901,13 +915,13 @@ address   name
 0000015c  WDTCTL_L                
 00003400  __STACK_END             
 000000a0  __STACK_SIZE            
-0000853a  __TI_CINIT_Base         
-00008542  __TI_CINIT_Limit        
-00008536  __TI_Handler_Table_Base 
-0000853a  __TI_Handler_Table_Limit
+0000910a  __TI_CINIT_Base         
+00009112  __TI_CINIT_Limit        
+00009106  __TI_Handler_Table_Base 
+0000910a  __TI_Handler_Table_Limit
 UNDEFED   __TI_INITARRAY_Base     
 UNDEFED   __TI_INITARRAY_Limit    
-00008522  __TI_ISR_TRAP           
+000088e6  __TI_ISR_TRAP           
 0000ffd2  __TI_int41              
 0000ffd4  __TI_int42              
 0000ffd6  __TI_int43              
@@ -930,26 +944,36 @@ UNDEFED   __TI_INITARRAY_Limit
 0000fff8  __TI_int60              
 0000fffa  __TI_int61              
 0000fffc  __TI_int62              
-000084a4  __TI_zero_init          
+0000883a  __TI_zero_init          
 ffffffff  __binit__               
 ffffffff  __c_args__              
-000082d0  _auto_init_hold_wdt     
-000084e2  _c_int00_noargs_noexit  
+0000864e  _auto_init_hold_wdt     
+00008878  _c_int00_noargs_noexit  
 0000fffe  _reset_vector           
 00003360  _stack                  
-00008528  _system_pre_init        
-0000852c  abort                   
+000088ec  _system_pre_init        
+000088f0  abort                   
+000088dc  abs                     
 ffffffff  binit                   
-00002400  current_blue_level      
-00002402  current_green_level     
-00002404  current_red_level       
-000084fc  initU5                  
-00008350  init_clock              
-000081d2  init_ioports            
-0000845a  main                    
-00008516  my_delay                
+000085ae  blt_char                
+000090f4  charstodisplay          
+000024c0  current_char            
+000024c2  display_addr            
+00002400  display_buffer          
+000024c4  display_ptr             
+000088f4  font_basic              
+00008892  initU5                  
+00008736  init_clock              
+000088c0  init_demo               
+000084b0  init_ioports            
+000024c6  loops                   
+00008796  main                    
+000088ac  my_delay                
+000024c8  num_cycles              
+000024ca  offset                  
 00008000  pulse_LEDs              
-000083b0  set_full_array_color    
+000024cc  scan                    
+000086ce  step_demo               
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -1635,30 +1659,41 @@ address   name
 000023fd  USBIEPBBAY_7            
 000023fe  USBIEPBCTY_7            
 000023ff  USBIEPSIZXY_7           
-00002400  current_blue_level      
-00002402  current_green_level     
-00002404  current_red_level       
+00002400  display_buffer          
+000024c0  current_char            
+000024c2  display_addr            
+000024c4  display_ptr             
+000024c6  loops                   
+000024c8  num_cycles              
+000024ca  offset                  
+000024cc  scan                    
 00003360  _stack                  
 00003400  __STACK_END             
 00008000  pulse_LEDs              
-000081d2  init_ioports            
-000082d0  _auto_init_hold_wdt     
-00008350  init_clock              
-000083b0  set_full_array_color    
-0000840c  SetVcoreUp              
-0000845a  main                    
-000084a4  __TI_zero_init          
-000084e2  _c_int00_noargs_noexit  
-000084fc  initU5                  
-00008516  my_delay                
-00008522  __TI_ISR_TRAP           
-00008528  _system_pre_init        
-0000852c  C$$EXIT                 
-0000852c  abort                   
-00008536  __TI_Handler_Table_Base 
-0000853a  __TI_CINIT_Base         
-0000853a  __TI_Handler_Table_Limit
-00008542  __TI_CINIT_Limit        
+000084b0  init_ioports            
+000085ae  blt_char                
+0000864e  _auto_init_hold_wdt     
+000086ce  step_demo               
+00008736  init_clock              
+00008796  main                    
+000087ec  SetVcoreUp              
+0000883a  __TI_zero_init          
+00008878  _c_int00_noargs_noexit  
+00008892  initU5                  
+000088ac  my_delay                
+000088c0  init_demo               
+000088d2  Port_1                  
+000088dc  abs                     
+000088e6  __TI_ISR_TRAP           
+000088ec  _system_pre_init        
+000088f0  C$$EXIT                 
+000088f0  abort                   
+000088f4  font_basic              
+000090f4  charstodisplay          
+00009106  __TI_Handler_Table_Base 
+0000910a  __TI_CINIT_Base         
+0000910a  __TI_Handler_Table_Limit
+00009112  __TI_CINIT_Limit        
 0000ffd2  __TI_int41              
 0000ffd4  __TI_int42              
 0000ffd6  __TI_int43              
@@ -1688,4 +1723,4 @@ ffffffff  binit
 UNDEFED   __TI_INITARRAY_Base     
 UNDEFED   __TI_INITARRAY_Limit    
 
-[731 symbols]
+[742 symbols]

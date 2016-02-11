@@ -24,7 +24,8 @@ const unsigned char	*current_char;
 // ***
 // Below spells out T h e L A B . m s (space) in unicode HEX
 // ***
-const unsigned char charstodisplay[ ] = " TheLAB.ms\0";
+//const unsigned char charstodisplay[ ] = " TheLAB.ms\0";
+const unsigned char charstodisplay[ ] = "TheLAB.ms \0";
 
 void init_demo(void)
 {

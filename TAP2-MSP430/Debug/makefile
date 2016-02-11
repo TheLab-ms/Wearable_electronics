@@ -5,6 +5,7 @@
 CG_TOOL_ROOT := /home/richardg/ccs/ccs61/ccsv6/tools/compiler/ti-cgt-msp430_4.4.4
 
 ORDERED_OBJS += \
+"./font_basic.obj" \
 "./main.obj" \
 "../lnk_msp430f5510.cmd" \
 $(GEN_CMDS__FLAG) \
@@ -145,8 +146,8 @@ TAP2-MSP430.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "main.pp" 
-	-$(RM) "main.obj" 
+	-$(RM) "font_basic.pp" "main.pp" 
+	-$(RM) "font_basic.obj" "main.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
