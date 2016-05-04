@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?ccsproject version="1.0"?>
+<projectOptions>
+	<deviceVariant value="MSP430F5529"/>
+	<deviceFamily value="MSP430"/>
+	<codegenToolVersion value="4.4.7"/>
+	<isElfFormat value="true"/>
+	<linkerCommandFile value="lnk_msp430f5529.cmd"/>
+	<rts value="libc.a"/>
+	<createSlaveProjects value=""/>
+	<origin value="C:\Users\Bill\Downloads\MSP430USBDevelopersPackage_5_00_01\MSP430_USB_Software\MSP430_USB_API\examples\CDC_virtualCOMport\C3_EchoToHost\CCS\C3_EchoToHost.projectspec"/>
+	<templateProperties value="id=C3_EchoToHost.projectspec.C3_EchoToHost,"/>
+	<connection value="common/targetdb/connections/TIMSP430-USB.xml"/>
+	<isTargetManual value="false"/>
+</projectOptions>
